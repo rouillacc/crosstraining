@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Cross Training Collège - Évaluation</title>
+    <title>Cross Training Collège - Cycle 4</title>
     <style>
         :root {
             --primary: #FF6B00;
@@ -15,7 +15,7 @@
             --level2: #10B981;
             --level3: #F59E0B;
             --level4: #8B5CF6;
-            --bonus: #EAB308;
+            --bonus: #EA580C;
         }
 
         * { box-sizing: border-box; }
@@ -153,15 +153,6 @@
             border-radius: 0 4px 4px 0;
             font-size: 0.95rem;
         }
-        .validation {
-            background-color: #D1FAE5;
-            border-left: 4px solid #10B981;
-            padding: 0.8rem;
-            margin: 0.8rem 0;
-            border-radius: 0 4px 4px 0;
-            font-weight: bold;
-            font-size: 0.95rem;
-        }
 
         .seance-card {
             background: var(--white);
@@ -182,15 +173,19 @@
         }
         .prof-tip h4 { margin: 0 0 0.5rem 0; color: #0369A1; font-size: 1.1rem; }
 
-        .defi-bonus {
-            background-color: #FEF9C3;
+        /* NOUVEAU STYLE POUR LES JEUX ET DEFIS */
+        .game-block {
+            background-color: #FFF7ED;
             border-left: 5px solid var(--bonus);
             padding: 1rem;
             border-radius: 6px;
             margin: 1rem 0;
             font-size: 0.95rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
-        .defi-bonus h4 { margin: 0 0 0.5rem 0; color: #A16207; font-size: 1.1rem; }
+        .game-block h4 { margin: 0 0 0.8rem 0; color: #9A3412; font-size: 1.15rem; text-transform: uppercase;}
+        .game-block p { margin-top: 0; margin-bottom: 0.8rem; }
+        .game-block strong { color: #C2410C; }
 
         .btn-download {
             display: block;
@@ -218,12 +213,6 @@
         th, td { border: 1px solid #E5E7EB; padding: 0.6rem; text-align: center; }
         th { background-color: var(--secondary); color: white; }
         .text-left { text-align: left; }
-
-        .bareme-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-        }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(5px); }
@@ -262,7 +251,7 @@
 
             <details><summary>Atelier 1 : Jumping Jack (Cardio)</summary>
                 <div class="details-content">
-                    <img src="https://i.postimg.cc/3xfWXDhS/Atelier-1-Jumping-Jack.jpg" alt="Jumping Jack" class="affiche-atelier">
+                    <img src="https://drive.google.com/thumbnail?id=1UHkbUq4QUXcDkjc9PFMwv0mwaCM61YoC&sz=w2000" alt="Jumping Jack" class="affiche-atelier">
                     <div class="level-block"><span class="level-badge n1">NIVEAU 1 : SANS LES BRAS</span><p>Mains fixes sur les hanches. Saut écartement des pieds.</p><div class="no-rep">NO REP : Mains quittant les hanches. Retombée lourde sur les talons. Genoux rentrants.</div></div>
                     <div class="level-block"><span class="level-badge n2">NIVEAU 2 : CLASSIQUE</span><p>Saut coordonné. Contact franc des mains en haut.</p><div class="no-rep">NO REP : Absence de contact des mains en haut. Bras non coordonnés.</div></div>
                     <div class="level-block"><span class="level-badge n3">NIVEAU 3 : CROSSOVER JACK</span><p>Bras en croix. Saut de croisement alterné (bras et jambes).</p><div class="no-rep">NO REP : Pas d'alternance D/G. Bras descendants sous les épaules.</div></div>
@@ -272,7 +261,7 @@
 
             <details><summary>Atelier 2 : Mountain Climber (Cardio/Gainage)</summary>
                 <div class="details-content">
-                    <img src="https://i.postimg.cc/y8pWmSK0/Atelier-2-Moutain-Climber.jpg" alt="Mountain Climber" class="affiche-atelier">
+                    <img src="https://drive.google.com/thumbnail?id=1fJehZ7cytRqJIxe2T8xC6afcEilWuw_P&sz=w2000" alt="Mountain Climber" class="affiche-atelier">
                     <div class="level-block"><span class="level-badge n1">NIVEAU 1 : PLANCHE ALTERNÉE</span><p>Planche haute. Amener un genou fléchi vers la poitrine en posant le pied.</p><div class="no-rep">NO REP : Bassin en toit ou dos creusé.</div></div>
                     <div class="level-block"><span class="level-badge n2">NIVEAU 2 : PLANK LEG LIFT</span><p>Planche haute. Élévation d'une jambe tendue vers le haut.</p><div class="no-rep">NO REP : Genou qui se plie. Dos qui se creuse à la montée.</div></div>
                     <div class="level-block"><span class="level-badge n3">NIVEAU 3 : LE TOUCH</span><p>Montée dynamique. Contact physique obligatoire genou sur coude.</p><div class="no-rep">NO REP : Genou ne touchant pas le bras. Bassin qui monte à l'impact.</div></div>
@@ -282,7 +271,7 @@
 
             <details><summary>Atelier 3 : Burpees (Cardio)</summary>
                 <div class="details-content">
-                    <img src="https://i.postimg.cc/VkZ5qbw4/Atelier-3-Burpees.jpg" alt="Burpees" class="affiche-atelier">
+                    <img src="https://drive.google.com/thumbnail?id=1Z5TML1MOryIVa68EiOO6BW59Ap9D3Hph&sz=w2000" alt="Burpees" class="affiche-atelier">
                     <div class="level-block"><span class="level-badge n1">NIVEAU 1 : SPRAWL COOL</span><p>Décomposé en marchant : Mains au sol, reculer un pied après l'autre, ramener et se redresser.</p><div class="no-rep">NO REP : Descente sur les genoux. Précipitation sautée.</div></div>
                     <div class="level-block"><span class="level-badge n2">NIVEAU 2 : SPRAWL</span><p>Jeté simultané des 2 pieds en planche. Retour groupé. Sans pompe, sans saut.</p></div>
                     <div class="level-block"><span class="level-badge n3">NIVEAU 3 : SPRAWL JUMP</span><p>Idem N2 + saut vertical explosif à la fin avec claquement de mains en l'air.</p><div class="no-rep">NO REP : Absence de décollement visible des pieds.</div></div>
@@ -292,7 +281,7 @@
 
             <details><summary>Atelier 4 : Air Squat (Bas du corps)</summary>
                 <div class="details-content">
-                    <img src="https://i.postimg.cc/W1YtGJVC/Atelier-4-Squats.jpg" alt="Squats" class="affiche-atelier">
+                    <img src="https://drive.google.com/thumbnail?id=1osaB_Lq4BvN-6FuxxFlFrKgGOmXuW01t&sz=w2000" alt="Squats" class="affiche-atelier">
                     <div class="level-block"><span class="level-badge n1">NIVEAU 1 : ASSISTED SQUAT</span><p>Se tenir à un point fixe. Descente assistée, talons collés au sol.</p></div>
                     <div class="level-block"><span class="level-badge n2">NIVEAU 2 : SQUAT COMPLET</span><p>Casser la parallèle (creux de la hanche sous le genou). Dos droit, talons ancrés.</p><div class="no-rep">NO REP : Descente insuffisante. Talons décollés. Buste couché.</div></div>
                     <div class="level-block"><span class="level-badge n3">NIVEAU 3 : SQUAT JUMP</span><p>Squat complet + extension explosive vers le haut.</p></div>
@@ -302,7 +291,7 @@
 
             <details><summary>Atelier 5 : Fentes Alternées (Jambes/Fessiers)</summary>
                 <div class="details-content">
-                    <img src="https://i.postimg.cc/Vkkd0Wx9/Atelier-5-Fentes-alternees.jpg" alt="Fentes" class="affiche-atelier">
+                    <img src="https://drive.google.com/thumbnail?id=1ZGU4KP4flUX84z-Kj_VWM1PK2sALtXIz&sz=w2000" alt="Fentes" class="affiche-atelier">
                     <div class="level-block"><span class="level-badge n1">NIVEAU 1 : LUNGE EXTENSION</span><p>Grand pas arrière glissé. Abaisser le bassin sans choc.</p></div>
                     <div class="level-block"><span class="level-badge n2">NIVEAU 2 : FRONT LUNGE POSE GENOU</span><p>Fente avant. "Baiser du genou" (contact très doux avec le sol).</p><div class="no-rep">NO REP : Genou arrière qui percute le sol violemment.</div></div>
                     <div class="level-block"><span class="level-badge n3">NIVEAU 3 : DYNAMIQUE MARCHÉE</span><p>Déplacement continu en marchant vers l'avant. Le genou arrière frôle le sol, on ne marque pas l'arrêt au milieu.</p></div>
@@ -312,7 +301,7 @@
 
             <details><summary>Atelier 6 : Push-up / Pompes (Haut du corps)</summary>
                 <div class="details-content">
-                    <img src="https://i.postimg.cc/7Ztb3T4Q/Atelier-6-Pompes.jpg" alt="Pompes" class="affiche-atelier">
+                    <img src="https://drive.google.com/thumbnail?id=1BALlDysqZKpwzOsr1G_PRlA1dTyEru-C&sz=w2000" alt="Pompes" class="affiche-atelier">
                     <div class="level-block"><span class="level-badge n1">NIVEAU 1 : SHOULDER TOUCH</span><p>Planche haute sur les mains. Venir toucher l'épaule opposée sans dandiner les hanches.</p></div>
                     <div class="level-block"><span class="level-badge n2">NIVEAU 2 : KNEE PUSH-UP</span><p>Pompes sur les genoux. Le bassin descend avec les épaules. Poitrine au sol.</p><div class="no-rep">NO REP : Position à "4 pattes".</div></div>
                     <div class="level-block"><span class="level-badge n3">NIVEAU 3 : HAND-RELEASE</span><p>Sur les genoux. Descente complète, on pose le torse, on décolle les mains, on repousse d'un bloc.</p></div>
@@ -322,7 +311,7 @@
 
             <details><summary>Atelier 7 : Crunchs (Gainage/Tronc)</summary>
                 <div class="details-content">
-                    <img src="https://i.postimg.cc/CxrdGf0D/Atelier-7-Crunchs.jpg" alt="Crunchs" class="affiche-atelier">
+                    <img src="https://drive.google.com/thumbnail?id=1L0csZY9C-8xFBgTTLsrzW0xafH5XDaN7&sz=w2000" alt="Crunchs" class="affiche-atelier">
                     <div class="level-block"><span class="level-badge n1">NIVEAU 1 : BASIC CRUNCH</span><p>Pieds au sol. On enroule le haut du dos. On ne tire JAMAIS sur la nuque.</p><div class="no-rep">NO REP : Mains tirant sur la nuque.</div></div>
                     <div class="level-block"><span class="level-badge n2">NIVEAU 2 : FEET OFF 90°</span><p>Jambes en l'air, tibias parallèles au sol. Enroulement vers les genoux.</p></div>
                     <div class="level-block"><span class="level-badge n3">NIVEAU 3 : RUSSIAN TWIST</span><p>Assis, buste à 45°. Talons décollés. Rotation des épaules pour toucher le sol de chaque côté.</p></div>
@@ -332,7 +321,7 @@
 
             <details><summary>Atelier 8 : Planche / Gainage</summary>
                 <div class="details-content">
-                    <img src="https://i.postimg.cc/dVND2TFy/Atelier-8-Gainage.jpg" alt="Gainage" class="affiche-atelier">
+                    <img src="https://drive.google.com/thumbnail?id=1lMLRyOId7k2vckJ8j17Lsl1yKAgxOwgp&sz=w2000" alt="Gainage" class="affiche-atelier">
                     <div class="level-block"><span class="level-badge n1">NIVEAU 1 : PLANK STEP OUT</span><p>Planche haute. Décaler une jambe tendue sur le côté sans glisser, ramener, alterner.</p></div>
                     <div class="level-block"><span class="level-badge n2">NIVEAU 2 : PLANK JACKS</span><p>Planche haute. Saut simultané des deux pieds vers l'extérieur puis resserrage.</p></div>
                     <div class="level-block"><span class="level-badge n3">NIVEAU 3 : MILITARY PLANK</span><p>Passer de la planche sur les coudes à la planche sur les mains de façon fluide. Bassin fixé.</p></div>
@@ -342,7 +331,7 @@
 
             <details><summary>Atelier 9 : Superman (Gainage dorsal)</summary>
                 <div class="details-content">
-                    <img src="https://i.postimg.cc/9Qgzdq2P/Atelier-9-Superman-Unin.png" alt="Superman" class="affiche-atelier">
+                    <img src="https://drive.google.com/thumbnail?id=1G0gaN_YaVkTBbnPd08qO_xKk2MlBPfYY&sz=w2000" alt="Superman" class="affiche-atelier">
                     <div class="prof-tip">
                         <h4>💡 Astuce de Juge</h4>
                         <p>Pour le Superman, le juge compte : <strong>"Un... Deux... Validé !"</strong>. Le temps sous tension statique est obligatoire pour valider la rep.</p>
@@ -361,9 +350,9 @@
             
             <div class="prof-tip">
                 <h4>💡 Explicatif pour le Prof : Le format TABATA</h4>
-                <p>C'est un format musical parfait pour l'échauffement ou le cardio (chercher "Tabata song" sur YouTube). Le principe : <strong>20 secondes de travail très intense / 10 secondes de repos absolu.</strong> On répète ça 8 fois, ce qui fait exactement 4 minutes d'effort par musique.</p>
+                <p>Format musical parfait pour l'échauffement ou le cardio. Principe : <strong>20 secondes de travail très intense / 10 secondes de repos absolu.</strong> On répète ça 8 fois (4 minutes par musique).</p>
                 <h4>💡 Explicatif pour le Prof : L'EMOM</h4>
-                <p><strong>Every Minute On the Minute :</strong> L'élève a 1 minute pour faire un nombre précis de répétitions (ex: 20 Squats). S'il a fini au bout de 40 secondes, les 20 secondes restantes sont son temps de repos avant le bip de la minute suivante. Ça force l'élève à ne pas trainer !</p>
+                <p><strong>Every Minute On the Minute :</strong> L'élève a 1 minute pour faire un nombre précis de répétitions (ex: 20 Squats). S'il a fini au bout de 40 secondes, les 20s restantes sont son temps de repos. Ça force l'élève à ne pas trainer !</p>
             </div>
 
             <div class="seance-card">
@@ -383,20 +372,24 @@
                 
                 <h3>2. Corps de Séance : Skills & EMOM (50 min)</h3>
                 <ul>
-                    <li><strong>Apprentissage (20 min) :</strong> Placer les élèves par 2. On explique en détail les postures de sécurité du Squat (talons au sol, dos droit) et de la Planche (pas de dos creux). Les élèves se testent et se corrigent.</li>
+                    <li><strong>Apprentissage (20 min) :</strong> Placer les élèves par 2. On explique les postures de sécurité du Squat (talons au sol, dos droit) et de la Planche (pas de dos creux). Les élèves se testent et se corrigent.</li>
                     <li><strong>WOD EMOM 5 minutes (30 min) :</strong> 
                         <ul>
                             <li>Ateliers tournants : Squat, Planche, Push-Up.</li>
-                            <li>L'élève "Athlète" choisit son niveau de difficulté et son nombre de reps à faire dans la minute (ex: 15 pompes sur les genoux).</li>
-                            <li>Le "Juge" compte et veille aux postures. Changement de rôle toutes les 5 minutes.</li>
+                            <li>L'élève "Athlète" choisit son niveau de difficulté et son nombre de reps à faire dans la minute. Le "Juge" compte et veille aux postures. Changement de rôle toutes les 5 minutes.</li>
                         </ul>
                     </li>
                 </ul>
 
-                <div class="defi-bonus">
-                    <h4>⏱️ DÉFI BONUS (Si cours de 1h30) : Le relais "Hold"</h4>
-                    <p>Faire deux grandes équipes (Filles vs Garçons ou mixtes). Un élève de l'équipe maintient la position de la "Chaise" contre le mur, pendant que le reste de l'équipe court autour du gymnase pour faire le plus de tours possibles. Dès que l'élève en chaise lâche, il est remplacé. Quelle équipe fait le plus de tours en 10 minutes ?</p>
+                <div class="game-block">
+                    <h4>🔥 SITUATIONS LUDIQUES & DÉFIS (Idéal pour séance d'1h30)</h4>
+                    <p><strong>1. Le Miroir et l'Inspecteur (15 min) :</strong> Apprendre à juger. Par binômes, A fait face à B. A doit réaliser 5 Air Squats. Sur les 5, le prof demande secrètement à tous les A d'en rater <em>volontairement</em> deux. L'élève B (l'inspecteur) doit annoncer "No Rep" au bon moment. Dédramatise l'erreur !</p>
+                    <p><strong>2. La Chaise Infernale (10 min) :</strong> Groupes de 4. Un élève est en position chaise contre le mur. Les 3 autres font des passes avec un medecine-ball ou des jumping jacks. Si la chaise lâche, on tourne. Travail isométrique et cohésion.</p>
                 </div>
+
+                <a href="https://drive.google.com/file/d/1x4w4g7Oe0oxVr9vWJ7iW-p2XTeUvEuq8/view" class="btn-download" target="_blank">
+                    📄 Ouvrir / Imprimer la Grille d'Évaluation (Séance 1)
+                </a>
             </div>
         </div>
 
@@ -427,10 +420,14 @@
                     </li>
                 </ul>
 
-                <div class="defi-bonus">
-                    <h4>⏱️ DÉFI BONUS (Si cours de 1h30) : Tabata "Abdos en folie"</h4>
-                    <p>Sans matériel : 4 minutes de Tabata (20s/10s) dédié uniquement au tronc. Alterner : 1. Crunchs classiques / 2. Gainage latéral droit / 3. Gainage dynamique (military) / 4. Gainage latéral gauche.</p>
+                <div class="game-block">
+                    <h4>🔥 SITUATION LUDIQUE & DÉFI</h4>
+                    <p><strong>Le Métronome / Pacing (15 min) :</strong> L'objectif n'est pas d'aller vite, mais d'être régulier. Le prof donne un contrat : "10 Jumping Jacks en <em>exactement</em> 20 secondes". S'il finit en 10s : échec (trop rapide). S'il finit en 25s : échec (trop lent). L'élève doit adapter sa vitesse d'exécution pour s'arrêter pile sur le coup de sifflet du prof. Idéal pour comprendre le lissage de l'effort !</p>
                 </div>
+
+                <a href="https://drive.google.com/file/d/1k-b_LoxWm1IIJQMkaLnIrfdOFp8M9nta/view" class="btn-download" target="_blank">
+                    📄 Ouvrir / Imprimer la Grille d'Évaluation (Séance 2)
+                </a>
             </div>
         </div>
 
@@ -440,7 +437,7 @@
             
             <div class="prof-tip">
                 <h4>💡 Lexique Prof : L'E2MOM</h4>
-                <p><strong>Every 2 Minutes On the Minute :</strong> C'est la même mécanique que l'EMOM, mais le chrono sonne toutes les <strong>2 minutes</strong>. Cela donne le temps d'enchaîner un combo de 3 ou 4 ateliers différents d'affilée (circuit) et d'avoir une récupération plus longue à la fin de la série.</p>
+                <p><strong>Every 2 Minutes On the Minute :</strong> Même mécanique que l'EMOM, mais le chrono sonne toutes les <strong>2 minutes</strong>. Cela donne le temps d'enchaîner un combo de 3 ou 4 ateliers d'affilée (circuit) et d'avoir une récupération plus longue à la fin de la série.</p>
             </div>
 
             <div class="seance-card">
@@ -452,20 +449,24 @@
 
                 <h3>2. Corps de Séance (50 min)</h3>
                 <ul>
-                    <li><strong>Skills (20 min) :</strong> Apprentissage sécuritaire des Fentes (protection des rotules !), du Superman et des Crunchs. Le juge s'entraine à compter.</li>
+                    <li><strong>Skills (20 min) :</strong> Apprentissage sécuritaire des Fentes (protection des rotules), du Superman et des Crunchs. Le juge s'entraine à compter.</li>
                     <li><strong>WOD E2MOM (10 minutes / 5 départs de 2 min) :</strong> 
                         <ul>
-                            <li>C'est le format de l'évaluation finale. Un départ toutes les 2 minutes.</li>
+                            <li><strong>C'est le format exact de l'évaluation finale.</strong> Un départ toutes les 2 minutes.</li>
                             <li><strong>Le Contrat :</strong> L'athlète choisit un mouvement dans chaque famille. Il choisit un contrat global : <strong>20, 30, ou 40 reps au total</strong> par bloc de 2 minutes.</li>
                             <li>L'élève doit accomplir son contrat dans les 2 minutes, se reposer, et recommencer 5 fois.</li>
                         </ul>
                     </li>
                 </ul>
 
-                <div class="defi-bonus">
-                    <h4>⏱️ DÉFI BONUS (Si cours de 1h30) : Le record du saut en longueur sans élan</h4>
-                    <p>Mettre des bandes de scotch au sol tous les 10cm à partir d'1m50. Les élèves ont 5 essais pour réaliser leur meilleur bond sans élan (travail d'explosivité lié au squat).</p>
+                <div class="game-block">
+                    <h4>🔥 SITUATION LUDIQUE & DÉFI</h4>
+                    <p><strong>Le Biathlon Cross-Training (20 min) :</strong> Relais par équipe de 3. L'élève sprinte sur 15 mètres, arrive sur son tapis et doit "tirer" (comme au biathlon). Le tir = tenir un Superman parfait pendant 15 secondes chronométrées par le juge. S'il tremble ou fait "No Rep" avant, il part faire un tour de pénalité (5 burpees) avant de taper dans la main du relayeur. Oblige à gainer sous fatigue cardio.</p>
                 </div>
+
+                <a href="https://drive.google.com/file/d/15Zy8qYht66IJ3Z_Hsomwv8KHe3J6Hz4b/view" class="btn-download" target="_blank">
+                    📄 Ouvrir / Imprimer la Grille d'Évaluation (Séance 3)
+                </a>
             </div>
         </div>
 
@@ -476,7 +477,7 @@
             <div class="prof-tip">
                 <h4>💡 Lexique Prof : AMRAP et For Time</h4>
                 <ul>
-                    <li><strong>AMRAP (As Many Rounds As Possible) :</strong> On lance un chrono global. L'élève doit faire le plus de tours possibles de son circuit sans pause obligatoire. C'est l'élève qui gère sa fatigue.</li>
+                    <li><strong>AMRAP (As Many Rounds As Possible) :</strong> On lance un chrono global. L'élève doit faire le plus de tours possibles de son circuit sans pause obligatoire. L'élève gère sa fatigue.</li>
                     <li><strong>For Time :</strong> On donne une quantité fixe de travail. Le but est de finir le plus vite possible. On chronomètre le temps final.</li>
                 </ul>
             </div>
@@ -489,16 +490,23 @@
 
                 <h3>2. Corps de Séance (50 min)</h3>
                 <ul>
-                    <li><strong>Skills Burpees (15 min) :</strong> Dédramatiser la chute au sol. Bien expliquer que les mains se posent à plat sous les épaules, et qu'on remonte pieds écartés pour préserver le dos.</li>
-                    <li><strong>Test Record Personnel (15 min) :</strong> Mesure de la puissance max pure. On chronomètre 15 secondes. L'élève fait un max de Burpees. Puis un max de Squats. Puis un max de Pompes. Le juge note.</li>
+                    <li><strong>Skills Burpees (15 min) :</strong> Dédramatiser la chute au sol. Expliquer que les mains se posent à plat sous les épaules, et qu'on remonte pieds écartés pour préserver le dos.</li>
+                    <li><strong>Test Record Personnel (15 min) :</strong> Mesure de la puissance max pure. On chronomètre 15 secondes. L'élève fait un max de Burpees. Puis max de Squats. Le juge note.</li>
                     <li><strong>Initiation "Team WOD - For Time" (20 min) :</strong> 
                         <ul>
-                            <li>Équipes de 2 (en relais, quand un bosse, l'autre souffle).</li>
-                            <li><strong>Mission For Time :</strong> 100 Mountain Climbers + 40 Squats + 60s de Planche statique cumulée.</li>
-                            <li>L'équipe découpe les séries comme elle veut (ex: 10 par 10) pour aller le plus vite possible.</li>
+                            <li>Équipes de 2 (en relais). <strong>Mission :</strong> 100 Mountain Climbers + 40 Squats + 60s de Planche statique cumulée. L'équipe découpe les séries comme elle veut (10 par 10) pour aller le plus vite possible.</li>
                         </ul>
                     </li>
                 </ul>
+
+                <div class="game-block">
+                    <h4>🔥 SITUATION LUDIQUE & DÉFI</h4>
+                    <p><strong>Le Relais "I Go, You Go" (15 min) :</strong> Binômes de même niveau. Le chrono tourne (6 minutes). L'élève A fait 3 Burpees le plus vite possible. Dès qu'il a fini, il tape dans la main de B qui fait ses 3 Burpees. Sprint permanent, temps mort très court, oblige les élèves à se dépasser en transfert d'énergie !</p>
+                </div>
+
+                <a href="https://drive.google.com/file/d/11uqkH8TH5kFJTCIvZVG59PMi2NvBeN1C/view" class="btn-download" target="_blank">
+                    📄 Ouvrir / Imprimer la Grille d'Évaluation (Séance 4)
+                </a>
             </div>
         </div>
 
@@ -508,9 +516,9 @@
             
             <div class="prof-tip">
                 <h4>💡 Pédagogie : Le format "Death By" (La mort subite)</h4>
-                <p>C'est un format psychologique et très ludique. Un bip retentit toutes les minutes.<br>
+                <p>Format psychologique très ludique. Un bip retentit toutes les minutes.<br>
                 Minute 1 = 1 répétition à faire. Minute 2 = 2 reps. Minute 10 = 10 reps, etc.<br>
-                Plus on avance, plus il y a de reps à faire, et moins on a de temps de repos avant le bip suivant. Le jeu s'arrête (mort subite) quand l'élève n'arrive plus à finir ses reps dans le temps imparti. Le juge doit annuler les reps moches, ce qui rajoute du stress !</p>
+                Le temps de repos diminue. Le jeu s'arrête (mort subite) quand l'élève n'arrive plus à finir ses reps dans le temps imparti. Le juge doit annuler les reps moches, rajoutant du stress !</p>
             </div>
 
             <div class="seance-card">
@@ -523,8 +531,8 @@
                 <ul>
                     <li><strong>Épreuve "Death By" (20 min) :</strong>
                         <ul>
-                            <li>On ajoute une pénalité fixe : Chaque minute commence par <strong>2 Burpees obligatoires</strong>, puis l'élève ajoute le nombre croissant de Squats (ou Fentes).</li>
-                            <li>Le juge observe la dégradation de la posture (acidose). S'il y a un dos rond = No rep, l'élève doit recommencer sa rep, perdant du temps.</li>
+                            <li>Pénalité fixe : Chaque minute commence par <strong>2 Burpees obligatoires</strong>, puis l'élève ajoute le nombre croissant de Squats (ou Fentes).</li>
+                            <li>Le juge observe la dégradation de la posture (acidose). S'il y a un dos rond = No rep.</li>
                         </ul>
                     </li>
                     <li><strong>Team WOD - 170 Reps For Time (30 min) :</strong>
@@ -534,6 +542,15 @@
                         </ul>
                     </li>
                 </ul>
+                
+                <div class="game-block">
+                    <h4>🔥 SITUATION LUDIQUE & DÉFI</h4>
+                    <p><strong>Le Poker des Contrats (15 min) :</strong> Par binômes. L'athlète tire au sort ou lance des dés pour un exercice et un nombre de reps (ex: 20 Pompes). Avant de démarrer, il doit annoncer à son juge s'il s'en sent capable en 1 minute. S'il réussit, il gagne 1 pt. S'il échoue, il perd 1 pt. Prépare parfaitement au choix de contrat (et à l'ego) pour l'évaluation !</p>
+                </div>
+
+                <a href="https://drive.google.com/file/d/1-5SpfhaMEbN4bc_1C8sXXIWifW8cogqS/view" class="btn-download" target="_blank">
+                    📄 Ouvrir / Imprimer la Grille d'Évaluation (Séance 5)
+                </a>
             </div>
         </div>
 
@@ -563,11 +580,20 @@
                     <li><strong>Simulation de l'Épreuve 2 - Team WOD (20 min) :</strong>
                         <ul>
                             <li>Format imposé : 170 répétitions par équipe.</li>
-                            <li>40 MC + 20 Pompes + 30 Squats + 80 JJ. Ils testent leur communication d'équipe pour faire le meilleur temps.</li>
+                            <li>40 MC + 20 Pompes + 30 Squats + 80 JJ. Ils testent leur communication d'équipe.</li>
                         </ul>
                     </li>
-                    <li><strong>Validation :</strong> À la fin de l'heure, l'élève valide et signe son contrat définitif pour la note de la semaine prochaine.</li>
+                    <li><strong>Validation :</strong> À la fin de l'heure, l'élève valide et signe son contrat définitif pour l'évaluation de la semaine prochaine.</li>
                 </ul>
+
+                <div class="game-block">
+                    <h4>🔥 SITUATION LUDIQUE & DÉFI</h4>
+                    <p><strong>Piège ton Juge (15 min) :</strong> Le prof distribue secrètement des "cartes rôles" aux athlètes : "Athlète parfait" ou "Tricheur subtil" (qui fait exprès une petite faute de posture). Le juge est noté par le prof sur sa capacité à repérer le tricheur sans se faire avoir. Rend le rôle de juge hyper actif avant la vraie évaluation !</p>
+                </div>
+
+                <a href="https://drive.google.com/file/d/1Tc6BXd-997DEVoTGdw03-t9GGhPvQEvi/view" class="btn-download" target="_blank">
+                    📄 Ouvrir / Imprimer la Feuille de Match (Séance 6)
+                </a>
             </div>
         </div>
 
@@ -699,6 +725,9 @@
                 </div>
             </div>
 
+            <a href="https://drive.google.com/file/d/1Tc6BXd-997DEVoTGdw03-t9GGhPvQEvi/view" class="btn-download" target="_blank" style="margin-top:20px;">
+                📄 Ouvrir / Imprimer la Feuille de Match Officielle (PDF)
+            </a>
         </div>
 
     </div>
