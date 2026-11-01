@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Cross Training Collège - Cycle 4</title>
+    <title>Cross Training Collège - Évaluation</title>
     <style>
         :root {
             --primary: #FF6B00;
@@ -213,10 +213,17 @@
             margin-top: 1rem;
             margin-bottom: 1.5rem;
             background: white;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
-        th, td { border: 1px solid #E5E7EB; padding: 0.8rem; text-align: left; }
+        th, td { border: 1px solid #E5E7EB; padding: 0.6rem; text-align: center; }
         th { background-color: var(--secondary); color: white; }
+        .text-left { text-align: left; }
+
+        .bareme-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(5px); }
@@ -227,8 +234,8 @@
 <body>
 
     <header>
-        <h1>💪 Cross Training - Cycle 4</h1>
-        <p>EPS 3ème - Concevoir et réaliser un projet d'entraînement</p>
+        <h1>💪 Cross Training - Collège</h1>
+        <p>EPS - Réaliser un projet d'entraînement et co-évaluer</p>
     </header>
 
     <div class="nav-wrapper">
@@ -239,7 +246,7 @@
         <button onclick="openTab('tab-s4', this)">S4: AMRAP</button>
         <button onclick="openTab('tab-s5', this)">S5: Death By</button>
         <button onclick="openTab('tab-s6', this)">S6: Répétition</button>
-        <button onclick="openTab('tab-eval', this)">📝 Évaluation</button>
+        <button onclick="openTab('tab-eval', this)">📝 ÉVALUATION OFFICIELLE</button>
     </div>
 
     <div class="container">
@@ -250,24 +257,24 @@
 
             <div class="prof-tip">
                 <h4>💡 Pédagogie de l'Atelier (Pour le Prof)</h4>
-                <p>Chaque atelier propose 4 niveaux progressifs. L'objectif en cycle 4 n'est pas de faire le niveau le plus dur, mais <strong>le niveau adapté à soi</strong> pour ne pas dégrader la posture (le dos !). Si un élève dégrade sa posture, le juge doit crier "NO REP" (répétition annulée).</p>
+                <p>Chaque atelier propose des niveaux progressifs. L'objectif n'est pas de faire le niveau le plus dur, mais <strong>le niveau adapté à soi</strong> pour ne pas dégrader la posture (le dos !). Si un élève dégrade sa posture, le juge doit crier "NO REP" (répétition annulée).</p>
             </div>
 
             <details><summary>Atelier 1 : Jumping Jack (Cardio)</summary>
                 <div class="details-content">
                     <img src="https://i.postimg.cc/3xfWXDhS/Atelier-1-Jumping-Jack.jpg" alt="Jumping Jack" class="affiche-atelier">
-                    <div class="level-block"><span class="level-badge n1">NIVEAU 1 : SANS LES BRAS (Prérequis)</span><p>Mains fixes sur les hanches. Saut écartement des pieds.</p><div class="no-rep">NO REP : Mains quittant les hanches. Retombée lourde sur les talons. Genoux rentrants.</div></div>
+                    <div class="level-block"><span class="level-badge n1">NIVEAU 1 : SANS LES BRAS</span><p>Mains fixes sur les hanches. Saut écartement des pieds.</p><div class="no-rep">NO REP : Mains quittant les hanches. Retombée lourde sur les talons. Genoux rentrants.</div></div>
                     <div class="level-block"><span class="level-badge n2">NIVEAU 2 : CLASSIQUE</span><p>Saut coordonné. Contact franc des mains en haut.</p><div class="no-rep">NO REP : Absence de contact des mains en haut. Bras non coordonnés.</div></div>
                     <div class="level-block"><span class="level-badge n3">NIVEAU 3 : CROSSOVER JACK</span><p>Bras en croix. Saut de croisement alterné (bras et jambes).</p><div class="no-rep">NO REP : Pas d'alternance D/G. Bras descendants sous les épaules.</div></div>
-                    <div class="level-block"><span class="level-badge n4">NIVEAU 4 : SQUAT JACK</span><p>Saut avec descente en squat complet, mains jointes au point bas.</p><div class="no-rep">NO REP : Squat trop haut (pas de parallèle). Buste couché en avant.</div></div>
+                    <div class="level-block"><span class="level-badge n4">NIVEAU 4 : SQUAT JACK</span><p>Saut avec descente en squat complet, mains jointes au point bas.</p><div class="no-rep">NO REP : Squat trop haut. Buste couché en avant.</div></div>
                 </div>
             </details>
 
             <details><summary>Atelier 2 : Mountain Climber (Cardio/Gainage)</summary>
                 <div class="details-content">
                     <img src="https://i.postimg.cc/y8pWmSK0/Atelier-2-Moutain-Climber.jpg" alt="Mountain Climber" class="affiche-atelier">
-                    <div class="level-block"><span class="level-badge n1">NIVEAU 1 : PLANCHE ALTERNÉE</span><p>Planche haute. Amener un genou fléchi vers la poitrine en posant le pied, alterner lentement.</p><div class="no-rep">NO REP : Bassin en toit ou dos creusé.</div></div>
-                    <div class="level-block"><span class="level-badge n2">NIVEAU 2 : PLANK LEG LIFT</span><p>Planche haute. Élévation d'une jambe tendue vers le haut (contraction fessière). Arrêt d'1 sec.</p><div class="no-rep">NO REP : Genou qui se plie. Dos qui se creuse à la montée.</div></div>
+                    <div class="level-block"><span class="level-badge n1">NIVEAU 1 : PLANCHE ALTERNÉE</span><p>Planche haute. Amener un genou fléchi vers la poitrine en posant le pied.</p><div class="no-rep">NO REP : Bassin en toit ou dos creusé.</div></div>
+                    <div class="level-block"><span class="level-badge n2">NIVEAU 2 : PLANK LEG LIFT</span><p>Planche haute. Élévation d'une jambe tendue vers le haut.</p><div class="no-rep">NO REP : Genou qui se plie. Dos qui se creuse à la montée.</div></div>
                     <div class="level-block"><span class="level-badge n3">NIVEAU 3 : LE TOUCH</span><p>Montée dynamique. Contact physique obligatoire genou sur coude.</p><div class="no-rep">NO REP : Genou ne touchant pas le bras. Bassin qui monte à l'impact.</div></div>
                     <div class="level-block"><span class="level-badge n4">NIVEAU 4 : DYNAMIQUE CONTINU</span><p>Course explosive horizontale. Le pied avant ne touche JAMAIS le sol.</p><div class="no-rep">NO REP : Bassin oscillant haut/bas. Pied avant qui rebondit au sol.</div></div>
                 </div>
@@ -276,7 +283,7 @@
             <details><summary>Atelier 3 : Burpees (Cardio)</summary>
                 <div class="details-content">
                     <img src="https://i.postimg.cc/VkZ5qbw4/Atelier-3-Burpees.jpg" alt="Burpees" class="affiche-atelier">
-                    <div class="level-block"><span class="level-badge n1">NIVEAU 1 : SPRAWL COOL</span><p>Décomposé en marchant : Mains au sol, reculer un pied après l'autre en planche, ramener et se redresser.</p><div class="no-rep">NO REP : Descente sur les genoux. Précipitation sautée.</div></div>
+                    <div class="level-block"><span class="level-badge n1">NIVEAU 1 : SPRAWL COOL</span><p>Décomposé en marchant : Mains au sol, reculer un pied après l'autre, ramener et se redresser.</p><div class="no-rep">NO REP : Descente sur les genoux. Précipitation sautée.</div></div>
                     <div class="level-block"><span class="level-badge n2">NIVEAU 2 : SPRAWL</span><p>Jeté simultané des 2 pieds en planche. Retour groupé. Sans pompe, sans saut.</p></div>
                     <div class="level-block"><span class="level-badge n3">NIVEAU 3 : SPRAWL JUMP</span><p>Idem N2 + saut vertical explosif à la fin avec claquement de mains en l'air.</p><div class="no-rep">NO REP : Absence de décollement visible des pieds.</div></div>
                     <div class="level-block"><span class="level-badge n4">NIVEAU 4 : BURPEE COMPLET</span><p>Poitrine ET cuisses au sol. Remontée, saut vertical, frappe des mains.</p><div class="no-rep">NO REP : Poitrine ne touchant pas le sol. Buste qui s'effondre (dos creux).</div></div>
@@ -307,8 +314,8 @@
                 <div class="details-content">
                     <img src="https://i.postimg.cc/7Ztb3T4Q/Atelier-6-Pompes.jpg" alt="Pompes" class="affiche-atelier">
                     <div class="level-block"><span class="level-badge n1">NIVEAU 1 : SHOULDER TOUCH</span><p>Planche haute sur les mains. Venir toucher l'épaule opposée sans dandiner les hanches.</p></div>
-                    <div class="level-block"><span class="level-badge n2">NIVEAU 2 : KNEE PUSH-UP</span><p>Pompes sur les genoux. Le bassin descend avec les épaules (alignement). Poitrine au sol.</p><div class="no-rep">NO REP : Position à "4 pattes" (les fesses restent en haut).</div></div>
-                    <div class="level-block"><span class="level-badge n3">NIVEAU 3 : HAND-RELEASE</span><p>Sur les genoux. Descente complète, on pose tout le torse, on décolle les mains du sol, on les repose et on pousse d'un bloc.</p></div>
+                    <div class="level-block"><span class="level-badge n2">NIVEAU 2 : KNEE PUSH-UP</span><p>Pompes sur les genoux. Le bassin descend avec les épaules. Poitrine au sol.</p><div class="no-rep">NO REP : Position à "4 pattes".</div></div>
+                    <div class="level-block"><span class="level-badge n3">NIVEAU 3 : HAND-RELEASE</span><p>Sur les genoux. Descente complète, on pose le torse, on décolle les mains, on repousse d'un bloc.</p></div>
                     <div class="level-block"><span class="level-badge n4">NIVEAU 4 : PUSH-UP CLASSIQUE</span><p>Sur la pointe des pieds. Descente monobloc, poitrine au sol, remontée stricte.</p></div>
                 </div>
             </details>
@@ -316,8 +323,8 @@
             <details><summary>Atelier 7 : Crunchs (Gainage/Tronc)</summary>
                 <div class="details-content">
                     <img src="https://i.postimg.cc/CxrdGf0D/Atelier-7-Crunchs.jpg" alt="Crunchs" class="affiche-atelier">
-                    <div class="level-block"><span class="level-badge n1">NIVEAU 1 : BASIC CRUNCH</span><p>Pieds au sol. On enroule le haut du dos (les omoplates décollent). On ne tire JAMAIS sur la nuque.</p><div class="no-rep">NO REP : Mains tirant sur la nuque.</div></div>
-                    <div class="level-block"><span class="level-badge n2">NIVEAU 2 : FEET OFF 90°</span><p>Jambes en l'air, tibias parallèles au sol (chaise renversée). Enroulement vers les genoux.</p></div>
+                    <div class="level-block"><span class="level-badge n1">NIVEAU 1 : BASIC CRUNCH</span><p>Pieds au sol. On enroule le haut du dos. On ne tire JAMAIS sur la nuque.</p><div class="no-rep">NO REP : Mains tirant sur la nuque.</div></div>
+                    <div class="level-block"><span class="level-badge n2">NIVEAU 2 : FEET OFF 90°</span><p>Jambes en l'air, tibias parallèles au sol. Enroulement vers les genoux.</p></div>
                     <div class="level-block"><span class="level-badge n3">NIVEAU 3 : RUSSIAN TWIST</span><p>Assis, buste à 45°. Talons décollés. Rotation des épaules pour toucher le sol de chaque côté.</p></div>
                     <div class="level-block"><span class="level-badge n4">NIVEAU 4 : BUTTERFLY SIT-UP</span><p>Pieds en papillon. Toucher le sol derrière la tête, puis remonter complètement pour toucher ses pieds.</p></div>
                 </div>
@@ -326,10 +333,10 @@
             <details><summary>Atelier 8 : Planche / Gainage</summary>
                 <div class="details-content">
                     <img src="https://i.postimg.cc/dVND2TFy/Atelier-8-Gainage.jpg" alt="Gainage" class="affiche-atelier">
-                    <div class="level-block"><span class="level-badge n1">NIVEAU 1 : PLANK STEP OUT</span><p>Planche haute. Décaler une jambe tendue sur le côté (sans glisser le pied au sol), ramener, alterner.</p></div>
-                    <div class="level-block"><span class="level-badge n2">NIVEAU 2 : PLANK JACKS</span><p>Planche haute. Saut simultané des deux pieds vers l'extérieur puis resserrage (comme un jumping jack couché).</p></div>
+                    <div class="level-block"><span class="level-badge n1">NIVEAU 1 : PLANK STEP OUT</span><p>Planche haute. Décaler une jambe tendue sur le côté sans glisser, ramener, alterner.</p></div>
+                    <div class="level-block"><span class="level-badge n2">NIVEAU 2 : PLANK JACKS</span><p>Planche haute. Saut simultané des deux pieds vers l'extérieur puis resserrage.</p></div>
                     <div class="level-block"><span class="level-badge n3">NIVEAU 3 : MILITARY PLANK</span><p>Passer de la planche sur les coudes à la planche sur les mains de façon fluide. Bassin fixé.</p></div>
-                    <div class="level-block"><span class="level-badge n4">NIVEAU 4 : BIRD DOG PLANK</span><p>Décoller simultanément Bras Droit et Jambe Gauche. Tenir 1 seconde en l'air, parfaitement aligné. Alterner.</p></div>
+                    <div class="level-block"><span class="level-badge n4">NIVEAU 4 : BIRD DOG PLANK</span><p>Décoller simultanément Bras D + Jambe G. Tenir 1 seconde parfaitement aligné. Alterner.</p></div>
                 </div>
             </details>
 
@@ -340,9 +347,9 @@
                         <h4>💡 Astuce de Juge</h4>
                         <p>Pour le Superman, le juge compte : <strong>"Un... Deux... Validé !"</strong>. Le temps sous tension statique est obligatoire pour valider la rep.</p>
                     </div>
-                    <div class="level-block"><span class="level-badge n1">NIVEAU 1 : SUPERMAN FIRST</span><p>À plat ventre. Seuls la tête et le buste décollent. Les pointes de pieds restent au sol.</p></div>
+                    <div class="level-block"><span class="level-badge n1">NIVEAU 1 : SUPERMAN FIRST</span><p>À plat ventre. Seuls la tête et le buste décollent.</p></div>
                     <div class="level-block"><span class="level-badge n2">NIVEAU 2 : ALTERNÉ CROISÉ</span><p>Élévation Bras Droit + Jambe Gauche. On maintient 2 secondes, puis on change de diagonale.</p></div>
-                    <div class="level-block"><span class="level-badge n3">NIVEAU 3 : L-VARIATION / CHANDELIER</span><p>Bras à 90° (chandelier). Buste ET cuisses décollent. On resserre très fort les omoplates.</p></div>
+                    <div class="level-block"><span class="level-badge n3">NIVEAU 3 : L-VARIATION / CHANDELIER</span><p>Bras à 90° (chandelier). Buste ET cuisses décollent. Resserrement des omoplates.</p></div>
                     <div class="level-block"><span class="level-badge n4">NIVEAU 4 : SUPERMAN HOLD / COMPLET</span><p>Banane complète. Buste, bras tendus devant, cuisses décollées. Maintien parfait 2 secondes.</p></div>
                 </div>
             </details>
@@ -390,10 +397,6 @@
                     <h4>⏱️ DÉFI BONUS (Si cours de 1h30) : Le relais "Hold"</h4>
                     <p>Faire deux grandes équipes (Filles vs Garçons ou mixtes). Un élève de l'équipe maintient la position de la "Chaise" contre le mur, pendant que le reste de l'équipe court autour du gymnase pour faire le plus de tours possibles. Dès que l'élève en chaise lâche, il est remplacé. Quelle équipe fait le plus de tours en 10 minutes ?</p>
                 </div>
-
-                <a href="https://drive.google.com/file/d/1x4w4g7Oe0oxVr9vWJ7iW-p2XTeUvEuq8/view" class="btn-download" target="_blank">
-                    📄 Ouvrir / Imprimer la Grille d'Évaluation (Séance 1)
-                </a>
             </div>
         </div>
 
@@ -403,7 +406,7 @@
 
             <div class="prof-tip">
                 <h4>💡 L'objectif du prof aujourd'hui :</h4>
-                <p>Éviter le "départ canon". En cycle 4, les élèves veulent souvent sprinter la 1ère minute de l'EMOM, mais ils explosent à la 3ème. Le rôle du juge/coach est de les forcer à **lisser leur effort** pour être réguliers sur tout le bloc de temps.</p>
+                <p>Éviter le "départ canon". Les élèves veulent souvent sprinter la 1ère minute de l'EMOM, mais ils explosent à la 3ème. Le rôle du juge/coach est de les forcer à **lisser leur effort** pour être réguliers sur tout le bloc de temps.</p>
             </div>
 
             <div class="seance-card">
@@ -428,10 +431,6 @@
                     <h4>⏱️ DÉFI BONUS (Si cours de 1h30) : Tabata "Abdos en folie"</h4>
                     <p>Sans matériel : 4 minutes de Tabata (20s/10s) dédié uniquement au tronc. Alterner : 1. Crunchs classiques / 2. Gainage latéral droit / 3. Gainage dynamique (military) / 4. Gainage latéral gauche.</p>
                 </div>
-
-                <a href="https://drive.google.com/file/d/1k-b_LoxWm1IIJQMkaLnIrfdOFp8M9nta/view" class="btn-download" target="_blank">
-                    📄 Ouvrir / Imprimer la Grille d'Évaluation (Séance 2)
-                </a>
             </div>
         </div>
 
@@ -454,12 +453,11 @@
                 <h3>2. Corps de Séance (50 min)</h3>
                 <ul>
                     <li><strong>Skills (20 min) :</strong> Apprentissage sécuritaire des Fentes (protection des rotules !), du Superman et des Crunchs. Le juge s'entraine à compter.</li>
-                    <li><strong>WOD E2MOM (12 minutes / 6 départs) :</strong> 
+                    <li><strong>WOD E2MOM (10 minutes / 5 départs de 2 min) :</strong> 
                         <ul>
-                            <li>Un départ toutes les 2 minutes.</li>
-                            <li><strong>Le Contrat :</strong> L'athlète choisit 3 mouvements (3 familles distinctes) pour un total d'environ 40 répétitions. <br>
-                            <em>Exemple de contrat validé : 16 Fentes (8/jambe) + 14 Crunchs + 10 Superman.</em></li>
-                            <li>L'élève doit accomplir tout ça dans les 2 minutes, se reposer, et recommencer 6 fois.</li>
+                            <li>C'est le format de l'évaluation finale. Un départ toutes les 2 minutes.</li>
+                            <li><strong>Le Contrat :</strong> L'athlète choisit un mouvement dans chaque famille. Il choisit un contrat global : <strong>20, 30, ou 40 reps au total</strong> par bloc de 2 minutes.</li>
+                            <li>L'élève doit accomplir son contrat dans les 2 minutes, se reposer, et recommencer 5 fois.</li>
                         </ul>
                     </li>
                 </ul>
@@ -468,10 +466,6 @@
                     <h4>⏱️ DÉFI BONUS (Si cours de 1h30) : Le record du saut en longueur sans élan</h4>
                     <p>Mettre des bandes de scotch au sol tous les 10cm à partir d'1m50. Les élèves ont 5 essais pour réaliser leur meilleur bond sans élan (travail d'explosivité lié au squat).</p>
                 </div>
-
-                <a href="https://drive.google.com/file/d/15Zy8qYht66IJ3Z_Hsomwv8KHe3J6Hz4b/view" class="btn-download" target="_blank">
-                    📄 Ouvrir / Imprimer la Grille d'Évaluation (Séance 3)
-                </a>
             </div>
         </div>
 
@@ -482,8 +476,8 @@
             <div class="prof-tip">
                 <h4>💡 Lexique Prof : AMRAP et For Time</h4>
                 <ul>
-                    <li><strong>AMRAP (As Many Rounds As Possible) :</strong> On lance un chrono global de 8 ou 10 minutes. L'élève doit faire le plus de tours possibles de son circuit sans pause obligatoire. C'est l'élève qui gère sa fatigue.</li>
-                    <li><strong>For Time :</strong> On donne une quantité fixe de travail (ex: faire 200 pompes en équipe). Le but est de finir le plus vite possible. On chronomètre le temps final.</li>
+                    <li><strong>AMRAP (As Many Rounds As Possible) :</strong> On lance un chrono global. L'élève doit faire le plus de tours possibles de son circuit sans pause obligatoire. C'est l'élève qui gère sa fatigue.</li>
+                    <li><strong>For Time :</strong> On donne une quantité fixe de travail. Le but est de finir le plus vite possible. On chronomètre le temps final.</li>
                 </ul>
             </div>
 
@@ -505,10 +499,6 @@
                         </ul>
                     </li>
                 </ul>
-
-                <a href="https://drive.google.com/file/d/11uqkH8TH5kFJTCIvZVG59PMi2NvBeN1C/view" class="btn-download" target="_blank">
-                    📄 Ouvrir / Imprimer la Grille d'Évaluation (Séance 4)
-                </a>
             </div>
         </div>
 
@@ -537,17 +527,13 @@
                             <li>Le juge observe la dégradation de la posture (acidose). S'il y a un dos rond = No rep, l'élève doit recommencer sa rep, perdant du temps.</li>
                         </ul>
                     </li>
-                    <li><strong>Team WOD - 200 Reps For Time (30 min) :</strong>
+                    <li><strong>Team WOD - 170 Reps For Time (30 min) :</strong>
                         <ul>
-                            <li>En équipe de 2, relais libre. Les élèves doivent franchir la barre des 200 reps au total (choix de 3 ou 4 ateliers).</li>
-                            <li>Gestion de stratégie : faut-il faire des relais très courts (5 reps chacun) rapides, ou des relais longs (20 reps chacun) lents ?</li>
+                            <li>En équipe de 2, relais libre. Les élèves se testent sur le format exact de l'évaluation finale.</li>
+                            <li>40 Mountain Climbers, 20 Push Up, 30 Squats, 80 Jumping Jacks.</li>
                         </ul>
                     </li>
                 </ul>
-                
-                <a href="https://drive.google.com/file/d/1-5SpfhaMEbN4bc_1C8sXXIWifW8cogqS/view" class="btn-download" target="_blank">
-                    📄 Ouvrir / Imprimer la Grille d'Évaluation (Séance 5)
-                </a>
             </div>
         </div>
 
@@ -557,7 +543,7 @@
             
             <div class="prof-tip">
                 <h4>💡 Conseils pour l'évaluation</h4>
-                <p>Attention, en classe de 3ème, l'objectif est de "Concevoir son entraînement". Les élèves doivent choisir leurs ateliers en fonction d'un MOBILE précis (Mobile 1 : Affiner sa silhouette / Cardio ; Mobile 2 : Gagner en puissance / Force ; Mobile 3 : Entretenir son corps / Posture). Aujourd'hui ils testent leurs choix pour voir si c'est réaliste.</p>
+                <p>C'est la répétition générale. Les élèves testent leur choix de niveaux (1, 2, 3) et leur choix de contrat (20, 30, 40) pour le WOD 1 afin de voir s'ils tiennent les 10 minutes sans exploser en "No Rep".</p>
             </div>
 
             <div class="seance-card">
@@ -570,58 +556,149 @@
                 <ul>
                     <li><strong>Simulation de l'Épreuve 1 - Individuel (30 min) :</strong>
                         <ul>
-                            <li>Format : E2MOM (7 rounds de 2 minutes = 14 minutes de travail).</li>
-                            <li>L'élève teste son contrat : 4 mouvements différents. Doit-il baisser la difficulté (passer de N3 à N2) pour ne pas faire de "No Rep" ? Doit-il baisser son nombre de répétitions ?</li>
+                            <li>Format : E2MOM 10 min (5 tours de 2 minutes).</li>
+                            <li>L'élève teste son contrat. Doit-il baisser la difficulté pour ne pas faire de "No Rep" ? Doit-il baisser son nombre de répétitions (passer de 40 à 30 reps) ?</li>
                         </ul>
                     </li>
                     <li><strong>Simulation de l'Épreuve 2 - Team WOD (20 min) :</strong>
                         <ul>
-                            <li>Format imposé : 200 répétitions par équipe.</li>
-                            <li>50 rep Haut du corps + 50 rep Bas du corps + 50 rep Gainage + 50 rep Cardio. Ils testent leur communication d'équipe.</li>
+                            <li>Format imposé : 170 répétitions par équipe.</li>
+                            <li>40 MC + 20 Pompes + 30 Squats + 80 JJ. Ils testent leur communication d'équipe pour faire le meilleur temps.</li>
                         </ul>
                     </li>
                     <li><strong>Validation :</strong> À la fin de l'heure, l'élève valide et signe son contrat définitif pour la note de la semaine prochaine.</li>
                 </ul>
-
-                <a href="https://drive.google.com/file/d/1Tc6BXd-997DEVoTGdw03-t9GGhPvQEvi/view" class="btn-download" target="_blank">
-                    📄 Ouvrir / Imprimer la Feuille de Match (Séance 6)
-                </a>
             </div>
         </div>
 
         <!-- ================= EVALUATION ================= -->
         <div id="tab-eval" class="tab-content">
-            <h2 class="section-title">Le Dispositif d'Évaluation (S7 et S8)</h2>
+            <h2 class="section-title">ÉVALUATION FINALE OFFICIELLE</h2>
             
             <div class="prof-tip">
-                <h4>💡 Comment noter ? (Barème sur 20)</h4>
+                <h4>💡 Le Nouveau Barème de Notation</h4>
                 <ul>
-                    <li><strong>L'arbitrage (4 points) :</strong> C'est la compétence de cycle 4. Un élève passif aura 0/4. Un élève qui se place au bon endroit, qui compte haut et fort et qui n'a pas peur de dire "NON, dos rond ! No Rep !" aura 4/4.</li>
-                    <li><strong>L'échauffement (4 points) :</strong> Est-il autonome ? Fait-il bien monter le cœur et les articulations avant l'effort ?</li>
-                    <li><strong>Le projet (6 pts) et La perf (6 pts) :</strong> S'il vise le niveau 4 (expert) mais fait la moitié en "No rep", sa note de compétence s'effondre. Mieux vaut un Niveau 2 (Standard) maîtrisé !</li>
+                    <li><strong>Performance (6 pts) :</strong> Contrat WOD 1 (40 reps=3pts, 30=2pts, 20=1pt) + Temps du WOD 2 (Ex: Moins de 2'20" = 3pts).</li>
+                    <li><strong>Maîtrise Motrice (6 pts) :</strong> Somme des niveaux de difficulté (max 3 pts) + Pénalités des No Rep (Moins de 2 fautes = 3 pts).</li>
+                    <li><strong>Rôle de Juge / Coach (4 pts) :</strong> Spectateur (1pt), Amateur (1.5pt), Confirmé (3pts), Pro (4pts).</li>
+                    <li><strong>Préparation / Échauffement (4 pts) :</strong> Inexistant (1pt), Insuffisant (1.5pt), Efficace (3pts), Cohérent et varié (4pts).</li>
                 </ul>
             </div>
 
             <div class="seance-card">
-                <h3>RÉCAPITULATIF DES NOTES OFFICIELLES (/20)</h3>
+                <h3>FEUILLE DE MATCH - WOD 1 : E2MOM 10 MIN (5 x 2')</h3>
+                <p class="text-left"><strong>1 mouvement choisi dans chacune des 4 familles.</strong> L'élève choisit le niveau (1 à 3) et l'un des trois contrats de répétitions (20, 30 ou 40 reps par tour).</p>
+                
                 <div style="overflow-x:auto;">
                     <table>
                         <tr>
-                            <th>Critère d'évaluation (Attendu de fin de cycle 4)</th>
-                            <th>Note obtenue</th>
+                            <th class="text-left">Famille</th>
+                            <th>Niveau (1,2,3)</th>
+                            <th>Contrat 20</th>
+                            <th>Contrat 30</th>
+                            <th>Contrat 40</th>
+                            <th class="text-left">No Rep (T1 à T5)</th>
                         </tr>
-                        <tr><td>Performance brute individuelle et collective (Temps/Volume)</td><td>___ / 6</td></tr>
-                        <tr><td>Compétence motrice & Projet (Niveaux choisis - No Rep)</td><td>___ / 6</td></tr>
-                        <tr><td>Rôle du Juge / Coach (Précision, arbitrage, posture)</td><td>___ / 4</td></tr>
-                        <tr><td>Préparation & Échauffement (Autonomie, cohérence)</td><td>___ / 4</td></tr>
-                        <tr><td><strong>NOTE FINALE DU CYCLE CROSS TRAINING</strong></td><td><strong>___ / 20</strong></td></tr>
+                        <tr>
+                            <td class="text-left"><strong>Mouvement 1</strong></td>
+                            <td>N___</td>
+                            <td>7 reps</td>
+                            <td>10 reps</td>
+                            <td>13 reps</td>
+                            <td class="text-left">R1:_ R2:_ R3:_ R4:_ R5:_</td>
+                        </tr>
+                        <tr>
+                            <td class="text-left"><strong>Mouvement 2</strong></td>
+                            <td>N___</td>
+                            <td>3 reps</td>
+                            <td>5 reps</td>
+                            <td>7 reps</td>
+                            <td class="text-left">R1:_ R2:_ R3:_ R4:_ R5:_</td>
+                        </tr>
+                        <tr>
+                            <td class="text-left"><strong>Mouvement 3</strong></td>
+                            <td>N___</td>
+                            <td>7 reps</td>
+                            <td>10 reps</td>
+                            <td>13 reps</td>
+                            <td class="text-left">R1:_ R2:_ R3:_ R4:_ R5:_</td>
+                        </tr>
+                        <tr>
+                            <td class="text-left"><strong>Mouvement 4</strong></td>
+                            <td>N___</td>
+                            <td>3 reps</td>
+                            <td>5 reps</td>
+                            <td>7 reps</td>
+                            <td class="text-left">R1:_ R2:_ R3:_ R4:_ R5:_</td>
+                        </tr>
+                        <tr style="background-color: #F8FAFC; font-weight: bold;">
+                            <td colspan="2" style="text-align: right;">TOTAL À FAIRE TOUTES LES 2' :</td>
+                            <td>20 Reps</td>
+                            <td>30 Reps</td>
+                            <td>40 Reps</td>
+                            <td class="text-left" style="color: #DC2626;">TOTAL NO REP: ______</td>
+                        </tr>
                     </table>
                 </div>
-
-                <a href="https://drive.google.com/file/d/1Tc6BXd-997DEVoTGdw03-t9GGhPvQEvi/view" class="btn-download" target="_blank">
-                    📄 Ouvrir / Imprimer la Feuille de Match Officielle (PDF)
-                </a>
             </div>
+
+            <div class="seance-card">
+                <h3>FEUILLE DE MATCH - WOD 2 : TEAM WOD (170 REPS)</h3>
+                <p class="text-left">Répartition libre avec le partenaire pour finir le plus vite possible.</p>
+                <div style="overflow-x:auto;">
+                    <table>
+                        <tr>
+                            <th class="text-left">Mouvement Imposé</th>
+                            <th>Reps Athlète A</th>
+                            <th>Reps Athlète B</th>
+                            <th class="text-left">No Rep Partenaire</th>
+                        </tr>
+                        <tr><td class="text-left"><strong>40 Mountain Climbers</strong></td><td></td><td></td><td class="text-left"></td></tr>
+                        <tr><td class="text-left"><strong>20 Push Up (Pompes)</strong></td><td></td><td></td><td class="text-left"></td></tr>
+                        <tr><td class="text-left"><strong>30 Squats</strong></td><td></td><td></td><td class="text-left"></td></tr>
+                        <tr><td class="text-left"><strong>80 Jumping Jacks</strong></td><td></td><td></td><td class="text-left"></td></tr>
+                    </table>
+                </div>
+                <p style="margin-top:1rem; font-size: 1.1rem;">⏱️ <strong>Temps réalisé :</strong> _____ min _____ s</p>
+            </div>
+
+            <div class="seance-card" style="background-color: #EFF6FF; border: 1px solid #BFDBFE;">
+                <h3 style="color: #1D4ED8;">RÉCAPITULATIF DES NOTES OFFICIELLES (/20)</h3>
+                <div style="overflow-x:auto;">
+                    <table>
+                        <tr>
+                            <th class="text-left">Compétence Évaluée</th>
+                            <th class="text-left">Détail des points</th>
+                            <th>Note / Points</th>
+                        </tr>
+                        <tr>
+                            <td class="text-left"><strong>Performance WOD 1 & 2</strong></td>
+                            <td class="text-left">Contrat WOD 1 (/3) + Temps WOD 2 (/3)</td>
+                            <td><strong>___ / 6</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="text-left"><strong>Maîtrise Motrice</strong></td>
+                            <td class="text-left">Niveau de difficulté des ateliers (/3) + Total No Rep (/3)</td>
+                            <td><strong>___ / 6</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="text-left"><strong>Rôle Juge / Coach</strong></td>
+                            <td class="text-left">Spectateur(1) - Amateur(1.5) - Confirmé(3) - Pro(4)</td>
+                            <td><strong>___ / 4</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="text-left"><strong>Préparation / Échauffement</strong></td>
+                            <td class="text-left">Inexistant(1) - Insuffisant(1.5) - Efficace(3) - Cohérent(4)</td>
+                            <td><strong>___ / 4</strong></td>
+                        </tr>
+                        <tr style="background-color: #DBEAFE; font-size: 1.2rem;">
+                            <td colspan="2" style="text-align: right;"><strong>NOTE FINALE :</strong></td>
+                            <td><strong>___ / 20</strong></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
         </div>
 
     </div>
