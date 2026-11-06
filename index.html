@@ -71,6 +71,21 @@
             color: var(--primary);
             border-bottom: 3px solid var(--primary);
         }
+        .nav-wrapper a.nav-btn-link {
+            display: inline-block;
+            padding: 1rem 1.2rem;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #0284C7;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .nav-wrapper a.nav-btn-link:hover {
+            background-color: #F0F9FF;
+            border-bottom: 3px solid #0284C7;
+        }
 
         .container {
             max-width: 900px;
@@ -203,6 +218,37 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         .btn-download:hover { background-color: #152C69; }
+        
+        .btn-student {
+            display: inline-block;
+            background-color: #0284C7;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            white-space: nowrap;
+        }
+        .btn-student:hover { background-color: #0369A1; }
+
+        .student-app-card {
+            background-color: #F0F9FF;
+            border-left: 5px solid #0284C7;
+            padding: 1.2rem;
+            border-radius: 6px;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .student-app-card div { flex: 1; min-width: 250px; }
+        .student-app-card h4 { margin: 0 0 0.5rem 0; color: #0369A1; font-size: 1.15rem; }
+        .student-app-card p { margin: 0; color: #0F172A; }
 
         table {
             width: 100%;
@@ -238,6 +284,7 @@
         <button onclick="openTab('tab-s5', this)">S5: Death By</button>
         <button onclick="openTab('tab-s6', this)">S6: Répétition</button>
         <button onclick="openTab('tab-eval', this)">📝 ÉVALUATION OFFICIELLE</button>
+        <a href="https://rouillacc.github.io/crosst/" target="_blank" class="nav-btn-link">📱 App Élèves</a>
     </div>
 
     <div class="container">
@@ -245,6 +292,16 @@
         <!-- ================= ONGLET ATELIERS ================= -->
         <div id="tab-ateliers" class="tab-content active">
             <h2 class="section-title">Guide Technique des 9 Ateliers</h2>
+            
+            <div class="student-app-card">
+                <div>
+                    <h4>📱 Application Web Élèves</h4>
+                    <p>Accès direct à l'interface distribuée aux élèves (chronos, affiches animées, etc.) sur GitHub Pages.</p>
+                </div>
+                <a href="https://rouillacc.github.io/crosst/" target="_blank" class="btn-student">
+                    Ouvrir l'App Élèves
+                </a>
+            </div>
 
             <div class="prof-tip">
                 <h4>💡 Pédagogie de l'Atelier (Pour le Prof)</h4>
@@ -420,15 +477,15 @@
                 <h3>1. Échauffement (15 min)</h3>
                 <ul>
                     <li>Course rythmée (pas chassés, montées de genoux, talons fesses).</li>
-                    <li>Mobilisation poignets (très important pour les Mountain Climbers).</li>
+                    <li>Mobilisation poignets (pour les Mountain Climbers et Sprawls) et hanches (pour les Fentes).</li>
                 </ul>
 
                 <h3>2. Corps de Séance (50 min)</h3>
                 <ul>
-                    <li><strong>Skills du jour (20 min) :</strong> Découverte des niveaux 1 à 4 des Jumping Jacks et Mountain Climbers. Explication des No Reps spécifiques.</li>
-                    <li><strong>WOD EMOM "Cardio" (8 minutes par élève) :</strong> 
+                    <li><strong>Skills du jour (20 min) :</strong> Découverte des niveaux 1 à 4 des Jumping Jacks, Mountain Climbers et <strong>Fentes (Lunges)</strong>. Explication des No Reps spécifiques.</li>
+                    <li><strong>WOD EMOM "Cardio & Jambes" (8 à 10 minutes par élève) :</strong> 
                         <ul>
-                            <li><strong>Le Contrat :</strong> Chaque minute, réaliser à la suite : (20 à 40 Jumping Jacks) + (10 à 30 Mountain Climbers).</li>
+                            <li><strong>Le Contrat :</strong> Chaque minute, réaliser à la suite : (20 à 40 Jumping Jacks) + (10 à 30 Mountain Climbers) + <strong>(10 à 20 Fentes alternées)</strong>.</li>
                             <li>Si un élève n'arrive pas à finir son contrat dans la minute, il doit revoir son contrat à la baisse à la minute suivante.</li>
                         </ul>
                     </li>
@@ -436,7 +493,8 @@
 
                 <div class="game-block">
                     <h4>🔥 SITUATION LUDIQUE & DÉFI</h4>
-                    <p><strong>Le Métronome / Pacing (15 min) :</strong> L'objectif n'est pas d'aller vite, mais d'être régulier. Le prof donne un contrat : "10 Jumping Jacks en <em>exactement</em> 20 secondes". S'il finit en 10s : échec (trop rapide). S'il finit en 25s : échec (trop lent). L'élève doit adapter sa vitesse d'exécution pour s'arrêter pile sur le coup de sifflet du prof. Idéal pour comprendre le lissage de l'effort !</p>
+                    <p><strong>Le Relais par Équipe (15 min) :</strong> Par équipe de 4 élèves. L'équipe doit réaliser un total de <strong>100 Jumping Jacks, 100 Squats, 50 Gainage Tap (ex: Shoulder touch), et 50 Sprawls</strong> le plus vite possible.<br>
+                    <em>Règle d'or :</em> Chaque élève de l'équipe <strong>doit faire au minimum 5 répétitions</strong> pour chaque exercice. Ils s'organisent comme ils veulent pour leurs relais !</p>
                 </div>
 
                 <a href="https://drive.google.com/file/d/1k-b_LoxWm1IIJQMkaLnIrfdOFp8M9nta/view" class="btn-download" target="_blank">
