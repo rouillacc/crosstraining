@@ -3,821 +3,994 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Cross Training Collège - Cycle 4</title>
+    <title>Cross Training - Évaluation Digitale</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <style>
         :root {
-            --primary: #FF6B00;
-            --secondary: #1E3A8A;
-            --bg-color: #F3F4F6;
-            --text-main: #1F2937;
-            --white: #FFFFFF;
-            --level1: #3B82F6;
-            --level2: #10B981;
-            --level3: #F59E0B;
-            --level4: #8B5CF6;
-            --bonus: #EA580C;
+            --bg-dark: #0f172a; --card-dark: #1e293b;
+            --primary: #f97316; --primary-glow: rgba(249, 115, 22, 0.4);
+            --secondary: #3b82f6; --secondary-glow: rgba(59, 130, 246, 0.4);
+            --tertiary: #10b981; --tertiary-glow: rgba(16, 185, 129, 0.4);
+            --quaternary: #8b5cf6; --quaternary-glow: rgba(139, 92, 246, 0.4);
+            --text-main: #f8fafc; --text-muted: #94a3b8;
+            --danger: #ef4444; --success: #10b981; --warning: #f59e0b;
+            --border-radius: 16px;
         }
 
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; font-family: 'Poppins', sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { margin: 0; padding: 0; background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            margin: 0;
-            padding: 0;
-            line-height: 1.5;
-        }
+        header { background: rgba(30, 41, 59, 0.9); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 1.2rem; text-align: center; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        header h1 { margin: 0; font-size: 1.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; background: linear-gradient(90deg, var(--primary), #fbbf24); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        header {
-            background-color: var(--secondary);
-            color: var(--white);
-            padding: 1rem;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        header h1 { margin: 0; font-size: 1.3rem; text-transform: uppercase; }
-        header p { margin: 0.2rem 0 0 0; font-size: 0.9rem; font-weight: normal; color: #BFDBFE; }
-
-        .nav-wrapper {
-            background-color: var(--white);
-            border-bottom: 2px solid #E5E7EB;
-            position: sticky;
-            top: 65px; 
-            z-index: 99;
-            overflow-x: auto;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
-            display: flex;
-        }
-        .nav-wrapper::-webkit-scrollbar { height: 4px; }
-        .nav-wrapper::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
-        .nav-wrapper button {
-            display: inline-block;
-            padding: 1rem 1.2rem;
-            background: none;
-            border: none;
-            border-bottom: 3px solid transparent;
-            font-size: 1rem;
-            font-weight: bold;
-            color: #6B7280;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .nav-wrapper button.active {
-            color: var(--primary);
-            border-bottom: 3px solid var(--primary);
-        }
-        .nav-wrapper a.nav-btn-link {
-            display: inline-block;
-            padding: 1rem 1.2rem;
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: bold;
-            color: #0284C7;
-            border-bottom: 3px solid transparent;
-            transition: all 0.2s;
-            white-space: nowrap;
-        }
-        .nav-wrapper a.nav-btn-link:hover {
-            background-color: #F0F9FF;
-            border-bottom: 3px solid #0284C7;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 1.5rem auto;
-            padding: 0 1rem;
-            padding-bottom: 4rem;
-        }
-
-        .tab-content { display: none; animation: fadeIn 0.3s ease-in-out; }
-        .tab-content.active { display: block; }
-
-        h2.section-title {
-            color: var(--secondary);
-            border-bottom: 2px solid var(--primary);
-            padding-bottom: 0.5rem;
-            margin-top: 0;
-        }
-
-        details {
-            background: var(--white);
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            overflow: hidden;
-        }
-        summary {
-            padding: 1.2rem;
-            font-size: 1.1rem;
-            font-weight: bold;
-            background-color: var(--white);
-            cursor: pointer;
-            list-style: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-left: 5px solid var(--secondary);
-        }
-        summary::-webkit-details-marker { display: none; }
-        summary::after { content: '+'; font-size: 1.5rem; color: var(--secondary); }
-        details[open] summary::after { content: '-'; }
+        .container { padding: 1.5rem 1rem; max-width: 650px; margin: 0 auto; padding-bottom: 5rem; }
         
-        .details-content { padding: 1.2rem; border-top: 1px solid #E5E7EB; }
+        .view { display: none; animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .view.active { display: block; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        .affiche-atelier {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-            image-rendering: high-quality;
-            image-rendering: -webkit-optimize-contrast;
-        }
-
-        .level-block {
-            margin-bottom: 1.5rem;
-            padding: 1rem;
-            background-color: #F8FAFC;
-            border-radius: 6px;
-            border: 1px solid #E2E8F0;
-        }
-        .level-badge {
-            display: inline-block;
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            color: white;
-            font-weight: bold;
-            font-size: 0.9rem;
-            margin-bottom: 0.8rem;
-        }
-        .n1 { background-color: var(--level1); }
-        .n2 { background-color: var(--level2); }
-        .n3 { background-color: var(--level3); }
-        .n4 { background-color: var(--level4); }
-
-        .no-rep {
-            background-color: #FEE2E2;
-            border-left: 4px solid #EF4444;
-            padding: 0.8rem;
-            margin: 0.8rem 0;
-            border-radius: 0 4px 4px 0;
-            font-size: 0.95rem;
-        }
-
-        .seance-card {
-            background: var(--white);
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            margin-bottom: 1.5rem;
-        }
-        .seance-card h3 { color: var(--primary); margin-top: 0; }
+        h2 { font-weight: 800; font-size: 1.4rem; margin-top: 0; margin-bottom: 1.5rem; color: white; text-align: center;}
+        label { display: block; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-muted); font-size: 0.9rem;}
         
-        .prof-tip {
-            background-color: #E0F2FE;
-            border-left: 5px solid #0284C7;
-            padding: 1rem;
-            border-radius: 6px;
-            margin: 1rem 0;
-            font-size: 0.95rem;
-        }
-        .prof-tip h4 { margin: 0 0 0.5rem 0; color: #0369A1; font-size: 1.1rem; }
+        .card { background: var(--card-dark); border-radius: var(--border-radius); padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3); border: 1px solid rgba(255,255,255,0.05); }
 
-        /* STYLE POUR LES JEUX ET DEFIS */
-        .game-block {
-            background-color: #FFF7ED;
-            border-left: 5px solid var(--bonus);
-            padding: 1.2rem;
-            border-radius: 6px;
-            margin: 1.5rem 0;
-            font-size: 0.95rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        .game-block h4 { margin: 0 0 1rem 0; color: #9A3412; font-size: 1.15rem; text-transform: uppercase;}
-        .game-block p { margin-top: 0; margin-bottom: 1rem; line-height: 1.6; }
-        .game-block p:last-child { margin-bottom: 0; }
-        .game-block strong { color: #C2410C; }
-        .game-block ul { margin-top: 0.5rem; margin-bottom: 1rem; padding-left: 1.2rem; }
-
-        .btn-download {
-            display: block;
-            background-color: var(--secondary);
-            color: white;
-            padding: 1rem;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 8px;
-            text-align: center;
-            margin-top: 1.5rem;
-            transition: 0.2s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .btn-download:hover { background-color: #152C69; }
+        .btn-main { display: block; width: 100%; padding: 1.2rem; margin-bottom: 1rem; background: linear-gradient(135deg, var(--primary), #ea580c); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 800; box-shadow: 0 4px 15px var(--primary-glow); cursor: pointer; text-align: center; text-transform: uppercase; transition: transform 0.1s, box-shadow 0.2s; }
+        .btn-main:active { transform: scale(0.98); }
+        .btn-main.prof { background: linear-gradient(135deg, var(--secondary), #2563eb); box-shadow: 0 4px 15px var(--secondary-glow); }
+        .btn-main.s2 { background: linear-gradient(135deg, var(--tertiary), #059669); box-shadow: 0 4px 15px var(--tertiary-glow); }
+        .btn-main.s3 { background: linear-gradient(135deg, var(--quaternary), #6d28d9); box-shadow: 0 4px 15px var(--quaternary-glow); }
         
-        .btn-student {
-            display: inline-block;
-            background-color: #0284C7;
-            color: white;
-            padding: 0.8rem 1.5rem;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 8px;
-            transition: 0.2s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            white-space: nowrap;
-        }
-        .btn-student:hover { background-color: #0369A1; }
+        .btn-secondary { display: block; width: 100%; padding: 1rem; margin-top: 1rem; background-color: transparent; color: var(--text-muted); border: 2px solid var(--text-muted); border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .btn-secondary:hover { background-color: rgba(255,255,255,0.05); }
 
-        .student-app-card {
-            background-color: #F0F9FF;
-            border-left: 5px solid #0284C7;
-            padding: 1.2rem;
-            border-radius: 6px;
-            margin-bottom: 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        .student-app-card div { flex: 1; min-width: 250px; }
-        .student-app-card h4 { margin: 0 0 0.5rem 0; color: #0369A1; font-size: 1.15rem; }
-        .student-app-card p { margin: 0; color: #0F172A; }
+        select, input[type="text"], input[type="password"], input[type="number"].main-input { width: 100%; padding: 1rem; margin-bottom: 1.5rem; border: 2px solid transparent; border-radius: 12px; font-size: 1.1rem; background-color: #ffffff; color: #0f172a; font-weight: 700; outline: none; appearance: none; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); }
+        select:focus, input:focus { border-color: var(--secondary); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3); }
+        select:disabled { opacity: 0.5; background-color: #cbd5e1; }
+        
+        .select-wrapper { position: relative; }
+        .select-wrapper::after { content: '▼'; font-size: 0.8rem; color: #64748b; position: absolute; right: 15px; top: 38%; pointer-events: none; }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-            margin-bottom: 1.5rem;
-            background: white;
-            font-size: 0.85rem;
-        }
-        th, td { border: 1px solid #E5E7EB; padding: 0.6rem; text-align: center; }
-        th { background-color: var(--secondary); color: white; }
-        .text-left { text-align: left; }
+        .file-upload-wrapper { position: relative; overflow: hidden; display: inline-block; width: 100%; background: rgba(59, 130, 246, 0.1); border: 2px dashed var(--secondary); border-radius: 12px; padding: 2rem 1rem; text-align: center; margin-bottom: 1rem; cursor: pointer; }
+        .file-upload-wrapper input[type="file"] { font-size: 100px; position: absolute; left: 0; top: 0; opacity: 0; height: 100%; cursor: pointer;}
+        .file-upload-text { color: var(--secondary); font-weight: 600; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .tour-table { width: 100%; border-collapse: collapse; margin-bottom: 0.5rem; }
+        .tour-table th { font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); text-align: center; }
+        .tour-table td { padding: 0.8rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); text-align: center; vertical-align: middle; }
+        .tour-table td:first-child { text-align: left; font-weight: 600; font-size: 0.95rem; color: white; width: 35%; line-height: 1.3;}
+        
+        .ctrl-cell { display: flex; align-items: center; justify-content: center; gap: 4px; }
+        .btn-tiny { width: 32px; height: 32px; border-radius: 6px; border: none; font-weight: bold; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; transition: transform 0.1s; }
+        .btn-tiny:active { transform: scale(0.85); }
+        .btn-tiny.minus { background: rgba(255,255,255,0.1); color: var(--text-muted); }
+        .btn-tiny.plus-val { background: var(--success); box-shadow: 0 2px 5px rgba(16, 185, 129, 0.3);}
+        .btn-tiny.plus-err { background: var(--danger); box-shadow: 0 2px 5px rgba(239, 68, 68, 0.3);}
+        
+        .val-tiny-input { width: 44px; height: 36px; background: #ffffff; border: 2px solid transparent; color: #0f172a; font-weight: 800; font-size: 1.1rem; text-align: center; border-radius: 8px; padding: 0; margin: 0; -moz-appearance: textfield; box-shadow: inset 0 2px 4px rgba(0,0,0,0.15); transition: transform 0.1s; }
+        .val-tiny-input:focus { border-color: var(--secondary); outline: none; }
+        .val-tiny-input::-webkit-outer-spin-button, .val-tiny-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        .val-tiny-input.err { color: var(--danger); }
+
+        .badge { padding: 4px 8px; border-radius: 6px; font-weight: bold; font-size:0.85rem; display:inline-block; text-align:center;}
+        .badge-vert { background-color: rgba(16, 185, 129, 0.2); color: var(--success); border: 1px solid var(--success); }
+        .badge-jaune { background-color: rgba(245, 158, 11, 0.2); color: var(--warning); border: 1px solid var(--warning); }
+        .badge-orange { background-color: rgba(249, 115, 22, 0.2); color: var(--primary); border: 1px solid var(--primary); }
+        .badge-rouge { background-color: rgba(239, 68, 68, 0.2); color: var(--danger); border: 1px solid var(--danger); }
+        .badge-gris { background-color: rgba(255, 255, 255, 0.1); color: var(--text-muted); border: 1px solid rgba(255,255,255,0.2); font-size: 0.75rem;}
+
+        .table-wrapper { overflow-x: auto; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: var(--card-dark); margin-bottom:1.5rem;}
+        table.prof-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 600px;}
+        table.prof-table th, table.prof-table td { border-bottom: 1px solid rgba(255,255,255,0.05); padding: 1rem; text-align: center; vertical-align: middle;}
+        table.prof-table th { background-color: rgba(0,0,0,0.3); color: var(--text-muted); font-weight: 600; text-transform: uppercase; font-size: 0.75rem; white-space: nowrap;}
+        table.prof-table td:first-child { text-align: left; font-weight: bold; color: var(--text-main); }
+        table.prof-table tr:hover { background: rgba(255,255,255,0.02); }
+
+        .modal-overlay { position: fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.8); backdrop-filter:blur(5px); z-index:999; display:none; justify-content:center; align-items:center; padding:1rem; }
+        .modal-content { background: var(--card-dark); border: 1px solid var(--secondary); border-radius: 16px; padding: 1.5rem; width: 100%; max-width: 500px; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+
+        #pdf-container { display: none; background: white; color: black; padding: 20px; font-family: sans-serif; }
+        #pdf-container table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 11px; }
+        #pdf-container th, #pdf-container td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+        #pdf-container th { background-color: #f1f5f9; font-weight: bold; }
+        #pdf-container td:first-child { text-align: left; font-weight: bold;}
+        #pdf-container h2 { color: #0f172a; text-align: center; font-size: 22px; margin-bottom: 5px;}
+        .pdf-b { padding: 4px 6px; border-radius: 4px; font-weight: bold; display:inline-block;}
+        .pdf-vert { background-color: #d1fae5; color: #065f46; border: 1px solid #10b981; }
+        .pdf-jaune { background-color: #fef3c7; color: #92400e; border: 1px solid #f59e0b; }
+        .pdf-orange { background-color: #ffedd5; color: #9a3412; border: 1px solid #f97316; }
+        .pdf-rouge { background-color: #fee2e2; color: #991b1b; border: 1px solid #ef4444; }
+        .pdf-gris { color: #64748b; font-size: 10px; }
+
+        .custom-alert { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: var(--card-dark); border: 1px solid var(--secondary); padding: 1rem 2rem; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 1000; display: none; align-items: center; gap: 10px; font-weight: bold; text-align:center; }
+        
+        .image-lightbox { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.95); z-index: 2000; display: none; justify-content: center; align-items: center; overflow: auto; touch-action: auto; }
+        .image-lightbox img { max-width: 100%; height: auto; transform-origin: center center; transition: transform 0.2s ease-out; }
+        .close-lightbox-btn { position: fixed; top: 20px; right: 20px; background: rgba(255, 255, 255, 0.2); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 24px; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 2001; backdrop-filter: blur(5px); }
+        .zoomable-img { cursor: zoom-in; }
+
+        .color-rouge { color: var(--danger); font-weight: bold; }
+        .color-vert { color: var(--success); font-weight: bold; }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>💪 Cross Training - Collège</h1>
-        <p>EPS - Réaliser un projet d'entraînement et co-évaluer</p>
+        <h1 id="header-title">🔥 Cross Training</h1>
     </header>
 
-    <div class="nav-wrapper">
-        <button class="active" onclick="openTab('tab-ateliers', this)">🏋️ Ateliers</button>
-        <button onclick="openTab('tab-s1', this)">S1: Découverte</button>
-        <button onclick="openTab('tab-s2', this)">S2: EMOM</button>
-        <button onclick="openTab('tab-s3', this)">S3: E2MOM</button>
-        <button onclick="openTab('tab-s4', this)">S4: AMRAP</button>
-        <button onclick="openTab('tab-s5', this)">S5: Death By</button>
-        <button onclick="openTab('tab-s6', this)">S6: Répétition</button>
-        <button onclick="openTab('tab-eval', this)">📝 ÉVALUATION OFFICIELLE</button>
-        <a href="https://rouillacc.github.io/crosst/" target="_blank" class="nav-btn-link">📱 App Élèves</a>
+    <div class="custom-alert" id="custom-alert"><span id="alert-msg">Message</span></div>
+
+    <div class="modal-overlay" id="prof-modal">
+        <div class="modal-content">
+            <h2 id="modal-title" style="color:var(--primary); margin-bottom:1rem;">Détails de l'élève</h2>
+            <div id="modal-body" style="font-size:0.9rem;"></div>
+            <button class="btn-main" style="margin-top:1.5rem;" onclick="document.getElementById('prof-modal').style.display='none'">Fermer</button>
+        </div>
+    </div>
+    
+    <div class="image-lightbox" id="image-lightbox" onclick="closeImage()">
+        <button class="close-lightbox-btn" onclick="closeImage(event)">×</button>
+        <img id="lightbox-img" src="" alt="Image agrandie">
     </div>
 
     <div class="container">
-
-        <!-- ================= ONGLET ATELIERS ================= -->
-        <div id="tab-ateliers" class="tab-content active">
-            <h2 class="section-title">Guide Technique des 9 Ateliers</h2>
+        
+        <div id="view-home" class="view active">
+            <div style="text-align: center; margin-bottom: 2.5rem; margin-top:1rem;">
+                <h2 style="font-size: 2.2rem; margin-bottom: 0.5rem; font-weight:900;">Bienvenue</h2>
+                <p style="color: var(--text-muted); font-size:1.1rem; margin-bottom:2rem;">Application d'évaluation EPS</p>
+            </div>
             
-            <div class="student-app-card">
-                <div>
-                    <h4>📱 Application Web Élèves</h4>
-                    <p>Accès direct à l'interface distribuée aux élèves (chronos, affiches animées, etc.) sur GitHub Pages.</p>
-                </div>
-                <a href="https://rouillacc.github.io/crosst/" target="_blank" class="btn-student">
-                    Ouvrir l'App Élèves
-                </a>
+            <button class="btn-main" onclick="navTo('view-student-setup')">🎓 Espace Élève</button>
+            
+            <!-- NOUVEAU BOUTON : REFERENTIEL GLOBAL SUR L'ACCUEIL -->
+            <button class="btn-main" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9); box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);" onclick="navToReferentiel('view-home', true)">
+                📖 Référentiel Global<br><span style="font-size:0.8rem; font-weight:normal;">Images & Critères Anti No-Rep</span>
+            </button>
+            
+            <button class="btn-main prof" style="margin-top: 2rem;" onclick="navTo('view-prof-login')">⚙️ Espace Professeur</button>
+        </div>
+
+        <div id="view-prof-login" class="view">
+            <div class="card">
+                <h2>Accès Sécurisé</h2>
+                <label>Code Professeur :</label>
+                <input type="password" id="prof-code" placeholder="Code secret..." autocomplete="new-password" onfocus="this.value=''" onkeypress="if(event.key === 'Enter') checkProf()">
+                <button class="btn-main prof" onclick="checkProf()">Valider</button>
+                <button class="btn-secondary" onclick="navTo('view-home')">Retour</button>
             </div>
+        </div>
 
-            <div class="prof-tip">
-                <h4>💡 Pédagogie de l'Atelier (Pour le Prof)</h4>
-                <p>Chaque atelier propose des niveaux progressifs. L'objectif n'est pas de faire le niveau le plus dur, mais <strong>le niveau adapté à soi</strong> pour ne pas dégrader la posture (le dos !). Si un élève dégrade sa posture, le juge doit crier "NO REP" (répétition annulée).</p>
+        <div id="view-prof-dashboard" class="view">
+            <div class="card" style="padding:1rem;">
+                <h2 style="font-size:1.1rem; margin-bottom:1rem; text-align:left;">📥 Gestion des classes</h2>
+                <input type="text" id="class-name-input" placeholder="Nom de la classe (ex: 3ème A)">
+                <div class="file-upload-wrapper">
+                    <input type="file" id="csv-file" accept=".csv" onchange="handleCSVUpload(event)">
+                    <div class="file-upload-text" id="upload-text">📁 Importer CSV Pronote</div>
+                </div>
+                <div id="preview-students" style="display:none; margin-bottom:1rem; max-height:100px; overflow-y:auto; background:rgba(0,0,0,0.2); padding:1rem; border-radius:8px; font-size:0.85rem;"></div>
+                <button class="btn-main" id="btn-save-class" style="display:none; padding:0.8rem;" onclick="saveClassToFirebase()">Sauvegarder</button>
             </div>
-
-            <details><summary>Atelier 1 : Jumping Jack (Cardio)</summary>
-                <div class="details-content">
-                    <img src="https://drive.google.com/thumbnail?id=1UHkbUq4QUXcDkjc9PFMwv0mwaCM61YoC&sz=w2000" alt="Jumping Jack" class="affiche-atelier">
-                    <div class="level-block"><span class="level-badge n1">NIVEAU 1 : SANS LES BRAS</span><p>Mains fixes sur les hanches. Saut écartement des pieds.</p><div class="no-rep">NO REP : Mains quittant les hanches. Retombée lourde sur les talons. Genoux rentrants.</div></div>
-                    <div class="level-block"><span class="level-badge n2">NIVEAU 2 : CLASSIQUE</span><p>Saut coordonné. Contact franc des mains en haut.</p><div class="no-rep">NO REP : Absence de contact des mains en haut. Bras non coordonnés.</div></div>
-                    <div class="level-block"><span class="level-badge n3">NIVEAU 3 : CROSSOVER JACK</span><p>Bras en croix. Saut de croisement alterné (bras et jambes).</p><div class="no-rep">NO REP : Pas d'alternance D/G. Bras descendants sous les épaules.</div></div>
-                    <div class="level-block"><span class="level-badge n4">NIVEAU 4 : SQUAT JACK</span><p>Saut avec descente en squat complet, mains jointes au point bas.</p><div class="no-rep">NO REP : Squat trop haut. Buste couché en avant.</div></div>
-                </div>
-            </details>
-
-            <details><summary>Atelier 2 : Mountain Climber (Cardio/Gainage)</summary>
-                <div class="details-content">
-                    <img src="https://drive.google.com/thumbnail?id=1fJehZ7cytRqJIxe2T8xC6afcEilWuw_P&sz=w2000" alt="Mountain Climber" class="affiche-atelier">
-                    <div class="level-block"><span class="level-badge n1">NIVEAU 1 : PLANCHE ALTERNÉE</span><p>Planche haute. Amener un genou fléchi vers la poitrine en posant le pied.</p><div class="no-rep">NO REP : Bassin en toit ou dos creusé.</div></div>
-                    <div class="level-block"><span class="level-badge n2">NIVEAU 2 : PLANK LEG LIFT</span><p>Planche haute. Élévation d'une jambe tendue vers le haut.</p><div class="no-rep">NO REP : Genou qui se plie. Dos qui se creuse à la montée.</div></div>
-                    <div class="level-block"><span class="level-badge n3">NIVEAU 3 : LE TOUCH</span><p>Montée dynamique. Contact physique obligatoire genou sur coude.</p><div class="no-rep">NO REP : Genou ne touchant pas le bras. Bassin qui monte à l'impact.</div></div>
-                    <div class="level-block"><span class="level-badge n4">NIVEAU 4 : DYNAMIQUE CONTINU</span><p>Course explosive horizontale. Le pied avant ne touche JAMAIS le sol.</p><div class="no-rep">NO REP : Bassin oscillant haut/bas. Pied avant qui rebondit au sol.</div></div>
-                </div>
-            </details>
-
-            <details><summary>Atelier 3 : Burpees (Cardio)</summary>
-                <div class="details-content">
-                    <img src="https://drive.google.com/thumbnail?id=1Z5TML1MOryIVa68EiOO6BW59Ap9D3Hph&sz=w2000" alt="Burpees" class="affiche-atelier">
-                    <div class="level-block"><span class="level-badge n1">NIVEAU 1 : SPRAWL COOL</span><p>Décomposé en marchant : Mains au sol, reculer un pied après l'autre, ramener et se redresser.</p><div class="no-rep">NO REP : Descente sur les genoux. Précipitation sautée.</div></div>
-                    <div class="level-block"><span class="level-badge n2">NIVEAU 2 : SPRAWL</span><p>Jeté simultané des 2 pieds en planche. Retour groupé. Sans pompe, sans saut.</p></div>
-                    <div class="level-block"><span class="level-badge n3">NIVEAU 3 : SPRAWL JUMP</span><p>Idem N2 + saut vertical explosif à la fin avec claquement de mains en l'air.</p><div class="no-rep">NO REP : Absence de décollement visible des pieds.</div></div>
-                    <div class="level-block"><span class="level-badge n4">NIVEAU 4 : BURPEE COMPLET</span><p>Poitrine ET cuisses au sol. Remontée, saut vertical, frappe des mains.</p><div class="no-rep">NO REP : Poitrine ne touchant pas le sol. Buste qui s'effondre (dos creux).</div></div>
-                </div>
-            </details>
-
-            <details><summary>Atelier 4 : Air Squat (Bas du corps)</summary>
-                <div class="details-content">
-                    <img src="https://drive.google.com/thumbnail?id=1osaB_Lq4BvN-6FuxxFlFrKgGOmXuW01t&sz=w2000" alt="Squats" class="affiche-atelier">
-                    <div class="level-block"><span class="level-badge n1">NIVEAU 1 : ASSISTED SQUAT</span><p>Se tenir à un point fixe. Descente assistée, talons collés au sol.</p></div>
-                    <div class="level-block"><span class="level-badge n2">NIVEAU 2 : SQUAT COMPLET</span><p>Casser la parallèle (creux de la hanche sous le genou). Dos droit, talons ancrés.</p><div class="no-rep">NO REP : Descente insuffisante. Talons décollés. Buste couché.</div></div>
-                    <div class="level-block"><span class="level-badge n3">NIVEAU 3 : SQUAT JUMP</span><p>Squat complet + extension explosive vers le haut.</p></div>
-                    <div class="level-block"><span class="level-badge n4">NIVEAU 4 : SQUAT JUMP 180°</span><p>Squat complet + impulsion avec demi-tour strict (180°).</p></div>
-                </div>
-            </details>
-
-            <details><summary>Atelier 5 : Fentes Alternées (Jambes/Fessiers)</summary>
-                <div class="details-content">
-                    <img src="https://drive.google.com/thumbnail?id=1ZGU4KP4flUX84z-Kj_VWM1PK2sALtXIz&sz=w2000" alt="Fentes" class="affiche-atelier">
-                    <div class="level-block"><span class="level-badge n1">NIVEAU 1 : LUNGE EXTENSION</span><p>Grand pas arrière glissé. Abaisser le bassin sans choc.</p></div>
-                    <div class="level-block"><span class="level-badge n2">NIVEAU 2 : FRONT LUNGE POSE GENOU</span><p>Fente avant. "Baiser du genou" (contact très doux avec le sol).</p><div class="no-rep">NO REP : Genou arrière qui percute le sol violemment.</div></div>
-                    <div class="level-block"><span class="level-badge n3">NIVEAU 3 : DYNAMIQUE MARCHÉE</span><p>Déplacement continu en marchant vers l'avant. Le genou arrière frôle le sol, on ne marque pas l'arrêt au milieu.</p></div>
-                    <div class="level-block"><span class="level-badge n4">NIVEAU 4 : JUMPING LUNGE</span><p>Fentes sautées avec changement de jambes en l'air. Réception amortie.</p></div>
-                </div>
-            </details>
-
-            <details><summary>Atelier 6 : Push-up / Pompes (Haut du corps)</summary>
-                <div class="details-content">
-                    <img src="https://drive.google.com/thumbnail?id=1BALlDysqZKpwzOsr1G_PRlA1dTyEru-C&sz=w2000" alt="Pompes" class="affiche-atelier">
-                    <div class="level-block"><span class="level-badge n1">NIVEAU 1 : SHOULDER TOUCH</span><p>Planche haute sur les mains. Venir toucher l'épaule opposée sans dandiner les hanches.</p></div>
-                    <div class="level-block"><span class="level-badge n2">NIVEAU 2 : KNEE PUSH-UP</span><p>Pompes sur les genoux. Le bassin descend avec les épaules. Poitrine au sol.</p><div class="no-rep">NO REP : Position à "4 pattes".</div></div>
-                    <div class="level-block"><span class="level-badge n3">NIVEAU 3 : HAND-RELEASE</span><p>Sur les genoux. Descente complète, on pose le torse, on décolle les mains, on repousse d'un bloc.</p></div>
-                    <div class="level-block"><span class="level-badge n4">NIVEAU 4 : PUSH-UP CLASSIQUE</span><p>Sur la pointe des pieds. Descente monobloc, poitrine au sol, remontée stricte.</p></div>
-                </div>
-            </details>
-
-            <details><summary>Atelier 7 : Crunchs (Gainage/Tronc)</summary>
-                <div class="details-content">
-                    <img src="https://drive.google.com/thumbnail?id=1L0csZY9C-8xFBgTTLsrzW0xafH5XDaN7&sz=w2000" alt="Crunchs" class="affiche-atelier">
-                    <div class="level-block"><span class="level-badge n1">NIVEAU 1 : BASIC CRUNCH</span><p>Pieds au sol. On enroule le haut du dos. On ne tire JAMAIS sur la nuque.</p><div class="no-rep">NO REP : Mains tirant sur la nuque.</div></div>
-                    <div class="level-block"><span class="level-badge n2">NIVEAU 2 : FEET OFF 90°</span><p>Jambes en l'air, tibias parallèles au sol. Enroulement vers les genoux.</p></div>
-                    <div class="level-block"><span class="level-badge n3">NIVEAU 3 : RUSSIAN TWIST</span><p>Assis, buste à 45°. Talons décollés. Rotation des épaules pour toucher le sol de chaque côté.</p></div>
-                    <div class="level-block"><span class="level-badge n4">NIVEAU 4 : BUTTERFLY SIT-UP</span><p>Pieds en papillon. Toucher le sol derrière la tête, puis remonter complètement pour toucher ses pieds.</p></div>
-                </div>
-            </details>
-
-            <details><summary>Atelier 8 : Planche / Gainage</summary>
-                <div class="details-content">
-                    <img src="https://drive.google.com/thumbnail?id=1lMLRyOId7k2vckJ8j17Lsl1yKAgxOwgp&sz=w2000" alt="Gainage" class="affiche-atelier">
-                    <div class="level-block"><span class="level-badge n1">NIVEAU 1 : PLANK STEP OUT</span><p>Planche haute. Décaler une jambe tendue sur le côté sans glisser, ramener, alterner.</p></div>
-                    <div class="level-block"><span class="level-badge n2">NIVEAU 2 : PLANK JACKS</span><p>Planche haute. Saut simultané des deux pieds vers l'extérieur puis resserrage.</p></div>
-                    <div class="level-block"><span class="level-badge n3">NIVEAU 3 : MILITARY PLANK</span><p>Passer de la planche sur les coudes à la planche sur les mains de façon fluide. Bassin fixé.</p></div>
-                    <div class="level-block"><span class="level-badge n4">NIVEAU 4 : BIRD DOG PLANK</span><p>Décoller simultanément Bras D + Jambe G. Tenir 1 seconde parfaitement aligné. Alterner.</p></div>
-                </div>
-            </details>
-
-            <details><summary>Atelier 9 : Superman (Gainage dorsal)</summary>
-                <div class="details-content">
-                    <img src="https://drive.google.com/thumbnail?id=1G0gaN_YaVkTBbnPd08qO_xKk2MlBPfYY&sz=w2000" alt="Superman" class="affiche-atelier">
-                    <div class="prof-tip">
-                        <h4>💡 Astuce de Juge</h4>
-                        <p>Pour le Superman, le juge compte : <strong>"Un... Deux... Validé !"</strong>. Le temps sous tension statique est obligatoire pour valider la rep.</p>
+            
+            <div>
+                <h2 style="text-align:left;">📊 Tableau de classe</h2>
+                <div style="display:flex; gap:10px;">
+                    <div class="select-wrapper" style="flex:1;">
+                        <select id="filter-class" onchange="loadClassMatrix()">
+                            <option value="">Sélectionner une classe</option>
+                        </select>
                     </div>
-                    <div class="level-block"><span class="level-badge n1">NIVEAU 1 : SUPERMAN FIRST</span><p>À plat ventre. Seuls la tête et le buste décollent.</p></div>
-                    <div class="level-block"><span class="level-badge n2">NIVEAU 2 : ALTERNÉ CROISÉ</span><p>Élévation Bras Droit + Jambe Gauche. On maintient 2 secondes, puis on change de diagonale.</p></div>
-                    <div class="level-block"><span class="level-badge n3">NIVEAU 3 : L-VARIATION / CHANDELIER</span><p>Bras à 90° (chandelier). Buste ET cuisses décollent. Resserrement des omoplates.</p></div>
-                    <div class="level-block"><span class="level-badge n4">NIVEAU 4 : SUPERMAN HOLD / COMPLET</span><p>Banane complète. Buste, bras tendus devant, cuisses décollées. Maintien parfait 2 secondes.</p></div>
                 </div>
-            </details>
-        </div>
-
-        <!-- ================= SÉANCE 1 ================= -->
-        <div id="tab-s1" class="tab-content">
-            <h2 class="section-title">Séance 1 : Découverte & Prise de repères</h2>
-            
-            <div class="prof-tip">
-                <h4>💡 Explicatif pour le Prof : Le format TABATA</h4>
-                <p>Format musical parfait pour l'échauffement ou le cardio. Principe : <strong>20 secondes de travail très intense / 10 secondes de repos absolu.</strong> On répète ça 8 fois (4 minutes par musique).</p>
-                <h4>💡 Explicatif pour le Prof : L'EMOM</h4>
-                <p><strong>Every Minute On the Minute :</strong> L'élève a 1 minute pour faire un nombre précis de répétitions (ex: 20 Squats). S'il a fini au bout de 40 secondes, les 20s restantes sont son temps de repos. Ça force l'élève à ne pas trainer !</p>
-            </div>
-
-            <div class="seance-card">
-                <h3>1. Échauffement (15 min)</h3>
-                <ul>
-                    <li>Mobilité articulaire classique (chevilles, genoux, bassin, épaules).</li>
-                    <li><strong>Application pratique Tabata (4 minutes) :</strong> 
-                        <br><i>Format 20s effort / 10s repos. À répéter 2 fois.</i>
-                        <ul>
-                            <li>Intervalle 1 : Jumping Jacks</li>
-                            <li>Intervalle 2 : Planche statique sur les coudes</li>
-                            <li>Intervalle 3 : Air Squats (lents)</li>
-                            <li>Intervalle 4 : Mountain Climbers</li>
-                        </ul>
-                    </li>
-                </ul>
                 
-                <h3>2. Corps de Séance : Skills & EMOM (40 min)</h3>
-                <ul>
-                    <li><strong>Apprentissage (20 min) :</strong> Placer les élèves par 2. On explique les postures de sécurité du Squat (talons au sol, dos droit) et de la Planche (pas de dos creux). Les élèves se testent et se corrigent.</li>
-                    <li><strong>WOD EMOM 5 minutes (20 min) :</strong> 
-                        <ul>
-                            <li>Ateliers tournants : Squat, Planche, Push-Up.</li>
-                            <li>L'élève "Athlète" choisit son niveau de difficulté et son nombre de reps à faire dans la minute. Le "Juge" compte et veille aux postures. Changement de rôle toutes les 5 minutes.</li>
-                        </ul>
-                    </li>
-                </ul>
+                <button class="btn-secondary" style="margin-bottom: 1.5rem; border-color: var(--secondary); color: var(--text-main); background:var(--secondary);" onclick="exportPDF()">📄 Exporter le Bilan (PDF)</button>
 
-                <div class="game-block">
-                    <h4>🔥 SITUATIONS LUDIQUES & DÉFIS DÉTAILLÉS</h4>
-                    
-                    <p><strong>1. Le Miroir et l'Inspecteur (15 min) - Apprendre à juger :</strong><br>
-                    <em>Le principe :</em> Dédramatiser l'erreur et forcer l'observation stricte. Par binômes, l'élève A (l'athlète) fait face à B (l'inspecteur).<br>
-                    <em>Le déroulé :</em> L'athlète A doit réaliser une série de 5 répétitions (ex: Air Squat). Avant de commencer, A décide secrètement d'insérer 1 ou 2 "No Rep" volontaires (ex: décoller les talons, ou le dos rond). L'élève B doit repérer la faute, crier "NO REP", et <strong>surtout expliquer pourquoi</strong>. On inverse ensuite les rôles.<br>
-                    <em>Variante :</em> Le prof se place dans le dos de l'inspecteur B et fait un signe discret (pouce en bas) à l'athlète A pour qu'il déclenche la mauvaise répétition au moment voulu.</p>
-
-                    <p><strong>2. La Chaise Infernale (15 min) - Défi de cohésion :</strong><br>
-                    <em>Le principe :</em> Un élève "débloque" le droit de travailler pour le reste de son équipe grâce à son gainage.<br>
-                    <em>Le déroulé pas-à-pas :</em><br>
-                    - Faire des équipes de 4 élèves.<br>
-                    - <strong>Élève 1</strong> se met en position de "chaise" contre un mur (dos plat, genoux à 90°).<br>
-                    - <strong>Élèves 2, 3 et 4</strong> se placent au centre et doivent réaliser un maximum de répétitions d'un exercice (ex: faire des passes avec un medecine-ball, ou cumuler des Jumping Jacks).<br>
-                    - <strong>La règle d'or :</strong> Les élèves 2, 3 et 4 ne peuvent accumuler des points <strong>QUE</strong> si l'Élève 1 tient sa chaise parfaitement. Si l'Élève 1 lâche ou glisse, le prof siffle et toute l'équipe doit s'arrêter ("Freeze !").<br>
-                    - <strong>Rotation :</strong> Dès que la chaise lâche, on fait tourner les rôles immédiatement. L'objectif final est de faire le plus gros score d'équipe en 8 minutes chrono.</p>
-                </div>
-
-                <a href="https://drive.google.com/file/d/1UqJO4UuCr027POn7H6muDT0hZ80LA6W-/view" class="btn-download" target="_blank">
-                    📄 Ouvrir / Imprimer la Grille d'Évaluation (Séance 1)
-                </a>
-            </div>
-        </div>
-
-        <!-- ================= SÉANCE 2 ================= -->
-        <div id="tab-s2" class="tab-content">
-            <h2 class="section-title">Séance 2 : Cardio-Training & EMOM long</h2>
-
-            <div class="prof-tip">
-                <h4>💡 L'objectif du prof aujourd'hui :</h4>
-                <p>Éviter le "départ canon". Les élèves veulent souvent sprinter la 1ère minute de l'EMOM, mais ils explosent à la 3ème. Le rôle du juge/coach est de les forcer à **lisser leur effort** pour être réguliers sur tout le bloc de temps.</p>
-            </div>
-
-            <div class="seance-card">
-                <h3>1. Échauffement (15 min)</h3>
-                <ul>
-                    <li>Course rythmée (pas chassés, montées de genoux, talons fesses).</li>
-                    <li>Mobilisation poignets (pour les Mountain Climbers et Sprawls) et hanches (pour les Fentes).</li>
-                </ul>
-
-                <h3>2. Corps de Séance (50 min)</h3>
-                <ul>
-                    <li><strong>Skills du jour (20 min) :</strong> Découverte des niveaux 1 à 4 des Jumping Jacks, Mountain Climbers et <strong>Fentes (Lunges)</strong>. Explication des No Reps spécifiques.</li>
-                    <li><strong>WOD EMOM "Cardio & Jambes" (8 à 10 minutes par élève) :</strong> 
-                        <ul>
-                            <li><strong>Le Contrat :</strong> Chaque minute, réaliser à la suite : (20 à 40 Jumping Jacks) + (10 à 30 Mountain Climbers) + <strong>(10 à 20 Fentes alternées)</strong>.</li>
-                            <li>Si un élève n'arrive pas à finir son contrat dans la minute, il doit revoir son contrat à la baisse à la minute suivante.</li>
-                        </ul>
-                    </li>
-                </ul>
-
-                <div class="game-block">
-                    <h4>🔥 SITUATION LUDIQUE & DÉFI</h4>
-                    <p><strong>Le Relais par Équipe (15 min) :</strong> Par équipe de 4 élèves. L'équipe doit réaliser un total de <strong>100 Jumping Jacks, 100 Squats, 50 Gainage Tap (ex: Shoulder touch), et 50 Sprawls</strong> le plus vite possible.<br>
-                    <em>Règle d'or :</em> Chaque élève de l'équipe <strong>doit faire au minimum 5 répétitions</strong> pour chaque exercice. Ils s'organisent comme ils veulent pour leurs relais !</p>
-                </div>
-
-                <a href="https://drive.google.com/file/d/1k-b_LoxWm1IIJQMkaLnIrfdOFp8M9nta/view" class="btn-download" target="_blank">
-                    📄 Ouvrir / Imprimer la Grille d'Évaluation (Séance 2)
-                </a>
-            </div>
-        </div>
-
-        <!-- ================= SÉANCE 3 ================= -->
-        <div id="tab-s3" class="tab-content">
-            <h2 class="section-title">Séance 3 : Chaînes Croisées & E2MOM</h2>
-            
-            <div class="prof-tip">
-                <h4>💡 Lexique Prof : L'E2MOM</h4>
-                <p><strong>Every 2 Minutes On the Minute :</strong> Même mécanique que l'EMOM, mais le chrono sonne toutes les <strong>2 minutes</strong>. Cela donne le temps d'enchaîner un combo de 3 ou 4 ateliers d'affilée (circuit) et d'avoir une récupération plus longue à la fin de la série.</p>
-            </div>
-
-            <div class="seance-card">
-                <h3>1. Échauffement (15 min)</h3>
-                <ul>
-                    <li>Éveil myofascial, fentes marchées lentes dans le gymnase.</li>
-                    <li>Activation lombaire au sol douce (Superman N1).</li>
-                </ul>
-
-                <h3>2. Corps de Séance (50 min)</h3>
-                <ul>
-                    <li><strong>Skills (20 min) :</strong> Apprentissage sécuritaire des Fentes (protection des rotules), du Superman et des Crunchs. Le juge s'entraine à compter.</li>
-                    <li><strong>WOD E2MOM (10 minutes / 5 départs de 2 min) :</strong> 
-                        <ul>
-                            <li><strong>C'est le format exact de l'évaluation finale.</strong> Un départ toutes les 2 minutes.</li>
-                            <li><strong>Le Contrat :</strong> L'athlète choisit un mouvement dans chaque famille. Il choisit un contrat global : <strong>20, 30, ou 40 reps au total</strong> par bloc de 2 minutes.</li>
-                            <li>L'élève doit accomplir son contrat dans les 2 minutes, se reposer, et recommencer 5 fois.</li>
-                        </ul>
-                    </li>
-                </ul>
-
-                <div class="game-block">
-                    <h4>🔥 SITUATION LUDIQUE & DÉFI</h4>
-                    <p><strong>Le Biathlon Cross-Training (20 min) :</strong> Relais par équipe de 3. L'élève sprinte sur 15 mètres, arrive sur son tapis et doit "tirer" (comme au biathlon). Le tir = tenir un Superman parfait pendant 15 secondes chronométrées par le juge. S'il tremble ou fait "No Rep" avant, il part faire un tour de pénalité (5 burpees) avant de taper dans la main du relayeur. Oblige à gainer sous fatigue cardio.</p>
-                </div>
-
-                <a href="https://drive.google.com/file/d/15Zy8qYht66IJ3Z_Hsomwv8KHe3J6Hz4b/view" class="btn-download" target="_blank">
-                    📄 Ouvrir / Imprimer la Grille d'Évaluation (Séance 3)
-                </a>
-            </div>
-        </div>
-
-        <!-- ================= SÉANCE 4 ================= -->
-        <div id="tab-s4" class="tab-content">
-            <h2 class="section-title">Séance 4 : Cardio-Puissance & AMRAP</h2>
-            
-            <div class="prof-tip">
-                <h4>💡 Lexique Prof : AMRAP et For Time</h4>
-                <ul>
-                    <li><strong>AMRAP (As Many Rounds As Possible) :</strong> On lance un chrono global. L'élève doit faire le plus de tours possibles de son circuit sans pause obligatoire. L'élève gère sa fatigue.</li>
-                    <li><strong>For Time :</strong> On donne une quantité fixe de travail. Le but est de finir le plus vite possible. On chronomètre le temps final.</li>
-                </ul>
-            </div>
-
-            <div class="seance-card">
-                <h3>1. Échauffement (15 min)</h3>
-                <ul>
-                    <li>Préparation aux Burpees : passage du sol à debout (Sprawl doux), position de l'ours (bear crawl).</li>
-                </ul>
-
-                <h3>2. Corps de Séance (50 min)</h3>
-                <ul>
-                    <li><strong>Skills Burpees (15 min) :</strong> Dédramatiser la chute au sol. Expliquer que les mains se posent à plat sous les épaules, et qu'on remonte pieds écartés pour préserver le dos.</li>
-                    <li><strong>Test Record Personnel (15 min) :</strong> Mesure de la puissance max pure. On chronomètre 15 secondes. L'élève fait un max de Burpees. Puis max de Squats. Le juge note.</li>
-                    <li><strong>Initiation "Team WOD - For Time" (20 min) :</strong> 
-                        <ul>
-                            <li>Équipes de 2 (en relais). <strong>Mission :</strong> 100 Mountain Climbers + 40 Squats + 60s de Planche statique cumulée. L'équipe découpe les séries comme elle veut (10 par 10) pour aller le plus vite possible.</li>
-                        </ul>
-                    </li>
-                </ul>
-
-                <div class="game-block">
-                    <h4>🔥 SITUATION LUDIQUE & DÉFI</h4>
-                    <p><strong>Le Relais "I Go, You Go" (15 min) :</strong> Binômes de même niveau. Le chrono tourne (6 minutes). L'élève A fait 3 Burpees le plus vite possible. Dès qu'il a fini, il tape dans la main de B qui fait ses 3 Burpees. Sprint permanent, temps mort très court, oblige les élèves à se dépasser en transfert d'énergie !</p>
-                </div>
-
-                <a href="https://drive.google.com/file/d/11uqkH8TH5kFJTCIvZVG59PMi2NvBeN1C/view" class="btn-download" target="_blank">
-                    📄 Ouvrir / Imprimer la Grille d'Évaluation (Séance 4)
-                </a>
-            </div>
-        </div>
-
-        <!-- ================= SÉANCE 5 ================= -->
-        <div id="tab-s5" class="tab-content">
-            <h2 class="section-title">Séance 5 : Gestion de crise & "Death By"</h2>
-            
-            <div class="prof-tip">
-                <h4>💡 Pédagogie : Le format "Death By" (La mort subite)</h4>
-                <p>Format psychologique très ludique. Un bip retentit toutes les minutes.<br>
-                Minute 1 = 1 répétition à faire. Minute 2 = 2 reps. Minute 10 = 10 reps, etc.<br>
-                Le temps de repos diminue. Le jeu s'arrête (mort subite) quand l'élève n'arrive plus à finir ses reps dans le temps imparti. Le juge doit annuler les reps moches, rajoutant du stress !</p>
-            </div>
-
-            <div class="seance-card">
-                <h3>1. Échauffement (15 min)</h3>
-                <ul>
-                    <li>Tabata dynamique : corde à sauter (ou jumping jacks) et squats légers.</li>
-                </ul>
-
-                <h3>2. Corps de Séance (50 min)</h3>
-                <ul>
-                    <li><strong>Épreuve "Death By" (20 min) :</strong>
-                        <ul>
-                            <li>Pénalité fixe : Chaque minute commence par <strong>2 Burpees obligatoires</strong>, puis l'élève ajoute le nombre croissant de Squats (ou Fentes).</li>
-                            <li>Le juge observe la dégradation de la posture (acidose). S'il y a un dos rond = No rep.</li>
-                        </ul>
-                    </li>
-                    <li><strong>Team WOD - 170 Reps For Time (30 min) :</strong>
-                        <ul>
-                            <li>En équipe de 2, relais libre. Les élèves se testent sur le format exact de l'évaluation finale.</li>
-                            <li>40 Mountain Climbers, 20 Push Up, 30 Squats, 80 Jumping Jacks.</li>
-                        </ul>
-                    </li>
-                </ul>
-                
-                <div class="game-block">
-                    <h4>🔥 SITUATION LUDIQUE & DÉFI</h4>
-                    <p><strong>Le Poker des Contrats (15 min) :</strong> Par binômes. L'athlète tire au sort ou lance des dés pour un exercice et un nombre de reps (ex: 20 Pompes). Avant de démarrer, il doit annoncer à son juge s'il s'en sent capable en 1 minute. S'il réussit, il gagne 1 pt. S'il échoue, il perd 1 pt. Prépare parfaitement au choix de contrat (et à l'ego) pour l'évaluation !</p>
-                </div>
-
-                <a href="https://drive.google.com/file/d/1-5SpfhaMEbN4bc_1C8sXXIWifW8cogqS/view" class="btn-download" target="_blank">
-                    📄 Ouvrir / Imprimer la Grille d'Évaluation (Séance 5)
-                </a>
-            </div>
-        </div>
-
-        <!-- ================= SÉANCE 6 ================= -->
-        <div id="tab-s6" class="tab-content">
-            <h2 class="section-title">Séance 6 : Répétition Générale (Test)</h2>
-            
-            <div class="prof-tip">
-                <h4>💡 Conseils pour l'évaluation</h4>
-                <p>C'est la répétition générale. Les élèves testent leur choix de niveaux (1, 2, 3) et leur choix de contrat (20, 30, 40) pour le WOD 1 afin de voir s'ils tiennent les 10 minutes sans exploser en "No Rep".</p>
-            </div>
-
-            <div class="seance-card">
-                <h3>1. Échauffement (15 min)</h3>
-                <ul>
-                    <li>Échauffement pris en charge <strong>en autonomie</strong> par l'athlète (le juge regarde si c'est bien fait, car cela comptera sur 4 points à l'évaluation).</li>
-                </ul>
-
-                <h3>2. Corps de Séance : Les 2 épreuves (50 min)</h3>
-                <ul>
-                    <li><strong>Simulation de l'Épreuve 1 - Individuel (30 min) :</strong>
-                        <ul>
-                            <li>Format : E2MOM 10 min (5 tours de 2 minutes).</li>
-                            <li>L'élève teste son contrat. Doit-il baisser la difficulté pour ne pas faire de "No Rep" ? Doit-il baisser son nombre de répétitions (passer de 40 à 30 reps) ?</li>
-                        </ul>
-                    </li>
-                    <li><strong>Simulation de l'Épreuve 2 - Team WOD (20 min) :</strong>
-                        <ul>
-                            <li>Format imposé : 170 répétitions par équipe.</li>
-                            <li>40 MC + 20 Pompes + 30 Squats + 80 JJ. Ils testent leur communication d'équipe.</li>
-                        </ul>
-                    </li>
-                    <li><strong>Validation :</strong> À la fin de l'heure, l'élève valide et signe son contrat définitif pour l'évaluation de la semaine prochaine.</li>
-                </ul>
-
-                <div class="game-block">
-                    <h4>🔥 SITUATION LUDIQUE & DÉFI</h4>
-                    <p><strong>Piège ton Juge (15 min) :</strong> Le prof distribue secrètement des "cartes rôles" aux athlètes : "Athlète parfait" ou "Tricheur subtil" (qui fait exprès une petite faute de posture). Le juge est noté par le prof sur sa capacité à repérer le tricheur sans se faire avoir. Rend le rôle de juge hyper actif avant la vraie évaluation !</p>
-                </div>
-
-                <a href="https://drive.google.com/file/d/1Tc6BXd-997DEVoTGdw03-t9GGhPvQEvi/view" class="btn-download" target="_blank">
-                    📄 Ouvrir / Imprimer la Feuille de Match (Séance 6)
-                </a>
-            </div>
-        </div>
-
-        <!-- ================= EVALUATION ================= -->
-        <div id="tab-eval" class="tab-content">
-            <h2 class="section-title">ÉVALUATION FINALE OFFICIELLE</h2>
-            
-            <div class="prof-tip">
-                <h4>💡 Le Nouveau Barème de Notation</h4>
-                <ul>
-                    <li><strong>Performance (6 pts) :</strong> Contrat WOD 1 (40 reps=3pts, 30=2pts, 20=1pt) + Temps du WOD 2 (Ex: Moins de 2'20" = 3pts).</li>
-                    <li><strong>Maîtrise Motrice (6 pts) :</strong> Somme des niveaux de difficulté (max 3 pts) + Pénalités des No Rep (Moins de 2 fautes = 3 pts).</li>
-                    <li><strong>Rôle de Juge / Coach (4 pts) :</strong> Spectateur (1pt), Amateur (1.5pt), Confirmé (3pts), Pro (4pts).</li>
-                    <li><strong>Préparation / Échauffement (4 pts) :</strong> Inexistant (1pt), Insuffisant (1.5pt), Efficace (3pts), Cohérent et varié (4pts).</li>
-                </ul>
-            </div>
-
-            <div class="seance-card">
-                <h3>FEUILLE DE MATCH - WOD 1 : E2MOM 10 MIN (5 x 2')</h3>
-                <p class="text-left"><strong>1 mouvement choisi dans chacune des 4 familles.</strong> L'élève choisit le niveau (1 à 3) et l'un des trois contrats de répétitions (20, 30 ou 40 reps par tour).</p>
-                
-                <div style="overflow-x:auto;">
-                    <table>
-                        <tr>
-                            <th class="text-left">Famille</th>
-                            <th>Niveau (1,2,3)</th>
-                            <th>Contrat 20</th>
-                            <th>Contrat 30</th>
-                            <th>Contrat 40</th>
-                            <th class="text-left">No Rep (T1 à T5)</th>
-                        </tr>
-                        <tr>
-                            <td class="text-left"><strong>Mouvement 1</strong></td>
-                            <td>N___</td>
-                            <td>7 reps</td>
-                            <td>10 reps</td>
-                            <td>13 reps</td>
-                            <td class="text-left">R1:_ R2:_ R3:_ R4:_ R5:_</td>
-                        </tr>
-                        <tr>
-                            <td class="text-left"><strong>Mouvement 2</strong></td>
-                            <td>N___</td>
-                            <td>3 reps</td>
-                            <td>5 reps</td>
-                            <td>7 reps</td>
-                            <td class="text-left">R1:_ R2:_ R3:_ R4:_ R5:_</td>
-                        </tr>
-                        <tr>
-                            <td class="text-left"><strong>Mouvement 3</strong></td>
-                            <td>N___</td>
-                            <td>7 reps</td>
-                            <td>10 reps</td>
-                            <td>13 reps</td>
-                            <td class="text-left">R1:_ R2:_ R3:_ R4:_ R5:_</td>
-                        </tr>
-                        <tr>
-                            <td class="text-left"><strong>Mouvement 4</strong></td>
-                            <td>N___</td>
-                            <td>3 reps</td>
-                            <td>5 reps</td>
-                            <td>7 reps</td>
-                            <td class="text-left">R1:_ R2:_ R3:_ R4:_ R5:_</td>
-                        </tr>
-                        <tr style="background-color: #F8FAFC; font-weight: bold;">
-                            <td colspan="2" style="text-align: right;">TOTAL À FAIRE TOUTES LES 2' :</td>
-                            <td>20 Reps</td>
-                            <td>30 Reps</td>
-                            <td>40 Reps</td>
-                            <td class="text-left" style="color: #DC2626;">TOTAL NO REP: ______</td>
-                        </tr>
+                <div class="table-wrapper">
+                    <table class="prof-table" id="matrix-table">
+                        <thead>
+                            <tr>
+                                <th>Élève</th>
+                                <th>S1 <br><span style="font-size:0.65rem; font-weight:normal;">(Squat/Pl/Push)</span></th>
+                                <th>S2 <br><span style="font-size:0.65rem; font-weight:normal;">(Jack/Cl/Fente)</span></th>
+                                <th>S3 <br><span style="font-size:0.65rem; font-weight:normal;">(Gainage/Sup/Crunch)</span></th>
+                                <th>Moyenne</th>
+                                <th>Détails</th>
+                            </tr>
+                        </thead>
+                        <tbody id="matrix-body">
+                            <tr><td colspan="6" style="color:var(--text-muted);">Sélectionnez une classe pour afficher les résultats.</td></tr>
+                        </tbody>
                     </table>
                 </div>
             </div>
+            <button class="btn-secondary" onclick="navTo('view-home')">Se déconnecter</button>
+        </div>
 
-            <div class="seance-card">
-                <h3>FEUILLE DE MATCH - WOD 2 : TEAM WOD (170 REPS)</h3>
-                <p class="text-left">Répartition libre avec le partenaire pour finir le plus vite possible.</p>
-                <div style="overflow-x:auto;">
-                    <table>
-                        <tr>
-                            <th class="text-left">Mouvement Imposé</th>
-                            <th>Reps Athlète A</th>
-                            <th>Reps Athlète B</th>
-                            <th class="text-left">No Rep Partenaire</th>
-                        </tr>
-                        <tr><td class="text-left"><strong>40 Mountain Climbers</strong></td><td></td><td></td><td class="text-left"></td></tr>
-                        <tr><td class="text-left"><strong>20 Push Up (Pompes)</strong></td><td></td><td></td><td class="text-left"></td></tr>
-                        <tr><td class="text-left"><strong>30 Squats</strong></td><td></td><td></td><td class="text-left"></td></tr>
-                        <tr><td class="text-left"><strong>80 Jumping Jacks</strong></td><td></td><td></td><td class="text-left"></td></tr>
-                    </table>
+        <div id="view-student-setup" class="view">
+            <div class="card">
+                <h2>Préparation</h2>
+                <label>1. Ma classe :</label>
+                <div class="select-wrapper">
+                    <select id="student-class" onchange="loadStudentsForClass()"><option value="">-- Choisir --</option></select>
                 </div>
-                <p style="margin-top:1rem; font-size: 1.1rem;">⏱️ <strong>Temps réalisé :</strong> _____ min _____ s</p>
+                <label>2. Je suis le JUGE (Arbitre) :</label>
+                <div class="select-wrapper">
+                    <select id="student-judge" disabled><option value="">-- Attente de la classe --</option></select>
+                </div>
+                <label>3. J'évalue l'ATHLÈTE :</label>
+                <div class="select-wrapper">
+                    <select id="student-athlete" disabled><option value="">-- Attente de la classe --</option></select>
+                </div>
+                <button class="btn-main" onclick="goToMenu()">Suivant ➡️</button>
+                <button class="btn-secondary" onclick="navTo('view-home')">Retour</button>
+            </div>
+        </div>
+
+        <div id="view-student-menu" class="view">
+            <div class="card" style="text-align: center;">
+                <h2 style="margin-bottom: 0.5rem;">Espace Évaluation</h2>
+                <div style="background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 12px; margin-bottom: 1.5rem;">
+                    <span style="color:var(--text-muted); font-size:0.9rem;">Juge :</span> <strong id="display-judge" style="color:var(--secondary);"></strong><br>
+                    <span style="color:var(--text-muted); font-size:0.9rem;">Athlète :</span> <strong id="display-athlete" style="color:var(--primary);"></strong>
+                </div>
+                
+                <p style="font-weight:bold; margin-bottom:1rem; color:var(--text-muted);">Quelle séance voulez-vous évaluer ?</p>
+                
+                <button class="btn-main" onclick="startSession('S1')">
+                    🏋️ SÉANCE 1<br><span style="font-size:0.8rem; font-weight:normal;">Squat / Planche / Push-Up</span>
+                </button>
+                <button class="btn-main s2" onclick="startSession('S2')">
+                    🏃 SÉANCE 2<br><span style="font-size:0.8rem; font-weight:normal;">Jumping Jack / Mountain Climber / Fentes</span>
+                </button>
+                <button class="btn-main s3" onclick="startSession('S3')">
+                    🤸 SÉANCE 3<br><span style="font-size:0.8rem; font-weight:normal;">Planche (Gainage) / Superman / Crunch</span>
+                </button>
+                
+                <button class="btn-main prof" style="margin-top:2rem;" onclick="loadHistorique()">🏆 Profil & Stats de l'athlète</button>
+                <button class="btn-secondary" onclick="navTo('view-student-setup')">Changer d'élèves</button>
+            </div>
+        </div>
+
+        <div id="view-reference" class="view">
+            <h2 id="ref-title">📖 Référentiel</h2>
+            <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">Touchez une image pour l'agrandir et zoomer dessus.</p>
+            <div id="ref-content"></div> 
+            <button class="btn-main" onclick="goBackFromReferentiel()">Retour</button>
+        </div>
+
+        <div id="view-form-setup" class="view">
+            <h2 style="text-align: center; color: var(--primary);">📋 ÉTAPE 1 : LE CONTRAT</h2>
+            <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">L'athlète annonce ses objectifs <strong>par tour</strong>.</p>
+            
+            <button class="btn-secondary" style="margin-bottom:1.5rem; color:white; border-color:var(--primary); background:rgba(255,255,255,0.05);" onclick="navToReferentiel('view-form-setup', false)">
+                📖 Rappel : Voir les Niveaux en Images
+            </button>
+
+            <div class="card">
+                <h3 style="color: var(--secondary); margin-top: 0; display:flex; justify-content:space-between; align-items:center;">
+                    <span id="setup-ex1-name">1. EX1</span>
+                    <select id="setup-ex1-lvl" style="width:auto; padding:0.3rem; margin:0; font-size:0.9rem; border-radius:8px;"><option value="N1">NIV 1</option><option value="N2">NIV 2</option><option value="N3">NIV 3</option><option value="N4">NIV 4</option></select>
+                </h3>
+                <label>Objectif par tour :</label>
+                <input type="number" class="main-input" id="setup-ex1-target" placeholder="Ex: 15" min="1">
             </div>
 
-            <div class="seance-card" style="background-color: #EFF6FF; border: 1px solid #BFDBFE;">
-                <h3 style="color: #1D4ED8;">RÉCAPITULATIF DES NOTES OFFICIELLES (/20)</h3>
-                <div style="overflow-x:auto;">
-                    <table>
-                        <tr>
-                            <th class="text-left">Compétence Évaluée</th>
-                            <th class="text-left">Détail des points</th>
-                            <th>Note / Points</th>
-                        </tr>
-                        <tr>
-                            <td class="text-left"><strong>Performance WOD 1 & 2</strong></td>
-                            <td class="text-left">Contrat WOD 1 (/3) + Temps WOD 2 (/3)</td>
-                            <td><strong>___ / 6</strong></td>
-                        </tr>
-                        <tr>
-                            <td class="text-left"><strong>Maîtrise Motrice</strong></td>
-                            <td class="text-left">Niveau de difficulté des ateliers (/3) + Total No Rep (/3)</td>
-                            <td><strong>___ / 6</strong></td>
-                        </tr>
-                        <tr>
-                            <td class="text-left"><strong>Rôle Juge / Coach</strong></td>
-                            <td class="text-left">Spectateur(1) - Amateur(1.5) - Confirmé(3) - Pro(4)</td>
-                            <td><strong>___ / 4</strong></td>
-                        </tr>
-                        <tr>
-                            <td class="text-left"><strong>Préparation / Échauffement</strong></td>
-                            <td class="text-left">Inexistant(1) - Insuffisant(1.5) - Efficace(3) - Cohérent(4)</td>
-                            <td><strong>___ / 4</strong></td>
-                        </tr>
-                        <tr style="background-color: #DBEAFE; font-size: 1.2rem;">
-                            <td colspan="2" style="text-align: right;"><strong>NOTE FINALE :</strong></td>
-                            <td><strong>___ / 20</strong></td>
-                        </tr>
-                    </table>
-                </div>
+            <div class="card">
+                <h3 style="color: var(--secondary); margin-top: 0; display:flex; justify-content:space-between; align-items:center;">
+                    <span id="setup-ex2-name">2. EX2</span>
+                    <select id="setup-ex2-lvl" style="width:auto; padding:0.3rem; margin:0; font-size:0.9rem; border-radius:8px;"><option value="N1">NIV 1</option><option value="N2">NIV 2</option><option value="N3">NIV 3</option><option value="N4">NIV 4</option></select>
+                </h3>
+                <label>Objectif par tour :</label>
+                <input type="number" class="main-input" id="setup-ex2-target" placeholder="Ex: 30" min="1">
             </div>
 
-            <a href="https://drive.google.com/file/d/1Tc6BXd-997DEVoTGdw03-t9GGhPvQEvi/view" class="btn-download" target="_blank" style="margin-top:20px;">
-                📄 Ouvrir / Imprimer la Feuille de Match Officielle (PDF)
-            </a>
+            <div class="card">
+                <h3 style="color: var(--secondary); margin-top: 0; display:flex; justify-content:space-between; align-items:center;">
+                    <span id="setup-ex3-name">3. EX3</span>
+                    <select id="setup-ex3-lvl" style="width:auto; padding:0.3rem; margin:0; font-size:0.9rem; border-radius:8px;"><option value="N1">NIV 1</option><option value="N2">NIV 2</option><option value="N3">NIV 3</option><option value="N4">NIV 4</option></select>
+                </h3>
+                <label>Objectif par tour :</label>
+                <input type="number" class="main-input" id="setup-ex3-target" placeholder="Ex: 10" min="1">
+            </div>
+
+            <button class="btn-main" onclick="goToEval()">PASSER À L'ÉVALUATION ➡️</button>
+            <button class="btn-secondary" onclick="navTo('view-student-menu')">Retour au menu</button>
+        </div>
+
+        <div id="view-form-eval" class="view">
+            <h2 style="text-align: center; color: var(--primary);" id="eval-title">🔥 ÉTAPE 2 : LE WOD</h2>
+            <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; background: rgba(255,255,255,0.05); padding: 0.8rem; border-radius: 8px;">
+                💡 Touchez les cases blanches pour taper le score direct, ou utilisez <strong>+</strong> et <strong>-</strong>.
+            </p>
+
+            <div id="tours-container"></div>
+
+            <button class="btn-main" onclick="confirmSubmission()">✅ TERMINER ET VOIR LE BILAN</button>
+            <button class="btn-secondary" onclick="navTo('view-form-setup')">⬅️ Modifier le contrat</button>
+        </div>
+
+        <div id="view-student-bilan" class="view">
+            <h2 style="text-align: center; color: var(--primary);">📊 BILAN DE LA SÉANCE</h2>
+            <div id="bilan-content"></div>
+            
+            <button class="btn-main" id="btn-final-submit" onclick="submitSession()">📤 ENREGISTRER DANS FIREBASE</button>
+            <button class="btn-secondary" onclick="navTo('view-form-eval')">⬅️ Corriger les scores</button>
+        </div>
+
+        <div id="view-student-historique" class="view">
+            <h2 style="text-align: center; color: var(--primary);">🏆 PROFIL ATHLÈTE</h2>
+            <p style="text-align: center; color: white; font-size: 1.2rem; font-weight:800; margin-bottom: 0.5rem;" id="hist-athlete-name"></p>
+            
+            <div id="hist-summary" class="card" style="text-align:center; padding: 2rem 1rem;">
+                <!-- Injecté en JS -->
+            </div>
+            
+            <div class="card">
+                <h3 style="margin-top:0; font-size:1rem; color:var(--text-muted); text-align:center;">Évolution de la réussite</h3>
+                <canvas id="progressChart" width="400" height="250"></canvas>
+            </div>
+            
+            <h3 style="color:var(--secondary); text-align:center; margin-top:2rem;">Historique détaillé</h3>
+            <div id="historique-list"></div>
+
+            <button class="btn-main prof" onclick="navTo('view-student-menu')">Retour au menu</button>
         </div>
 
     </div>
 
-    <!-- Script de gestion des onglets -->
+    <div id="pdf-container">
+        <h2>Bilan Général EPS - Classe : <span id="pdf-class-name"></span></h2>
+        <p style="text-align:center; color:#555;">Date d'export : <span id="pdf-date"></span></p>
+        <table id="pdf-table">
+            <thead>
+                <tr>
+                    <th>Élève</th>
+                    <th>SÉANCE 1</th>
+                    <th>SÉANCE 2</th>
+                    <th>SÉANCE 3</th>
+                    <th>BILAN GLOBAL</th>
+                </tr>
+            </thead>
+            <tbody id="pdf-tbody"></tbody>
+        </table>
+    </div>
+
     <script>
-        function openTab(tabId, elmnt) {
-            var tabcontents = document.getElementsByClassName("tab-content");
-            for (var i = 0; i < tabcontents.length; i++) {
-                tabcontents[i].classList.remove("active");
+        const firebaseConfig = {
+            apiKey: "AIzaSyDLGvFMYtVH01sPeGkqaM_BmgLXo9Q3cRY",
+            authDomain: "cross-training-eleve.firebaseapp.com",
+            projectId: "cross-training-eleve",
+            storageBucket: "cross-training-eleve.firebasestorage.app",
+            messagingSenderId: "261521832974",
+            appId: "1:261521832974:web:95d1fd4c26618dc7d3905f"
+        };
+        if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Ajout des indices (hints) pour éviter les No-Rep
+        const SESSIONS = {
+            'S1': {
+                id: 'S1', title: 'S1 : Renfo',
+                exos: [
+                    { id: 'ex1', name: 'Air Squat', unit: 'rep', step: 1, img: '1osaB_Lq4BvN-6FuxxFlFrKgGOmXuW01t', hint: "Casser la parallèle, talons ancrés au sol, extension complète en haut." },
+                    { id: 'ex2', name: 'Planche', unit: 's', step: 5, img: '1lMLRyOId7k2vckJ8j17Lsl1yKAgxOwgp', hint: "Bassin aligné avec les épaules et les talons. Ne pas creuser le dos." },
+                    { id: 'ex3', name: 'Push-Up', unit: 'rep', step: 1, img: '1BALlDysqZKpwzOsr1G_PRlA1dTyEru-C', hint: "Poitrine au contact du sol (ou du support), extension complète des bras." }
+                ]
+            },
+            'S2': {
+                id: 'S2', title: 'S2 : Cardio & Fentes',
+                exos: [
+                    { id: 'ex1', name: 'Jumping Jack', unit: 'rep', step: 1, img: '1UHkbUq4QUXcDkjc9PFMwv0mwaCM61YoC', hint: "Mains se touchent en haut, pieds totalement joints au retour." },
+                    { id: 'ex2', name: 'Mountain Climber', unit: 'rep', step: 1, img: '1fJehZ7cytRqJIxe2T8xC6afcEilWuw_P', hint: "Bassin stable, genou vers la poitrine, épaules à l'aplomb des mains." },
+                    { id: 'ex3', name: 'Fentes', unit: 'rep', step: 1, img: '1ZGU4KP4flUX84z-Kj_VWM1PK2sALtXIz', hint: "Le genou arrière touche (ou frôle) le sol, le buste reste bien droit." }
+                ]
+            },
+            'S3': {
+                id: 'S3', title: 'S3 : Gainage & Dos',
+                exos: [
+                    { id: 'ex1', name: 'Gainage (Planche)', unit: 's', step: 5, img: '1lMLRyOId7k2vckJ8j17Lsl1yKAgxOwgp', hint: "Abdos contractés, respiration fluide, aucun creux lombaire." },
+                    { id: 'ex2', name: 'Superman', unit: 'rep', step: 1, img: '1G0gaN_YaVkTBbnPd08qO_xKk2MlBPfYY', hint: "Décoller simultanément cuisses et poitrine du sol, sans à-coups." },
+                    { id: 'ex3', name: 'Crunch', unit: 'rep', step: 1, img: '1L0csZY9C-8xFBgTTLsrzW0xafH5XDaN7', hint: "Épaules décollées, regard vers le haut, ne pas tirer sur la nuque avec les mains." }
+                ]
             }
-            var tablinks = document.getElementsByClassName("nav-wrapper")[0].getElementsByTagName("button");
-            for (var i = 0; i < tablinks.length; i++) {
-                tablinks[i].classList.remove("active");
+        };
+
+        let currentClass = "", currentJudge = "", currentAthlete = "", extractedStudents = [];
+        let currentSessionId = "S1", currentPayload = null, progressChartInstance = null;
+        let viewBeforeReferentiel = "", profMatrixData = {}, currentRoster = [];
+
+        const viewportMeta = document.querySelector('meta[name="viewport"]');
+        
+        function openImage(imgUrl) {
+            document.getElementById('lightbox-img').src = imgUrl;
+            document.getElementById('image-lightbox').style.display = 'flex';
+            viewportMeta.setAttribute("content", "width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes");
+        }
+        
+        function closeImage(event) {
+            if(event) event.stopPropagation();
+            document.getElementById('image-lightbox').style.display = 'none';
+            document.getElementById('lightbox-img').src = "";
+            viewportMeta.setAttribute("content", "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no");
+        }
+
+        function navTo(viewId) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+            if(viewId === 'view-student-setup') fetchClasses();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Gère l'affichage du référentiel (Soit Global depuis l'accueil, soit Ciblé depuis un contrat)
+        function navToReferentiel(fromView, showAll = false) {
+            viewBeforeReferentiel = fromView;
+            let html = "";
+            
+            if (showAll) {
+                document.getElementById('ref-title').textContent = `📖 Référentiel Global`;
+                for (const [sid, cfg] of Object.entries(SESSIONS)) {
+                    html += `<h3 style="color:var(--primary); text-align:center; margin-top:1.5rem; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:10px;">--- ${cfg.title} ---</h3>`;
+                    cfg.exos.forEach((ex, idx) => {
+                        let imgUrl = `https://drive.google.com/thumbnail?id=${ex.img}&sz=w1600`;
+                        html += `
+                        <div class="card" style="margin-bottom:1rem;">
+                            <h4 style="color:var(--secondary); margin-top:0; margin-bottom:5px;">${ex.name.toUpperCase()}</h4>
+                            <p style="font-size:0.8rem; color:var(--danger); margin-top:0; margin-bottom:10px;">⚠️ Anti No-Rep : <em>${ex.hint}</em></p>
+                            <img class="zoomable-img" src="${imgUrl}" alt="${ex.name}" style="width:100%; border-radius:8px; border: 1px solid rgba(255,255,255,0.1);" onclick="openImage('${imgUrl}')">
+                        </div>`;
+                    });
+                }
+            } else {
+                const cfg = SESSIONS[currentSessionId]; 
+                document.getElementById('ref-title').textContent = `📖 Référentiel - ${cfg.title}`;
+                cfg.exos.forEach((ex, idx) => {
+                    let imgUrl = `https://drive.google.com/thumbnail?id=${ex.img}&sz=w1600`;
+                    html += `
+                    <div class="card" style="margin-bottom:1rem;">
+                        <h4 style="color:var(--secondary); margin-top:0; margin-bottom:5px;">${idx+1}. ${ex.name.toUpperCase()}</h4>
+                        <p style="font-size:0.8rem; color:var(--danger); margin-top:0; margin-bottom:10px;">⚠️ Anti No-Rep : <em>${ex.hint}</em></p>
+                        <img class="zoomable-img" src="${imgUrl}" alt="${ex.name}" style="width:100%; border-radius:8px; border: 1px solid rgba(255,255,255,0.1);" onclick="openImage('${imgUrl}')">
+                    </div>`;
+                });
             }
-            document.getElementById(tabId).classList.add("active");
-            elmnt.classList.add("active");
-            elmnt.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            
+            document.getElementById('ref-content').innerHTML = html;
+            navTo('view-reference');
+        }
+
+        function goBackFromReferentiel() {
+            if(viewBeforeReferentiel) navTo(viewBeforeReferentiel);
+            else navTo('view-student-menu');
+        }
+
+        function showAlert(msg) {
+            const alertBox = document.getElementById('custom-alert');
+            document.getElementById('alert-msg').textContent = msg;
+            alertBox.style.display = 'flex';
+            setTimeout(() => { alertBox.style.display = 'none'; }, 3000);
+        }
+
+        function getBadgeClass(percent) {
+            if(percent === null || percent === undefined) return 'badge-gris';
+            if (percent >= 90) return 'badge-vert';
+            if (percent >= 75) return 'badge-jaune';
+            if (percent >= 50) return 'badge-orange';
+            return 'badge-rouge';
+        }
+        function getPdfBadgeClass(percent) {
+            if(percent === null || percent === undefined) return 'pdf-gris';
+            if (percent >= 90) return 'pdf-vert';
+            if (percent >= 75) return 'pdf-jaune';
+            if (percent >= 50) return 'pdf-orange';
+            return 'pdf-rouge';
+        }
+
+        function calcPercent(fait, obj) {
+            if (obj <= 0) return 0;
+            let p = Math.round((fait / obj) * 100);
+            return p > 100 ? 100 : p; 
+        }
+
+        function checkProf() {
+            if(btoa(document.getElementById('prof-code').value) === 'Q1QyMDI2') {
+                navTo('view-prof-dashboard');
+                fetchClassesForFilter();
+                document.getElementById('prof-code').value = '';
+            } else { showAlert('❌ Code incorrect.'); }
+        }
+
+        function handleCSVUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            document.getElementById('upload-text').innerHTML = `✅ Fichier chargé : <strong>${file.name}</strong>`;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const text = e.target.result;
+                const lines = text.split(/\r\n|\n|\r/); // Correction bug JavaScript ici
+                extractedStudents = [];
+                for(let i = 0; i < lines.length; i++) {
+                    if (lines[i].trim() === "") continue; 
+                    const cols = lines[i].split(';');
+                    if (cols.length >= 1) { 
+                        const nomPrenom = cols[0].replace(/"/g, '').trim();
+                        if (nomPrenom !== "" && nomPrenom.toLowerCase() !== "élèves" && nomPrenom.toLowerCase() !== "eleves") {
+                            extractedStudents.push(nomPrenom);
+                        }
+                    }
+                }
+                extractedStudents.sort();
+                const preview = document.getElementById('preview-students');
+                preview.style.display = "block";
+                preview.innerHTML = `<strong>${extractedStudents.length} élèves trouvés :</strong><br>` + extractedStudents.join(', ');
+                if(extractedStudents.length > 0) {
+                    document.getElementById('btn-save-class').style.display = "block";
+                } else {
+                    document.getElementById('btn-save-class').style.display = "none";
+                    showAlert("❌ Aucun élève trouvé.");
+                }
+            };
+            reader.readAsText(file, 'ISO-8859-1'); 
+        }
+
+        async function saveClassToFirebase() {
+            const className = document.getElementById('class-name-input').value.trim();
+            if(!className) return showAlert('⚠️ Entrez le nom de la classe.');
+            if(extractedStudents.length === 0) return showAlert('⚠️ Aucun élève à importer.');
+            const btn = document.getElementById('btn-save-class');
+            btn.textContent = "⏳ Sauvegarde...";
+            try {
+                await db.collection('classes').doc(className).set({ students: extractedStudents });
+                showAlert(`✅ Classe ${className} enregistrée !`);
+                document.getElementById('class-name-input').value = '';
+                document.getElementById('csv-file').value = '';
+                document.getElementById('upload-text').innerHTML = "📁 Importer CSV Pronote";
+                document.getElementById('preview-students').style.display = "none";
+                btn.style.display = "none";
+                btn.textContent = "Sauvegarder";
+                fetchClassesForFilter();
+            } catch (e) { showAlert("❌ Erreur Firebase."); }
+        }
+
+        async function fetchClasses() {
+            const select = document.getElementById('student-class');
+            select.innerHTML = '<option value="">-- Choisir la classe --</option>';
+            try {
+                const snapshot = await db.collection('classes').get();
+                snapshot.forEach(doc => { select.innerHTML += `<option value="${doc.id}">${doc.id}</option>`; });
+            } catch (e) {}
+        }
+
+        async function fetchClassesForFilter() {
+            const select = document.getElementById('filter-class');
+            select.innerHTML = '<option value="">Sélectionner une classe</option>';
+            try {
+                const snapshot = await db.collection('classes').get();
+                snapshot.forEach(doc => { select.innerHTML += `<option value="${doc.id}">${doc.id}</option>`; });
+            } catch(e) {}
+        }
+
+        async function loadStudentsForClass() {
+            const className = document.getElementById('student-class').value;
+            const selectJ = document.getElementById('student-judge');
+            const selectA = document.getElementById('student-athlete');
+            if(!className) {
+                selectJ.disabled = true; selectA.disabled = true;
+                selectJ.innerHTML = '<option value="">-- Attente de la classe --</option>';
+                selectA.innerHTML = '<option value="">-- Attente de la classe --</option>';
+                return;
+            }
+            try {
+                const doc = await db.collection('classes').doc(className).get();
+                if(doc.exists) {
+                    const students = doc.data().students;
+                    let html = '<option value="">-- Sélectionner un nom --</option>';
+                    students.forEach(s => html += `<option value="${s}">${s}</option>`);
+                    selectJ.innerHTML = html; selectA.innerHTML = html;
+                    selectJ.disabled = false; selectA.disabled = false;
+                }
+            } catch(e) {}
+        }
+
+        function goToMenu() {
+            currentClass = document.getElementById('student-class').value;
+            currentJudge = document.getElementById('student-judge').value;
+            currentAthlete = document.getElementById('student-athlete').value;
+            if(!currentClass || !currentJudge || !currentAthlete) return showAlert("⚠️ Remplissez tous les champs !");
+            if(currentJudge === currentAthlete) return showAlert("❌ On ne peut pas s'évaluer soi-même !");
+            document.getElementById('display-judge').textContent = currentJudge;
+            document.getElementById('display-athlete').textContent = currentAthlete;
+            navTo('view-student-menu');
+        }
+
+        function startSession(sid) {
+            currentSessionId = sid;
+            const cfg = SESSIONS[sid];
+            document.getElementById('setup-ex1-name').textContent = `1. ${cfg.exos[0].name.toUpperCase()}`;
+            document.getElementById('setup-ex1-target').placeholder = `Ex: ${cfg.exos[0].unit === 's' ? '30' : '15'} (${cfg.exos[0].unit})`;
+            document.getElementById('setup-ex2-name').textContent = `2. ${cfg.exos[1].name.toUpperCase()}`;
+            document.getElementById('setup-ex2-target').placeholder = `Ex: ${cfg.exos[1].unit === 's' ? '30' : '15'} (${cfg.exos[1].unit})`;
+            document.getElementById('setup-ex3-name').textContent = `3. ${cfg.exos[2].name.toUpperCase()}`;
+            document.getElementById('setup-ex3-target').placeholder = `Ex: ${cfg.exos[2].unit === 's' ? '30' : '10'} (${cfg.exos[2].unit})`;
+            navTo('view-form-setup');
+        }
+
+        function updateCount(id, change) {
+            const el = document.getElementById(id);
+            let val = parseInt(el.value) || 0;
+            val += change;
+            if(val < 0) val = 0; 
+            el.value = val;
+            el.style.transform = "scale(1.1)";
+            setTimeout(() => el.style.transform = "scale(1)", 150);
+        }
+
+        function renderTours() {
+            const cfg = SESSIONS[currentSessionId];
+            const t1 = parseInt(document.getElementById('setup-ex1-target').value) || 0;
+            const t2 = parseInt(document.getElementById('setup-ex2-target').value) || 0;
+            const t3 = parseInt(document.getElementById('setup-ex3-target').value) || 0;
+            const container = document.getElementById('tours-container');
+            container.innerHTML = '';
+            
+            for(let i=1; i<=5; i++) {
+                container.innerHTML += `
+                    <div class="card" style="padding: 1rem;">
+                        <h3 style="margin-top:0; color:var(--primary); font-size: 1.1rem; margin-bottom: 0.5rem; text-align:center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem;">TOUR ${i}</h3>
+                        <table class="tour-table">
+                            <tr><th>Atelier</th><th>✅ Fait</th><th>❌ No Rep</th></tr>
+                            <tr>
+                                <td>${cfg.exos[0].name.substring(0,8)}<br><span style="font-size:0.7rem; color:var(--text-muted);">Obj: ${t1} ${cfg.exos[0].unit}</span></td>
+                                <td>
+                                    <div class="ctrl-cell">
+                                        <button class="btn-tiny minus" onclick="updateCount('t${i}-ex1-val', -${cfg.exos[0].step})">-</button>
+                                        <input type="number" class="val-tiny-input" id="t${i}-ex1-val" placeholder="">
+                                        <button class="btn-tiny plus-val" onclick="updateCount('t${i}-ex1-val', ${cfg.exos[0].step})">+</button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="ctrl-cell">
+                                        <input type="number" class="val-tiny-input err" id="t${i}-ex1-err" placeholder="">
+                                        <button class="btn-tiny plus-err" onclick="updateCount('t${i}-ex1-err', 1)">+</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>${cfg.exos[1].name.substring(0,8)}<br><span style="font-size:0.7rem; color:var(--text-muted);">Obj: ${t2} ${cfg.exos[1].unit}</span></td>
+                                <td>
+                                    <div class="ctrl-cell">
+                                        <button class="btn-tiny minus" onclick="updateCount('t${i}-ex2-val', -${cfg.exos[1].step})">-</button>
+                                        <input type="number" class="val-tiny-input" id="t${i}-ex2-val" placeholder="">
+                                        <button class="btn-tiny plus-val" onclick="updateCount('t${i}-ex2-val', ${cfg.exos[1].step})">+</button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="ctrl-cell">
+                                        <input type="number" class="val-tiny-input err" id="t${i}-ex2-err" placeholder="">
+                                        <button class="btn-tiny plus-err" onclick="updateCount('t${i}-ex2-err', 1)">+</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>${cfg.exos[2].name.substring(0,8)}<br><span style="font-size:0.7rem; color:var(--text-muted);">Obj: ${t3} ${cfg.exos[2].unit}</span></td>
+                                <td>
+                                    <div class="ctrl-cell">
+                                        <button class="btn-tiny minus" onclick="updateCount('t${i}-ex3-val', -${cfg.exos[2].step})">-</button>
+                                        <input type="number" class="val-tiny-input" id="t${i}-ex3-val" placeholder="">
+                                        <button class="btn-tiny plus-val" onclick="updateCount('t${i}-ex3-val', ${cfg.exos[2].step})">+</button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="ctrl-cell">
+                                        <input type="number" class="val-tiny-input err" id="t${i}-ex3-err" placeholder="">
+                                        <button class="btn-tiny plus-err" onclick="updateCount('t${i}-ex3-err', 1)">+</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>`;
+            }
+        }
+
+        function goToEval() {
+            const t1 = document.getElementById('setup-ex1-target').value;
+            const t2 = document.getElementById('setup-ex2-target').value;
+            const t3 = document.getElementById('setup-ex3-target').value;
+            if(!t1 || !t2 || !t3) return showAlert("❌ Remplissez les 3 objectifs avant de démarrer !");
+            if(t1 <= 0 || t2 <= 0 || t3 <= 0) return showAlert("❌ Les objectifs doivent être supérieurs à 0 !");
+            document.getElementById('eval-title').textContent = `🔥 ÉTAPE 2 : LE WOD (${currentSessionId})`;
+            renderTours(); 
+            navTo('view-form-eval');
+        }
+
+        function confirmSubmission() {
+            const cfg = SESSIONS[currentSessionId];
+            currentPayload = {
+                timestamp: new Date(), classe: currentClass, juge: currentJudge, athlete: currentAthlete, seance: currentSessionId,
+                contrat: {
+                    ex1: { lvl: document.getElementById('setup-ex1-lvl').value, target: parseInt(document.getElementById('setup-ex1-target').value) },
+                    ex2: { lvl: document.getElementById('setup-ex2-lvl').value, target: parseInt(document.getElementById('setup-ex2-target').value) },
+                    ex3: { lvl: document.getElementById('setup-ex3-lvl').value, target: parseInt(document.getElementById('setup-ex3-target').value) }
+                },
+                tours: []
+            };
+
+            let sumE1V = 0, sumE1E = 0, sumE2V = 0, sumE2E = 0, sumE3V = 0, sumE3E = 0;
+            for(let i=1; i<=5; i++) {
+                let v1 = parseInt(document.getElementById(`t${i}-ex1-val`).value) || 0; let e1 = parseInt(document.getElementById(`t${i}-ex1-err`).value) || 0;
+                let v2 = parseInt(document.getElementById(`t${i}-ex2-val`).value) || 0; let e2 = parseInt(document.getElementById(`t${i}-ex2-err`).value) || 0;
+                let v3 = parseInt(document.getElementById(`t${i}-ex3-val`).value) || 0; let e3 = parseInt(document.getElementById(`t${i}-ex3-err`).value) || 0;
+                sumE1V += v1; sumE1E += e1; sumE2V += v2; sumE2E += e2; sumE3V += v3; sumE3E += e3;
+                currentPayload.tours.push({ tour: i, ex1: {fait:v1, norep:e1}, ex2: {fait:v2, norep:e2}, ex3: {fait:v3, norep:e3} });
+            }
+
+            let t1Total = currentPayload.contrat.ex1.target * 5; let t2Total = currentPayload.contrat.ex2.target * 5; let t3Total = currentPayload.contrat.ex3.target * 5;
+            let p1 = calcPercent(sumE1V, t1Total); let p2 = calcPercent(sumE2V, t2Total); let p3 = calcPercent(sumE3V, t3Total);
+            let moyGlobal = Math.round((p1 + p2 + p3) / 3);
+
+            document.getElementById('bilan-content').innerHTML = `
+                <div class="card" style="text-align:center;">
+                    <h3 style="margin-top:0;">SCORE GLOBAL</h3>
+                    <div style="font-size: 3rem; font-weight:800;" class="${getBadgeClass(moyGlobal)}">${moyGlobal}%</div>
+                    <p style="color:var(--text-muted); font-size:0.9rem;">Moyenne de réussite des 3 ateliers</p>
+                </div>
+                <div class="card">
+                    <h3 style="margin-top:0; font-size:1.1rem;">Détail par atelier :</h3>
+                    <div style="margin-bottom: 1rem; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:0.5rem;">
+                        <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                            <strong>${cfg.exos[0].name} (N${currentPayload.contrat.ex1.lvl})</strong>
+                            <span class="badge ${getBadgeClass(p1)}">${p1}%</span>
+                        </div>
+                        <div style="font-size:0.85rem; color:var(--text-muted);">Fait : ${sumE1V} / Obj : ${t1Total} ${cfg.exos[0].unit} (❌ ${sumE1E} NoRep)</div>
+                    </div>
+                    <div style="margin-bottom: 1rem; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:0.5rem;">
+                        <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                            <strong>${cfg.exos[1].name} (N${currentPayload.contrat.ex2.lvl})</strong>
+                            <span class="badge ${getBadgeClass(p2)}">${p2}%</span>
+                        </div>
+                        <div style="font-size:0.85rem; color:var(--text-muted);">Fait : ${sumE2V} / Obj : ${t2Total} ${cfg.exos[1].unit} (❌ ${sumE2E} NoRep)</div>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                            <strong>${cfg.exos[2].name} (N${currentPayload.contrat.ex3.lvl})</strong>
+                            <span class="badge ${getBadgeClass(p3)}">${p3}%</span>
+                        </div>
+                        <div style="font-size:0.85rem; color:var(--text-muted);">Fait : ${sumE3V} / Obj : ${t3Total} ${cfg.exos[2].unit} (❌ ${sumE3E} NoRep)</div>
+                    </div>
+                </div>`;
+            navTo('view-student-bilan');
+        }
+
+        async function submitSession() {
+            if(!currentPayload) return;
+            const btn = document.getElementById('btn-final-submit');
+            btn.textContent = "⏳ Enregistrement..."; btn.disabled = true;
+            try {
+                await db.collection('resultats').add(currentPayload);
+                showAlert("✅ Résultats enregistrés avec succès !");
+                document.getElementById('setup-ex1-target').value = ''; document.getElementById('setup-ex2-target').value = ''; document.getElementById('setup-ex3-target').value = '';
+                currentPayload = null;
+                navTo('view-student-menu');
+            } catch(e) { showAlert("❌ Erreur de réseau."); } 
+            finally { btn.textContent = "📤 ENREGISTRER DANS FIREBASE"; btn.disabled = false; }
+        }
+
+        function getAthleteTitle(avg) {
+            if(avg >= 90) return { title: "MACHINE DE GUERRE 🦾", color: "var(--primary)" };
+            if(avg >= 75) return { title: "CROSSFITEUR CONFIRMÉ 🔥", color: "var(--success)" };
+            if(avg >= 50) return { title: "ATHLÈTE EN DEVENIR ⚡", color: "var(--warning)" };
+            if(avg > 0) return { title: "DÉBUTANT MOTIVÉ 💡", color: "var(--text-main)" };
+            return { title: "NOUVEAU CHALLENGER 🏁", color: "var(--text-muted)" };
+        }
+
+        async function loadHistorique() {
+            if(!currentAthlete || !currentClass) return showAlert("Sélectionnez un élève.");
+            navTo('view-student-historique');
+            document.getElementById('hist-athlete-name').textContent = currentAthlete;
+            const listDiv = document.getElementById('historique-list'), summaryDiv = document.getElementById('hist-summary');
+            listDiv.innerHTML = '<p style="text-align:center;">Chargement...</p>'; summaryDiv.innerHTML = '...';
+
+            try {
+                const snapshot = await db.collection('resultats').where('classe', '==', currentClass).where('athlete', '==', currentAthlete).get();
+                let histData = []; snapshot.forEach(doc => histData.push(doc.data()));
+                histData.sort((a, b) => b.timestamp - a.timestamp); 
+                
+                if(histData.length === 0) {
+                    summaryDiv.innerHTML = '<p style="color:var(--text-muted);">Aucune donnée pour générer ton profil.</p>';
+                    listDiv.innerHTML = '';
+                    if(progressChartInstance) progressChartInstance.destroy();
+                    return;
+                }
+
+                let globalScores = [], chartLabels = [], chartData = [], graphData = [...histData].reverse(); 
+                
+                graphData.forEach((d, index) => {
+                     let sid = (d.seance === "S1_5_TOURS" ? "S1" : d.seance);
+                     chartLabels.push(`S${index+1} (${sid})`);
+                     if(d.tours && d.tours.length > 0) {
+                        let sum1 = 0, sum2 = 0, sum3 = 0;
+                        d.tours.forEach(t => { sum1 += (t.ex1?.fait || t.squat?.fait || 0); sum2 += (t.ex2?.fait || t.plank?.fait || 0); sum3 += (t.ex3?.fait || t.pushup?.fait || 0); });
+                        let t1 = d.contrat.ex1 ? d.contrat.ex1.target * 5 : d.contrat.squat.target * 5;
+                        let t2 = d.contrat.ex2 ? d.contrat.ex2.target * 5 : d.contrat.plank.target * 5;
+                        let t3 = d.contrat.ex3 ? d.contrat.ex3.target * 5 : d.contrat.pushup.target * 5;
+                        let moy = Math.round((calcPercent(sum1,t1) + calcPercent(sum2,t2) + calcPercent(sum3,t3))/3);
+                        chartData.push(moy); globalScores.push(moy);
+                     } else chartData.push(0);
+                });
+
+                let totalAvg = globalScores.length > 0 ? Math.round(globalScores.reduce((a,b)=>a+b,0)/globalScores.length) : 0;
+                let profil = getAthleteTitle(totalAvg);
+
+                summaryDiv.innerHTML = `
+                    <div style="font-size:1.1rem; color:var(--text-muted); margin-bottom:5px;">NIVEAU ACTUEL</div>
+                    <div style="font-size:1.5rem; font-weight:900; color:${profil.color}; margin-bottom:15px;">${profil.title}</div>
+                    <div style="display:flex; justify-content:space-around; align-items:center;">
+                        <div><div style="font-size:2.5rem; font-weight:800; color:var(--text-main);">${totalAvg}%</div><div style="font-size:0.8rem; color:var(--text-muted);">Réussite Moyenne</div></div>
+                        <div><div style="font-size:2.5rem; font-weight:800; color:var(--secondary);">${histData.length}</div><div style="font-size:0.8rem; color:var(--text-muted);">Séances Validées</div></div>
+                    </div>`;
+
+                const ctx = document.getElementById('progressChart').getContext('2d');
+                if(progressChartInstance) progressChartInstance.destroy();
+                progressChartInstance = new Chart(ctx, {
+                    type: 'bar', data: { labels: chartLabels, datasets: [{ label: 'Taux de réussite (%)', data: chartData, backgroundColor: chartData.map(v => v >= 90 ? '#10b981' : v >= 75 ? '#f59e0b' : v >= 50 ? '#f97316' : '#ef4444'), borderRadius: 6 }] },
+                    options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { min:0, max:100, ticks: { color: '#94a3b8'} }, x: { ticks: { color: '#94a3b8'} } } }
+                });
+
+                listDiv.innerHTML = '';
+                histData.forEach(d => {
+                    const dateStr = d.timestamp.toDate().toLocaleDateString('fr-FR');
+                    if(d.tours && d.tours.length > 0) {
+                        let sum1 = 0, sum2 = 0, sum3 = 0;
+                        d.tours.forEach(t => { sum1 += (t.ex1?.fait || t.squat?.fait || 0); sum2 += (t.ex2?.fait || t.plank?.fait || 0); sum3 += (t.ex3?.fait || t.pushup?.fait || 0); });
+                        let t1 = d.contrat.ex1 ? d.contrat.ex1.target * 5 : d.contrat.squat.target * 5;
+                        let t2 = d.contrat.ex2 ? d.contrat.ex2.target * 5 : d.contrat.plank.target * 5;
+                        let t3 = d.contrat.ex3 ? d.contrat.ex3.target * 5 : d.contrat.pushup.target * 5;
+                        let p1 = calcPercent(sum1, t1); let p2 = calcPercent(sum2, t2); let p3 = calcPercent(sum3, t3);
+                        let moy = Math.round((p1 + p2 + p3) / 3);
+
+                        let sid = (d.seance === "S1_5_TOURS" ? "S1" : d.seance);
+                        let cfg = SESSIONS[sid] || SESSIONS["S1"];
+
+                        listDiv.innerHTML += `
+                            <div class="card" style="padding:1rem;">
+                                <div style="display:flex; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:0.5rem; margin-bottom:0.5rem;">
+                                    <strong>${sid} du ${dateStr}</strong>
+                                    <span class="badge ${getBadgeClass(moy)}">${moy}%</span>
+                                </div>
+                                <div style="font-size:0.75rem; color:var(--text-muted); display:flex; justify-content:space-between;">
+                                    <span>${cfg.exos[0].name.substring(0,5)}: <span class="badge ${getBadgeClass(p1)}">${p1}%</span></span>
+                                    <span>${cfg.exos[1].name.substring(0,5)}: <span class="badge ${getBadgeClass(p2)}">${p2}%</span></span>
+                                    <span>${cfg.exos[2].name.substring(0,5)}: <span class="badge ${getBadgeClass(p3)}">${p3}%</span></span>
+                                </div>
+                            </div>`;
+                    }
+                });
+            } catch (e) { listDiv.innerHTML = '<p style="color:var(--danger); text-align:center;">Erreur de chargement.</p>'; }
+        }
+
+        async function loadClassMatrix() {
+            const classId = document.getElementById('filter-class').value;
+            const tbody = document.getElementById('matrix-body');
+            if(!classId) { tbody.innerHTML = '<tr><td colspan="6" style="color:var(--text-muted);">Sélectionnez une classe.</td></tr>'; return; }
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">⏳ Construction du tableau...</td></tr>';
+            
+            try {
+                const classDoc = await db.collection('classes').doc(classId).get();
+                if(!classDoc.exists) { tbody.innerHTML = '<tr><td colspan="6" style="color:var(--danger);">Classe introuvable.</td></tr>'; return; }
+                currentRoster = classDoc.data().students || [];
+                
+                const snapshot = await db.collection('resultats').where('classe', '==', classId).get();
+                let profRawData = []; snapshot.forEach(doc => profRawData.push(doc.data()));
+                
+                let studentData = {};
+                currentRoster.forEach(s => { studentData[s] = { S1: null, S2: null, S3: null }; });
+                profRawData.sort((a,b) => a.timestamp - b.timestamp);
+                
+                profRawData.forEach(d => {
+                    if(studentData[d.athlete] !== undefined && d.tours && d.tours.length > 0) {
+                        let sid = d.seance === "S1_5_TOURS" ? "S1" : d.seance;
+                        let sum1=0, sum2=0, sum3=0;
+                        d.tours.forEach(t => { sum1 += (t.ex1?.fait || t.squat?.fait || 0); sum2 += (t.ex2?.fait || t.plank?.fait || 0); sum3 += (t.ex3?.fait || t.pushup?.fait || 0); });
+                        let t1 = d.contrat.ex1 ? d.contrat.ex1.target*5 : d.contrat.squat.target*5;
+                        let t2 = d.contrat.ex2 ? d.contrat.ex2.target*5 : d.contrat.plank.target*5;
+                        let t3 = d.contrat.ex3 ? d.contrat.ex3.target*5 : d.contrat.pushup.target*5;
+                        let moy = Math.round((calcPercent(sum1,t1)+calcPercent(sum2,t2)+calcPercent(sum3,t3))/3);
+                        if(studentData[d.athlete][sid] !== undefined) studentData[d.athlete][sid] = { moy: moy, raw: d };
+                    }
+                });
+
+                tbody.innerHTML = '';
+                currentRoster.forEach(athlete => {
+                    let s1 = studentData[athlete].S1, s2 = studentData[athlete].S2, s3 = studentData[athlete].S3;
+                    let s1H = s1 ? `<span class="badge ${getBadgeClass(s1.moy)}">${s1.moy}%</span>` : `<span class="badge badge-gris">N/A</span>`;
+                    let s2H = s2 ? `<span class="badge ${getBadgeClass(s2.moy)}">${s2.moy}%</span>` : `<span class="badge badge-gris">N/A</span>`;
+                    let s3H = s3 ? `<span class="badge ${getBadgeClass(s3.moy)}">${s3.moy}%</span>` : `<span class="badge badge-gris">N/A</span>`;
+                    
+                    let moys = [];
+                    if(s1) moys.push(s1.moy); if(s2) moys.push(s2.moy); if(s3) moys.push(s3.moy);
+                    let globalMoy = moys.length > 0 ? Math.round(moys.reduce((a,b)=>a+b,0)/moys.length) : null;
+                    let globalHtml = globalMoy !== null ? `<span class="badge ${getBadgeClass(globalMoy)}" style="font-size:1rem;">${globalMoy}%</span>` : `-`;
+                    let safeName = encodeURIComponent(athlete);
+
+                    tbody.innerHTML += `<tr><td>${athlete}</td><td>${s1H}</td><td>${s2H}</td><td>${s3H}</td><td>${globalHtml}</td><td><button class="btn-secondary" style="margin:0; padding:4px 8px;" onclick="showStudentDetails('${safeName}')">🔍</button></td></tr>`;
+                });
+                profMatrixData = studentData; 
+            } catch (e) { tbody.innerHTML = `<tr><td colspan="6" style="color:var(--danger);">Erreur réseau.</td></tr>`; }
+        }
+
+        function showStudentDetails(encodedName) {
+            let athlete = decodeURIComponent(encodedName);
+            let data = profMatrixData[athlete];
+            let html = `<h4 style="margin-top:0; border-bottom:1px solid rgba(255,255,255,0.2); padding-bottom:0.5rem;">${athlete}</h4>`;
+            
+            if(!data.S1 && !data.S2 && !data.S3) html += `<p style="color:var(--text-muted);">Aucune donnée.</p>`;
+            else {
+                ['S1', 'S2', 'S3'].forEach(sid => {
+                    if(data[sid]) {
+                        let d = data[sid].raw;
+                        let cfg = SESSIONS[sid] || SESSIONS["S1"];
+                        html += `
+                        <div style="background:rgba(0,0,0,0.2); padding:1rem; border-radius:8px; margin-bottom:1rem;">
+                            <strong style="color:var(--primary);">${sid} - Note : ${data[sid].moy}%</strong>
+                            <p style="font-size:0.75rem; color:var(--text-muted); margin: 5px 0;">Juge : ${d.juge} | ${d.timestamp.toDate().toLocaleDateString('fr-FR')}</p>
+                            <table style="width:100%; font-size:0.75rem; margin-top:0.5rem; text-align:center; border-collapse:collapse;">
+                                <tr style="border-bottom:1px solid rgba(255,255,255,0.1);"><th style="padding:2px;text-align:left;">Atelier</th><th style="padding:2px;">Contrat</th><th style="padding:2px;">Fait</th><th style="padding:2px;">Fautes</th></tr>`;
+                        
+                        let sum1=0, sum1E=0, sum2=0, sum2E=0, sum3=0, sum3E=0;
+                        d.tours.forEach(t => {
+                            sum1 += (t.ex1?.fait || t.squat?.fait || 0); sum1E += (t.ex1?.norep || t.squat?.norep || 0);
+                            sum2 += (t.ex2?.fait || t.plank?.fait || 0); sum2E += (t.ex2?.norep || t.plank?.norep || 0);
+                            sum3 += (t.ex3?.fait || t.pushup?.fait || 0); sum3E += (t.ex3?.norep || t.pushup?.norep || 0);
+                        });
+                        let t1 = d.contrat.ex1 ? d.contrat.ex1.target*5 : d.contrat.squat.target*5;
+                        let t2 = d.contrat.ex2 ? d.contrat.ex2.target*5 : d.contrat.plank.target*5;
+                        let t3 = d.contrat.ex3 ? d.contrat.ex3.target*5 : d.contrat.pushup.target*5;
+
+                        html += `<tr><td style="text-align:left; padding:2px;">${cfg.exos[0].name.substring(0,8)}</td><td>${t1}</td><td><span class="color-vert">${sum1}</span></td><td><span class="color-rouge">${sum1E}</span></td></tr>`;
+                        html += `<tr><td style="text-align:left; padding:2px;">${cfg.exos[1].name.substring(0,8)}</td><td>${t2}</td><td><span class="color-vert">${sum2}</span></td><td><span class="color-rouge">${sum2E}</span></td></tr>`;
+                        html += `<tr><td style="text-align:left; padding:2px;">${cfg.exos[2].name.substring(0,8)}</td><td>${t3}</td><td><span class="color-vert">${sum3}</span></td><td><span class="color-rouge">${sum3E}</span></td></tr>`;
+                        html += `</table></div>`;
+                    }
+                });
+            }
+            document.getElementById('modal-body').innerHTML = html;
+            document.getElementById('prof-modal').style.display = 'flex';
+        }
+
+        function exportPDF() {
+            const classId = document.getElementById('filter-class').value;
+            if(!classId) return showAlert("⚠️ Sélectionnez une classe.");
+            if(currentRoster.length === 0) return showAlert("⚠️ Aucun résultat à exporter.");
+
+            document.getElementById('pdf-class-name').textContent = classId;
+            document.getElementById('pdf-date').textContent = new Date().toLocaleDateString('fr-FR');
+            const tbody = document.getElementById('pdf-tbody');
+            tbody.innerHTML = '';
+
+            currentRoster.forEach(athlete => {
+                let s1 = profMatrixData[athlete]?.S1, s2 = profMatrixData[athlete]?.S2, s3 = profMatrixData[athlete]?.S3;
+                let s1H = s1 ? `<span class="pdf-b ${getPdfBadgeClass(s1.moy)}">${s1.moy}%</span>` : `<span class="pdf-gris">Abs</span>`;
+                let s2H = s2 ? `<span class="pdf-b ${getPdfBadgeClass(s2.moy)}">${s2.moy}%</span>` : `<span class="pdf-gris">Abs</span>`;
+                let s3H = s3 ? `<span class="pdf-b ${getPdfBadgeClass(s3.moy)}">${s3.moy}%</span>` : `<span class="pdf-gris">Abs</span>`;
+                
+                let moys = [];
+                if(s1) moys.push(s1.moy); if(s2) moys.push(s2.moy); if(s3) moys.push(s3.moy);
+                let globalMoy = moys.length > 0 ? Math.round(moys.reduce((a,b)=>a+b,0)/moys.length) : null;
+                let gHtml = globalMoy !== null ? `<span class="pdf-b ${getPdfBadgeClass(globalMoy)}">${globalMoy}%</span>` : `-`;
+
+                tbody.innerHTML += `<tr><td>${athlete}</td><td>${s1H}</td><td>${s2H}</td><td>${s3H}</td><td>${gHtml}</td></tr>`;
+            });
+
+            const element = document.getElementById('pdf-container');
+            element.style.display = 'block';
+
+            var opt = { margin: 10, filename: `Bilan_Global_EPS_${classId}.pdf`, image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } };
+            html2pdf().set(opt).from(element).save().then(() => { element.style.display = 'none'; });
         }
     </script>
 </body>
