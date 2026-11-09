@@ -204,6 +204,34 @@
         .game-block strong { color: #C2410C; }
         .game-block ul { margin-top: 0.5rem; margin-bottom: 1rem; padding-left: 1.2rem; }
 
+        /* STYLE DU CHRONOMETRE INTEGRE */
+        .timer-container {
+            background-color: #1E293B;
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .timer-container h4 { margin: 0 0 1rem 0; color: #38BDF8; font-size: 1.2rem; text-transform: uppercase; }
+        .timer-display { font-size: 4rem; font-weight: bold; font-family: 'Courier New', Courier, monospace; line-height: 1; margin-bottom: 0.5rem; color: #F8FAFC; }
+        .timer-round { font-size: 1.3rem; color: #94A3B8; margin-bottom: 1.5rem; font-weight: bold; }
+        .timer-controls button {
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 0 0.5rem;
+            transition: 0.2s;
+        }
+        .btn-start { background-color: #10B981; color: white; }
+        .btn-start:hover { background-color: #059669; }
+        .btn-stop { background-color: #EF4444; color: white; }
+        .btn-stop:hover { background-color: #DC2626; }
+
         .btn-download {
             display: block;
             background-color: var(--secondary);
@@ -532,6 +560,17 @@
                     </li>
                 </ul>
 
+                <!-- CHRONOMETRE INTEGRE S3 -->
+                <div class="timer-container">
+                    <h4>⏱️ Chrono E2MOM - 10 Minutes (Bip toutes les 2 min)</h4>
+                    <div class="timer-display" id="timer-display-s3">10:00</div>
+                    <div class="timer-round" id="timer-round-s3">Tour 1 / 5</div>
+                    <div class="timer-controls">
+                        <button class="btn-start" onclick="startTimer('s3')">▶️ Démarrer</button>
+                        <button class="btn-stop" onclick="resetTimer('s3')">⏹️ Réinitialiser</button>
+                    </div>
+                </div>
+
                 <div class="game-block">
                     <h4>🔥 SITUATION LUDIQUE & DÉFI</h4>
                     <p><strong>Le Biathlon Cross-Training (20 min) :</strong> Relais par équipe de 3. L'élève sprinte sur 15 mètres, arrive sur son tapis et doit "tirer" (comme au biathlon). Le tir = tenir un Superman parfait pendant 15 secondes chronométrées par le juge. S'il tremble ou fait "No Rep" avant, il part faire un tour de pénalité (5 burpees) avant de taper dans la main du relayeur. Oblige à gainer sous fatigue cardio.</p>
@@ -658,6 +697,17 @@
                     </li>
                     <li><strong>Validation :</strong> À la fin de l'heure, l'élève valide et signe son contrat définitif pour l'évaluation de la semaine prochaine.</li>
                 </ul>
+
+                <!-- CHRONOMETRE INTEGRE S6 -->
+                <div class="timer-container">
+                    <h4>⏱️ Chrono E2MOM - 10 Minutes (Bip toutes les 2 min)</h4>
+                    <div class="timer-display" id="timer-display-s6">10:00</div>
+                    <div class="timer-round" id="timer-round-s6">Tour 1 / 5</div>
+                    <div class="timer-controls">
+                        <button class="btn-start" onclick="startTimer('s6')">▶️ Démarrer</button>
+                        <button class="btn-stop" onclick="resetTimer('s6')">⏹️ Réinitialiser</button>
+                    </div>
+                </div>
 
                 <div class="game-block">
                     <h4>🔥 SITUATION LUDIQUE & DÉFI</h4>
@@ -805,7 +855,7 @@
 
     </div>
 
-    <!-- Script de gestion des onglets -->
+    <!-- Script de gestion des onglets et Chronomètre E2MOM -->
     <script>
         function openTab(tabId, elmnt) {
             var tabcontents = document.getElementsByClassName("tab-content");
@@ -817,8 +867,103 @@
                 tablinks[i].classList.remove("active");
             }
             document.getElementById(tabId).classList.add("active");
-            elmnt.classList.add("active");
-            elmnt.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            if(elmnt) {
+                elmnt.classList.add("active");
+                elmnt.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            }
+        }
+
+        // --- Logique du Chronomètre E2MOM ---
+        let timerInterval = null;
+        let timeRemaining = 600; // 10 minutes en secondes
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        // Fonction pour générer un son (Beep) sans fichier externe
+        function playBeep(type) {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            
+            if (type === 'end') {
+                // Son long et grave pour la fin totale
+                oscillator.type = 'square';
+                oscillator.frequency.setValueAtTime(400, audioCtx.currentTime); 
+                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                oscillator.start();
+                oscillator.stop(audioCtx.currentTime + 1.5); 
+            } else {
+                // Son court et aigu pour les changements de tours (chaque 2 minutes)
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(800, audioCtx.currentTime);
+                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                oscillator.start();
+                oscillator.stop(audioCtx.currentTime + 0.5);
+            }
+        }
+
+        function formatTime(seconds) {
+            const m = Math.floor(seconds / 60);
+            const s = seconds % 60;
+            return (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
+        }
+        
+        function getRound(seconds) {
+            if (seconds > 480) return 1; // 10:00 à 08:00
+            if (seconds > 360) return 2; // 08:00 à 06:00
+            if (seconds > 240) return 3; // 06:00 à 04:00
+            if (seconds > 120) return 4; // 04:00 à 02:00
+            if (seconds > 0) return 5;   // 02:00 à 00:00
+            return 5;
+        }
+
+        function updateDisplay(id, time, round) {
+            document.getElementById('timer-display-' + id).innerText = formatTime(time);
+            if(time > 0) {
+                document.getElementById('timer-round-' + id).innerText = "Tour " + round + " / 5";
+                document.getElementById('timer-round-' + id).style.color = "#94A3B8";
+            } else {
+                document.getElementById('timer-round-' + id).innerText = "✅ FIN DU WOD !";
+                document.getElementById('timer-round-' + id).style.color = "#10B981";
+            }
+        }
+
+        function startTimer(id) {
+            // Arrête le chrono s'il est déjà en cours
+            if (timerInterval) clearInterval(timerInterval);
+            
+            // Réinitialise à 10 minutes (600s)
+            timeRemaining = 600;
+            updateDisplay(id, timeRemaining, 1);
+            
+            // Petit bip de démarrage pour prévenir
+            playBeep('start'); 
+            
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                let currentRound = getRound(timeRemaining);
+                updateDisplay(id, timeRemaining, currentRound);
+                
+                // Si on passe un palier de 2 minutes (ex: 480s, 360s, etc.) on Bip !
+                if (timeRemaining > 0 && timeRemaining % 120 === 0) {
+                    playBeep('round');
+                }
+                
+                // Si on arrive à 0, on arrête tout et on sonne la fin
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    playBeep('end');
+                }
+            }, 1000);
+        }
+
+        function resetTimer(id) {
+            if (timerInterval) clearInterval(timerInterval);
+            timeRemaining = 600;
+            updateDisplay(id, timeRemaining, 1);
+            document.getElementById('timer-round-' + id).style.color = "#94A3B8";
         }
     </script>
 </body>
