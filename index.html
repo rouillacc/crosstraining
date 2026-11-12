@@ -169,6 +169,16 @@
             font-size: 0.95rem;
         }
 
+        .success-box {
+            background-color: #ECFCCB;
+            border-left: 5px solid #84CC16;
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+            color: #3F6212;
+        }
+
         .seance-card {
             background: var(--white);
             padding: 1.5rem;
@@ -258,8 +268,18 @@
             transition: 0.2s;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             white-space: nowrap;
+            cursor: pointer;
+            border: none;
         }
         .btn-student:hover { background-color: #0369A1; }
+        
+        .btn-print {
+            background-color: #4F46E5;
+            margin-top: 15px;
+            width: 100%;
+            text-align: center;
+        }
+        .btn-print:hover { background-color: #4338CA; }
 
         .student-app-card {
             background-color: #F0F9FF;
@@ -434,6 +454,14 @@
         <!-- ================= SÉANCE 1 ================= -->
         <div id="tab-s1" class="tab-content">
             <h2 class="section-title">Séance 1 : Découverte & Prise de repères</h2>
+
+            <div class="prof-tip" style="background-color: #ECFDF5; border-left-color: #10B981;">
+                <h4>👨‍🏫 Fiche Pédagogique (Support Collègues)</h4>
+                <p>Retrouvez le document complet de la leçon issu du Google Drive.</p>
+                <a href="https://drive.google.com/file/d/1uRydAn-hrP5fPQM9a0yjplHWO1oewQhP/view?usp=sharing" target="_blank" class="btn-student" style="background-color: #10B981; margin-top: 5px;">
+                    📄 Ouvrir le PDF de la Leçon 1
+                </a>
+            </div>
             
             <div class="prof-tip">
                 <h4>💡 Explicatif pour le Prof : Le format TABATA</h4>
@@ -454,6 +482,7 @@
                             <li>Intervalle 3 : Air Squats (lents)</li>
                             <li>Intervalle 4 : Mountain Climbers</li>
                         </ul>
+                        <div class="success-box">✅ <strong>Validation des pré-requis :</strong> À la fin de ce Tabata, l'élève doit avoir cumulé <strong>moins de 6 "No Rep" au total</strong> pour valider sa maîtrise des postures avant de passer à la suite.</div>
                     </li>
                 </ul>
                 
@@ -463,7 +492,7 @@
                     <li><strong>WOD EMOM 5 minutes (20 min) :</strong> 
                         <ul>
                             <li>Ateliers tournants : Squat, Planche, Push-Up.</li>
-                            <li>L'élève "Athlète" choisit son niveau de difficulté et son nombre de reps à faire dans la minute. Le "Juge" compte et veille aux postures. Changement de rôle toutes les 5 minutes.</li>
+                            <li>L'élève "Athlète" choisit son niveau de difficulté et son <strong>contrat de répétitions (10, 15, ou 20 reps à faire dans la minute)</strong>. Le "Juge" compte et veille aux postures. Changement de rôle toutes les 5 minutes.</li>
                         </ul>
                     </li>
                 </ul>
@@ -485,10 +514,6 @@
                     - <strong>La règle d'or :</strong> Les élèves 2, 3 et 4 ne peuvent accumuler des points <strong>QUE</strong> si l'Élève 1 tient sa chaise parfaitement. Si l'Élève 1 lâche ou glisse, le prof siffle et toute l'équipe doit s'arrêter ("Freeze !").<br>
                     - <strong>Rotation :</strong> Dès que la chaise lâche, on fait tourner les rôles immédiatement. L'objectif final est de faire le plus gros score d'équipe en 8 minutes chrono.</p>
                 </div>
-
-                <a href="https://drive.google.com/file/d/1UqJO4UuCr027POn7H6muDT0hZ80LA6W-/view" class="btn-download" target="_blank">
-                    📄 Ouvrir / Imprimer la Grille d'Évaluation (Séance 1)
-                </a>
             </div>
         </div>
 
@@ -513,7 +538,7 @@
                     <li><strong>Skills du jour (20 min) :</strong> Découverte des niveaux 1 à 4 des Jumping Jacks, Mountain Climbers et <strong>Fentes (Lunges)</strong>. Explication des No Reps spécifiques.</li>
                     <li><strong>WOD EMOM "Cardio & Jambes" (8 à 10 minutes par élève) :</strong> 
                         <ul>
-                            <li><strong>Le Contrat :</strong> Chaque minute, réaliser à la suite : (20 à 40 Jumping Jacks) + (10 à 30 Mountain Climbers) + <strong>(10 à 20 Fentes alternées)</strong>.</li>
+                            <li><strong>Le Contrat :</strong> L'élève choisit son contrat exact <strong>(10, 15, ou 20 répétitions)</strong> par exercice. Chaque minute, réaliser à la suite : (Jumping Jacks) + (Mountain Climbers) + <strong>(Fentes alternées)</strong> selon le contrat choisi.</li>
                             <li>Si un élève n'arrive pas à finir son contrat dans la minute, il doit revoir son contrat à la baisse à la minute suivante.</li>
                         </ul>
                     </li>
@@ -524,16 +549,20 @@
                     <p><strong>Le Relais par Équipe (15 min) :</strong> Par équipe de 4 élèves. L'équipe doit réaliser un total de <strong>100 Jumping Jacks, 100 Squats, 50 Gainage Tap (ex: Shoulder touch), et 50 Sprawls</strong> le plus vite possible.<br>
                     <em>Règle d'or :</em> Chaque élève de l'équipe <strong>doit faire au minimum 5 répétitions</strong> pour chaque exercice. Ils s'organisent comme ils veulent pour leurs relais !</p>
                 </div>
-
-                <a href="https://drive.google.com/file/d/1k-b_LoxWm1IIJQMkaLnIrfdOFp8M9nta/view" class="btn-download" target="_blank">
-                    📄 Ouvrir / Imprimer la Grille d'Évaluation (Séance 2)
-                </a>
             </div>
         </div>
 
         <!-- ================= SÉANCE 3 ================= -->
         <div id="tab-s3" class="tab-content">
             <h2 class="section-title">Séance 3 : Chaînes Croisées & E2MOM</h2>
+
+            <div class="prof-tip" style="background-color: #ECFDF5; border-left-color: #10B981;">
+                <h4>👨‍🏫 Fiche Pédagogique (Support Collègues)</h4>
+                <p>Retrouvez le document complet de la leçon issu du Google Drive.</p>
+                <a href="https://drive.google.com/file/d/1JqLVXb9vOHggSat2Kix_m5tON73o4c3M/view?usp=sharing" target="_blank" class="btn-student" style="background-color: #10B981; margin-top: 5px;">
+                    📄 Ouvrir le PDF de la Leçon 3
+                </a>
+            </div>
             
             <div class="prof-tip">
                 <h4>💡 Lexique Prof : L'E2MOM</h4>
@@ -575,16 +604,20 @@
                     <h4>🔥 SITUATION LUDIQUE & DÉFI</h4>
                     <p><strong>Le Biathlon Cross-Training (20 min) :</strong> Relais par équipe de 3. L'élève sprinte sur 15 mètres, arrive sur son tapis et doit "tirer" (comme au biathlon). Le tir = tenir un Superman parfait pendant 15 secondes chronométrées par le juge. S'il tremble ou fait "No Rep" avant, il part faire un tour de pénalité (5 burpees) avant de taper dans la main du relayeur. Oblige à gainer sous fatigue cardio.</p>
                 </div>
-
-                <a href="https://drive.google.com/file/d/15Zy8qYht66IJ3Z_Hsomwv8KHe3J6Hz4b/view" class="btn-download" target="_blank">
-                    📄 Ouvrir / Imprimer la Grille d'Évaluation (Séance 3)
-                </a>
             </div>
         </div>
 
         <!-- ================= SÉANCE 4 ================= -->
         <div id="tab-s4" class="tab-content">
             <h2 class="section-title">Séance 4 : Cardio-Puissance & AMRAP</h2>
+
+            <div class="prof-tip" style="background-color: #ECFDF5; border-left-color: #10B981;">
+                <h4>👨‍🏫 Fiche Pédagogique (Support Collègues)</h4>
+                <p>Retrouvez le document complet de la leçon issu du Google Drive.</p>
+                <a href="https://drive.google.com/file/d/1KEzkKJ2m0to5zfCkujntFnix11_WAWBv/view?usp=sharing" target="_blank" class="btn-student" style="background-color: #10B981; margin-top: 5px;">
+                    📄 Ouvrir le PDF de la Leçon 4
+                </a>
+            </div>
             
             <div class="prof-tip">
                 <h4>💡 Lexique Prof : AMRAP et For Time</h4>
@@ -615,10 +648,6 @@
                     <h4>🔥 SITUATION LUDIQUE & DÉFI</h4>
                     <p><strong>Le Relais "I Go, You Go" (15 min) :</strong> Binômes de même niveau. Le chrono tourne (6 minutes). L'élève A fait 3 Burpees le plus vite possible. Dès qu'il a fini, il tape dans la main de B qui fait ses 3 Burpees. Sprint permanent, temps mort très court, oblige les élèves à se dépasser en transfert d'énergie !</p>
                 </div>
-
-                <a href="https://drive.google.com/file/d/11uqkH8TH5kFJTCIvZVG59PMi2NvBeN1C/view" class="btn-download" target="_blank">
-                    📄 Ouvrir / Imprimer la Grille d'Évaluation (Séance 4)
-                </a>
             </div>
         </div>
 
@@ -637,6 +666,7 @@
                 <h3>1. Échauffement (15 min)</h3>
                 <ul>
                     <li>Tabata dynamique : corde à sauter (ou jumping jacks) et squats légers.</li>
+                    <div class="success-box">✅ <strong>Validation des pré-requis :</strong> À la fin de ce Tabata, l'élève doit avoir cumulé <strong>moins de 6 "No Rep" au total</strong> pour valider sa maîtrise des postures sous fatigue.</div>
                 </ul>
 
                 <h3>2. Corps de Séance (50 min)</h3>
@@ -659,10 +689,6 @@
                     <h4>🔥 SITUATION LUDIQUE & DÉFI</h4>
                     <p><strong>Le Poker des Contrats (15 min) :</strong> Par binômes. L'athlète tire au sort ou lance des dés pour un exercice et un nombre de reps (ex: 20 Pompes). Avant de démarrer, il doit annoncer à son juge s'il s'en sent capable en 1 minute. S'il réussit, il gagne 1 pt. S'il échoue, il perd 1 pt. Prépare parfaitement au choix de contrat (et à l'ego) pour l'évaluation !</p>
                 </div>
-
-                <a href="https://drive.google.com/file/d/1-5SpfhaMEbN4bc_1C8sXXIWifW8cogqS/view" class="btn-download" target="_blank">
-                    📄 Ouvrir / Imprimer la Grille d'Évaluation (Séance 5)
-                </a>
             </div>
         </div>
 
@@ -713,28 +739,22 @@
                     <h4>🔥 SITUATION LUDIQUE & DÉFI</h4>
                     <p><strong>Piège ton Juge (15 min) :</strong> Le prof distribue secrètement des "cartes rôles" aux athlètes : "Athlète parfait" ou "Tricheur subtil" (qui fait exprès une petite faute de posture). Le juge est noté par le prof sur sa capacité à repérer le tricheur sans se faire avoir. Rend le rôle de juge hyper actif avant la vraie évaluation !</p>
                 </div>
-
-                <a href="https://drive.google.com/file/d/1Tc6BXd-997DEVoTGdw03-t9GGhPvQEvi/view" class="btn-download" target="_blank">
-                    📄 Ouvrir / Imprimer la Feuille de Match (Séance 6)
-                </a>
             </div>
         </div>
 
         <!-- ================= EVALUATION ================= -->
         <div id="tab-eval" class="tab-content">
             <h2 class="section-title">ÉVALUATION FINALE OFFICIELLE</h2>
-            
-            <div class="prof-tip">
-                <h4>💡 Le Nouveau Barème de Notation</h4>
-                <ul>
-                    <li><strong>Performance (6 pts) :</strong> Contrat WOD 1 (40 reps=3pts, 30=2pts, 20=1pt) + Temps du WOD 2 (Ex: Moins de 2'20" = 3pts).</li>
-                    <li><strong>Maîtrise Motrice (6 pts) :</strong> Somme des niveaux de difficulté (max 3 pts) + Pénalités des No Rep (Moins de 2 fautes = 3 pts).</li>
-                    <li><strong>Rôle de Juge / Coach (4 pts) :</strong> Spectateur (1pt), Amateur (1.5pt), Confirmé (3pts), Pro (4pts).</li>
-                    <li><strong>Préparation / Échauffement (4 pts) :</strong> Inexistant (1pt), Insuffisant (1.5pt), Efficace (3pts), Cohérent et varié (4pts).</li>
-                </ul>
+
+            <div class="prof-tip" style="background-color: #ECFDF5; border-left-color: #10B981;">
+                <h4>👨‍🏫 Support d'Évaluation (Support Collègues)</h4>
+                <p>Retrouvez le support FPC et la grille globale issus du Google Drive.</p>
+                <a href="https://drive.google.com/file/d/15z_ihtuqPWc3tGLT4uEe28Y9HD4FFWSr/view?usp=sharing" target="_blank" class="btn-student" style="background-color: #10B981; margin-top: 5px;">
+                    📄 Ouvrir le PDF d'Évaluation
+                </a>
             </div>
 
-            <div class="seance-card">
+            <div class="seance-card" id="card-wod1">
                 <h3>FEUILLE DE MATCH - WOD 1 : E2MOM 10 MIN (5 x 2')</h3>
                 <p class="text-left"><strong>1 mouvement choisi dans chacune des 4 familles.</strong> L'élève choisit le niveau (1 à 3) et l'un des trois contrats de répétitions (20, 30 ou 40 reps par tour).</p>
                 
@@ -789,9 +809,10 @@
                         </tr>
                     </table>
                 </div>
+                <button class="btn-print" onclick="printCard('card-wod1')">🖨️ Imprimer la fiche WOD 1 au format PDF</button>
             </div>
 
-            <div class="seance-card">
+            <div class="seance-card" id="card-wod2">
                 <h3>FEUILLE DE MATCH - WOD 2 : TEAM WOD (170 REPS)</h3>
                 <p class="text-left">Répartition libre avec le partenaire pour finir le plus vite possible.</p>
                 <div style="overflow-x:auto;">
@@ -808,54 +829,48 @@
                         <tr><td class="text-left"><strong>80 Jumping Jacks</strong></td><td></td><td></td><td class="text-left"></td></tr>
                     </table>
                 </div>
-                <p style="margin-top:1rem; font-size: 1.1rem;">⏱️ <strong>Temps réalisé :</strong> _____ min _____ s</p>
+                <p style="margin-top:1rem; font-size: 1.1rem;">⏱️ <strong>Temps estimé :</strong> _____ min _____ s &nbsp; | &nbsp; <strong>Temps réalisé :</strong> _____ min _____ s</p>
+                <button class="btn-print" onclick="printCard('card-wod2')">🖨️ Imprimer la fiche WOD 2 au format PDF</button>
             </div>
 
             <div class="seance-card" style="background-color: #EFF6FF; border: 1px solid #BFDBFE;">
-                <h3 style="color: #1D4ED8;">RÉCAPITULATIF DES NOTES OFFICIELLES (/20)</h3>
-                <div style="overflow-x:auto;">
-                    <table>
-                        <tr>
-                            <th class="text-left">Compétence Évaluée</th>
-                            <th class="text-left">Détail des points</th>
-                            <th>Note / Points</th>
-                        </tr>
-                        <tr>
-                            <td class="text-left"><strong>Performance WOD 1 & 2</strong></td>
-                            <td class="text-left">Contrat WOD 1 (/3) + Temps WOD 2 (/3)</td>
-                            <td><strong>___ / 6</strong></td>
-                        </tr>
-                        <tr>
-                            <td class="text-left"><strong>Maîtrise Motrice</strong></td>
-                            <td class="text-left">Niveau de difficulté des ateliers (/3) + Total No Rep (/3)</td>
-                            <td><strong>___ / 6</strong></td>
-                        </tr>
-                        <tr>
-                            <td class="text-left"><strong>Rôle Juge / Coach</strong></td>
-                            <td class="text-left">Spectateur(1) - Amateur(1.5) - Confirmé(3) - Pro(4)</td>
-                            <td><strong>___ / 4</strong></td>
-                        </tr>
-                        <tr>
-                            <td class="text-left"><strong>Préparation / Échauffement</strong></td>
-                            <td class="text-left">Inexistant(1) - Insuffisant(1.5) - Efficace(3) - Cohérent(4)</td>
-                            <td><strong>___ / 4</strong></td>
-                        </tr>
-                        <tr style="background-color: #DBEAFE; font-size: 1.2rem;">
-                            <td colspan="2" style="text-align: right;"><strong>NOTE FINALE :</strong></td>
-                            <td><strong>___ / 20</strong></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+                <h3 style="color: #1D4ED8;">BARÈME ET GRILLE DE NOTATION OFFICIELLE (/20)</h3>
+                
+                <h4>1. NIVEAU DE MAITRISE (/6)</h4>
+                <p>Addition des niveaux de difficulté choisis (/3) + Total NO REP (/3)</p>
+                <ul style="font-size:0.9rem;">
+                    <li><strong>Niveau de difficulté des ateliers :</strong> 12 pts = 3/3 | 11 pts = 2.5/3 | 10 pts = 2.25/3 | 9 pts = 1.75/3 | 8 pts = 1.5/3 | 7 pts = 1.25/3</li>
+                    <li><strong>Nombre total de NO REP :</strong> 0 à 2 = 3/3 | 3 à 4 = 2.5/3 | 5 à 6 = 2.25/3 | 7 à 8 = 1.75/3 | 9 à 10 = 1.5/3 | 11 à 12 = 1.25/3 | 13 à 14 = 1/3 | 15 à 16 = 0.75/3 | Supérieur à 17 = 0.5/3</li>
+                </ul>
 
-            <a href="https://drive.google.com/file/d/1Tc6BXd-997DEVoTGdw03-t9GGhPvQEvi/view" class="btn-download" target="_blank" style="margin-top:20px;">
-                📄 Ouvrir / Imprimer la Feuille de Match Officielle (PDF)
-            </a>
+                <h4>2. NIVEAU DE PERFORMANCE (/6)</h4>
+                <p>Contrat WOD 1 (/3) + Temps WOD 2 (/3)</p>
+                <ul style="font-size:0.9rem;">
+                    <li><strong>WOD 1 (Contrat E2MOM) :</strong> Contrat 40 = 3/3 | Contrat 30 = 2/3 | Contrat 20 = 1/3</li>
+                    <li><strong>WOD 2 (Temps 170 Reps) :</strong> &lt;2'20" = 3/3 | 2'30" = 2.5/3 | 2'50" = 2.25/3 | 3'00" = 2/3 | 3'10" = 1.75/3 | 3'20" = 1.5/3 | 3'30" = 1.25/3 | 3'50" = 1/3 | 4'10" = 0.5/3</li>
+                </ul>
+
+                <h4>3. MON ÉVALUATION EN TANT QUE JUGE ET COACH (/4)</h4>
+                <ul style="font-size:0.9rem;">
+                    <li><strong>0 pt (SPECTATEUR) :</strong> Comptage erroné, ne comptabilise pas les NO REP, coach absent...</li>
+                    <li><strong>1.5 pts (AMATEUR) :</strong> Attentif mais NO REP approximatifs, compte mais se trompe parfois.</li>
+                    <li><strong>3 pts (CONFIRMÉ) :</strong> Score proche de la réalité - des hésitations - compte à voix haute.</li>
+                    <li><strong>4 pts (PRO) :</strong> Attentif - rigoureux - précis dans le repérage des NO REP. Coach engagé.</li>
+                </ul>
+
+                <h4>4. PRÉPARER SON WOD (/4)</h4>
+                <ul style="font-size:0.9rem;">
+                    <li><strong>0 pt :</strong> Échauffement anecdotique ou inexistant.</li>
+                    <li><strong>1.5 pts :</strong> Insuffisant par manque d'intensité et de variété.</li>
+                    <li><strong>3 pts :</strong> Efficace en intensité et durée mais peu cohérent.</li>
+                    <li><strong>4 pts :</strong> Cohérent, complet et varié.</li>
+                </ul>
+            </div>
         </div>
 
     </div>
 
-    <!-- Script de gestion des onglets et Chronomètre E2MOM -->
+    <!-- Script de gestion des onglets, Chronomètre E2MOM et Impression -->
     <script>
         function openTab(tabId, elmnt) {
             var tabcontents = document.getElementsByClassName("tab-content");
@@ -871,6 +886,33 @@
                 elmnt.classList.add("active");
                 elmnt.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
             }
+        }
+
+        function printCard(cardId) {
+            var printContents = document.getElementById(cardId).innerHTML;
+            // On supprime le bouton d'impression lui-même de la vue à imprimer
+            printContents = printContents.replace(/<button[^>]*btn-print[^>]*>.*?<\/button>/gi, '');
+            
+            var printWindow = window.open('', '', 'height=600,width=800');
+            printWindow.document.write('<html><head><title>Impression Fiche WOD</title>');
+            printWindow.document.write('<style>');
+            printWindow.document.write('body{font-family: Arial, sans-serif; padding: 20px;} ');
+            printWindow.document.write('table{width: 100%; border-collapse: collapse; margin-top: 15px;} ');
+            printWindow.document.write('th, td{border: 1px solid #000; padding: 10px; text-align: center;} ');
+            printWindow.document.write('th{background-color: #f2f2f2;} ');
+            printWindow.document.write('.text-left{text-align: left;} ');
+            printWindow.document.write('.highlight{background-color: #e0e0e0; font-weight: bold;} ');
+            printWindow.document.write('h3{color: #FF6B00; border-bottom: 2px solid #FF6B00; padding-bottom: 5px;}');
+            printWindow.document.write('</style></head><body>');
+            printWindow.document.write(printContents);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            
+            // Délai nécessaire pour que le DOM de la nouvelle fenêtre soit bien chargé avant l'impression
+            setTimeout(function() {
+                printWindow.print();
+                printWindow.close();
+            }, 250);
         }
 
         // --- Logique du Chronomètre E2MOM ---
