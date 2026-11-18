@@ -521,6 +521,14 @@
         <div id="tab-s2" class="tab-content">
             <h2 class="section-title">Séance 2 : Cardio-Training & EMOM long</h2>
 
+            <div class="prof-tip" style="background-color: #ECFDF5; border-left-color: #10B981;">
+                <h4>👨‍🏫 Fiche Pédagogique (Support Collègues)</h4>
+                <p>Retrouvez le document complet de la leçon issu du Google Drive.</p>
+                <a href="https://drive.google.com/file/d/1sFoBntXezxLNatgrl2mxHSfG23cuOCMh/view" target="_blank" class="btn-student" style="background-color: #10B981; margin-top: 5px;">
+                    📄 Ouvrir le PDF de la Leçon 2
+                </a>
+            </div>
+
             <div class="prof-tip">
                 <h4>💡 L'objectif du prof aujourd'hui :</h4>
                 <p>Éviter le "départ canon". Les élèves veulent souvent sprinter la 1ère minute de l'EMOM, mais ils explosent à la 3ème. Le rôle du juge/coach est de les forcer à **lisser leur effort** pour être réguliers sur tout le bloc de temps.</p>
@@ -622,8 +630,8 @@
             <div class="prof-tip">
                 <h4>💡 Lexique Prof : AMRAP et For Time</h4>
                 <ul>
-                    <li><strong>AMRAP (As Many Rounds As Possible) :</strong> On lance un chrono global. L'élève doit faire le plus de tours possibles de son circuit sans pause obligatoire. L'élève gère sa fatigue.</li>
-                    <li><strong>For Time :</strong> On donne une quantité fixe de travail. Le but est de finir le plus vite possible. On chronomètre le temps final.</li>
+                    <li><strong>AMRAP (As Many Rounds As Possible) :</strong> Chrono fixe. L'élève doit faire le plus de tours possibles de son circuit sans pause obligatoire. L'élève gère sa propre fatigue.</li>
+                    <li><strong>For Time :</strong> Quantité fixe de travail à réaliser. Le but est de finir le plus vite possible.</li>
                 </ul>
             </div>
 
@@ -633,16 +641,36 @@
                     <li>Préparation aux Burpees : passage du sol à debout (Sprawl doux), position de l'ours (bear crawl).</li>
                 </ul>
 
-                <h3>2. Corps de Séance (50 min)</h3>
+                <h3>2. Corps de Séance : Apprentissage & AMRAP (50 min)</h3>
                 <ul>
-                    <li><strong>Skills Burpees (15 min) :</strong> Dédramatiser la chute au sol. Expliquer que les mains se posent à plat sous les épaules, et qu'on remonte pieds écartés pour préserver le dos.</li>
-                    <li><strong>Test Record Personnel (15 min) :</strong> Mesure de la puissance max pure. On chronomètre 15 secondes. L'élève fait un max de Burpees. Puis max de Squats. Le juge note.</li>
-                    <li><strong>Initiation "Team WOD - For Time" (20 min) :</strong> 
-                        <ul>
-                            <li>Équipes de 2 (en relais). <strong>Mission :</strong> 100 Mountain Climbers + 40 Squats + 60s de Planche statique cumulée. L'équipe découpe les séries comme elle veut (10 par 10) pour aller le plus vite possible.</li>
-                        </ul>
+                    <li><strong>Skills Burpees (10 min) :</strong> Dédramatiser la chute au sol. Expliquer que les mains se posent à plat sous les épaules, et qu'on remonte pieds écartés pour préserver le dos.</li>
+                    <li><strong>WOD "AMRAP CLASSIQUE" (25 min) :</strong> 
+                        <p>Par binômes (1 Athlète / 1 Juge). L'athlète a <strong>10 Minutes</strong> au chronomètre pour réaliser <strong>le plus de tours possibles</strong> du circuit suivant :</p>
+                        
+                        <div style="background-color: #F8FAFC; border: 1px solid #E2E8F0; padding: 1rem; border-radius: 6px; margin: 10px 0;">
+                            <strong style="color:#1E3A8A;">LE CIRCUIT (1 Tour complet) :</strong>
+                            <ul style="margin-top: 5px; margin-bottom: 0;">
+                                <li><strong>5 Burpees</strong> (ou Sprawls selon le niveau)</li>
+                                <li><strong>10 Air Squats</strong></li>
+                                <li><strong>15 Crunchs</strong> (ou Russian Twist)</li>
+                                <li><strong>20 Jumping Jacks</strong></li>
+                            </ul>
+                        </div>
+                        
+                        <p><em>Le rôle du Juge :</em> Il note sur une ardoise chaque tour terminé (Rounds) par son partenaire et annonce clairement les "No Rep". Si le chrono sonne à la fin des 10 minutes au milieu d'un tour, il note les répétitions en plus. <br><i>Exemple de score final : "4 Tours + 12 reps".</i></p>
                     </li>
                 </ul>
+
+                <!-- CHRONOMETRE INTEGRE S4 (AMRAP) -->
+                <div class="timer-container" style="background-color: #312E81;">
+                    <h4 style="color: #A5B4FC;">⏱️ Chrono AMRAP - 10 Minutes (Continu)</h4>
+                    <div class="timer-display" id="timer-display-s4">10:00</div>
+                    <div class="timer-round" id="timer-round-s4" style="color: #A5B4FC;">Tourne à ton rythme !</div>
+                    <div class="timer-controls">
+                        <button class="btn-start" style="background-color: #4F46E5;" onclick="startAMRAP('s4')">▶️ Démarrer</button>
+                        <button class="btn-stop" style="background-color: #E11D48;" onclick="resetAMRAP('s4')">⏹️ Réinitialiser</button>
+                    </div>
+                </div>
 
                 <div class="game-block">
                     <h4>🔥 SITUATION LUDIQUE & DÉFI</h4>
@@ -870,7 +898,7 @@
 
     </div>
 
-    <!-- Script de gestion des onglets, Chronomètre E2MOM et Impression -->
+    <!-- Script de gestion des onglets, Chronomètres et Impression -->
     <script>
         function openTab(tabId, elmnt) {
             var tabcontents = document.getElementsByClassName("tab-content");
@@ -890,7 +918,6 @@
 
         function printCard(cardId) {
             var printContents = document.getElementById(cardId).innerHTML;
-            // On supprime le bouton d'impression lui-même de la vue à imprimer
             printContents = printContents.replace(/<button[^>]*btn-print[^>]*>.*?<\/button>/gi, '');
             
             var printWindow = window.open('', '', 'height=600,width=800');
@@ -908,19 +935,17 @@
             printWindow.document.write('</body></html>');
             printWindow.document.close();
             
-            // Délai nécessaire pour que le DOM de la nouvelle fenêtre soit bien chargé avant l'impression
             setTimeout(function() {
                 printWindow.print();
                 printWindow.close();
             }, 250);
         }
 
-        // --- Logique du Chronomètre E2MOM ---
+        // --- Logique Audio et Formatage ---
         let timerInterval = null;
-        let timeRemaining = 600; // 10 minutes en secondes
+        let timeRemaining = 600; 
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-        // Fonction pour générer un son (Beep) sans fichier externe
         function playBeep(type) {
             if (audioCtx.state === 'suspended') audioCtx.resume();
             const oscillator = audioCtx.createOscillator();
@@ -930,14 +955,12 @@
             gainNode.connect(audioCtx.destination);
             
             if (type === 'end') {
-                // Son long et grave pour la fin totale
                 oscillator.type = 'square';
                 oscillator.frequency.setValueAtTime(400, audioCtx.currentTime); 
                 gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
                 oscillator.start();
                 oscillator.stop(audioCtx.currentTime + 1.5); 
             } else {
-                // Son court et aigu pour les changements de tours (chaque 2 minutes)
                 oscillator.type = 'sine';
                 oscillator.frequency.setValueAtTime(800, audioCtx.currentTime);
                 gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
@@ -952,12 +975,13 @@
             return (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
         }
         
+        // --- CHRONO E2MOM (Leçon 3 et 6) ---
         function getRound(seconds) {
-            if (seconds > 480) return 1; // 10:00 à 08:00
-            if (seconds > 360) return 2; // 08:00 à 06:00
-            if (seconds > 240) return 3; // 06:00 à 04:00
-            if (seconds > 120) return 4; // 04:00 à 02:00
-            if (seconds > 0) return 5;   // 02:00 à 00:00
+            if (seconds > 480) return 1; 
+            if (seconds > 360) return 2; 
+            if (seconds > 240) return 3; 
+            if (seconds > 120) return 4; 
+            if (seconds > 0) return 5;   
             return 5;
         }
 
@@ -973,14 +997,9 @@
         }
 
         function startTimer(id) {
-            // Arrête le chrono s'il est déjà en cours
             if (timerInterval) clearInterval(timerInterval);
-            
-            // Réinitialise à 10 minutes (600s)
             timeRemaining = 600;
             updateDisplay(id, timeRemaining, 1);
-            
-            // Petit bip de démarrage pour prévenir
             playBeep('start'); 
             
             timerInterval = setInterval(() => {
@@ -988,12 +1007,10 @@
                 let currentRound = getRound(timeRemaining);
                 updateDisplay(id, timeRemaining, currentRound);
                 
-                // Si on passe un palier de 2 minutes (ex: 480s, 360s, etc.) on Bip !
                 if (timeRemaining > 0 && timeRemaining % 120 === 0) {
                     playBeep('round');
                 }
                 
-                // Si on arrive à 0, on arrête tout et on sonne la fin
                 if (timeRemaining <= 0) {
                     clearInterval(timerInterval);
                     playBeep('end');
@@ -1006,6 +1023,36 @@
             timeRemaining = 600;
             updateDisplay(id, timeRemaining, 1);
             document.getElementById('timer-round-' + id).style.color = "#94A3B8";
+        }
+
+        // --- CHRONO AMRAP (Leçon 4) ---
+        function startAMRAP(id) {
+            if (timerInterval) clearInterval(timerInterval);
+            timeRemaining = 600; // 10 minutes
+            document.getElementById('timer-display-' + id).innerText = formatTime(timeRemaining);
+            document.getElementById('timer-round-' + id).innerText = "Tourne à ton rythme !";
+            document.getElementById('timer-round-' + id).style.color = "#A5B4FC";
+            playBeep('start'); 
+            
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                document.getElementById('timer-display-' + id).innerText = formatTime(timeRemaining);
+                
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    document.getElementById('timer-round-' + id).innerText = "✅ TIME CAP !";
+                    document.getElementById('timer-round-' + id).style.color = "#10B981";
+                    playBeep('end');
+                }
+            }, 1000);
+        }
+
+        function resetAMRAP(id) {
+            if (timerInterval) clearInterval(timerInterval);
+            timeRemaining = 600;
+            document.getElementById('timer-display-' + id).innerText = formatTime(timeRemaining);
+            document.getElementById('timer-round-' + id).innerText = "Tourne à ton rythme !";
+            document.getElementById('timer-round-' + id).style.color = "#A5B4FC";
         }
     </script>
 </body>
