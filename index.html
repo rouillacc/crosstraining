@@ -179,6 +179,18 @@
             color: #3F6212;
         }
 
+        /* ENCART OBJECTIFS DE SEANCE */
+        .obj-box {
+            background-color: #EEF2FF;
+            border-left: 5px solid #4F46E5;
+            padding: 1rem 1.2rem;
+            border-radius: 6px;
+            margin: 1rem 0 1.5rem 0;
+            font-size: 0.95rem;
+        }
+        .obj-box h4 { margin: 0 0 0.5rem 0; color: #3730A3; font-size: 1.1rem; }
+        .obj-box ul { margin: 0; padding-left: 1.2rem; }
+
         .seance-card {
             background: var(--white);
             padding: 1.5rem;
@@ -214,7 +226,7 @@
         .game-block strong { color: #C2410C; }
         .game-block ul { margin-top: 0.5rem; margin-bottom: 1rem; padding-left: 1.2rem; }
 
-        /* STYLE DU CHRONOMETRE INTEGRE */
+        /* STYLE DES CHRONOMETRES INTEGRES */
         .timer-container {
             background-color: #1E293B;
             color: white;
@@ -224,23 +236,35 @@
             margin: 1.5rem 0;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
-        .timer-container h4 { margin: 0 0 1rem 0; color: #38BDF8; font-size: 1.2rem; text-transform: uppercase; }
-        .timer-display { font-size: 4rem; font-weight: bold; font-family: 'Courier New', Courier, monospace; line-height: 1; margin-bottom: 0.5rem; color: #F8FAFC; }
-        .timer-round { font-size: 1.3rem; color: #94A3B8; margin-bottom: 1.5rem; font-weight: bold; }
+        .timer-container h4 { margin: 0 0 0.8rem 0; color: #38BDF8; font-size: 1.15rem; text-transform: uppercase; }
+        .timer-display { font-size: 3.8rem; font-weight: bold; font-family: 'Courier New', Courier, monospace; line-height: 1; margin-bottom: 0.5rem; color: #F8FAFC; }
+        .timer-round { font-size: 1.2rem; color: #94A3B8; margin-bottom: 1.2rem; font-weight: bold; }
         .timer-controls button {
-            padding: 0.8rem 1.5rem;
-            font-size: 1rem;
+            padding: 0.75rem 1.3rem;
+            font-size: 0.95rem;
             font-weight: bold;
             border: none;
             border-radius: 6px;
             cursor: pointer;
-            margin: 0 0.5rem;
+            margin: 0.25rem 0.4rem;
             transition: 0.2s;
         }
         .btn-start { background-color: #10B981; color: white; }
         .btn-start:hover { background-color: #059669; }
+        .btn-pause { background-color: #F59E0B; color: white; }
+        .btn-pause:hover { background-color: #D97706; }
         .btn-stop { background-color: #EF4444; color: white; }
         .btn-stop:hover { background-color: #DC2626; }
+
+        /* Variantes visuelles de chronos */
+        .timer-tabata { background-color: #064E3B; }
+        .timer-tabata h4 { color: #6EE7B7; }
+        .timer-amrap { background-color: #312E81; }
+        .timer-amrap h4 { color: #A5B4FC; }
+        .timer-death { background-color: #7F1D1D; }
+        .timer-death h4 { color: #FCA5A5; }
+        .timer-fortime { background-color: #0F172A; border: 2px solid #38BDF8; }
+        .timer-fortime h4 { color: #7DD3FC; }
 
         .btn-download {
             display: block;
@@ -275,6 +299,12 @@
         
         .btn-print {
             background-color: #4F46E5;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            font-weight: bold;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
             margin-top: 15px;
             width: 100%;
             text-align: center;
@@ -455,6 +485,14 @@
         <div id="tab-s1" class="tab-content">
             <h2 class="section-title">Séance 1 : Découverte & Prise de repères</h2>
 
+            <div class="obj-box">
+                <h4>🎯 Objectifs de la séance</h4>
+                <ul>
+                    <li>Découvrir les formats <strong>Tabata</strong> et <strong>EMOM</strong> et maîtriser les postures sécuritaires de base (Squat, Planche, Push-Up).</li>
+                    <li>Valider les pré-requis posturaux (moins de 6 No Rep au Tabata) et s'initier au rôle de <strong>Juge</strong>.</li>
+                </ul>
+            </div>
+
             <div class="prof-tip" style="background-color: #ECFDF5; border-left-color: #10B981;">
                 <h4>👨‍🏫 Fiche Pédagogique (Support Collègues)</h4>
                 <p>Retrouvez le document complet de la leçon issu du Google Drive.</p>
@@ -485,6 +523,17 @@
                         <div class="success-box">✅ <strong>Validation des pré-requis :</strong> À la fin de ce Tabata, l'élève doit avoir cumulé <strong>moins de 6 "No Rep" au total</strong> pour valider sa maîtrise des postures avant de passer à la suite.</div>
                     </li>
                 </ul>
+
+                <!-- CHRONO TABATA S1 -->
+                <div class="timer-container timer-tabata">
+                    <h4>⏱️ Chrono TABATA - 4 Minutes (20s Effort / 10s Repos)</h4>
+                    <div class="timer-display" id="timer-display-tabata-s1">00:20</div>
+                    <div class="timer-round" id="timer-round-tabata-s1">Prêt - Round 1 / 8</div>
+                    <div class="timer-controls">
+                        <button class="btn-start" onclick="startTabata('tabata-s1')">▶️ Démarrer</button>
+                        <button class="btn-stop" onclick="resetTabata('tabata-s1')">⏹️ Réinitialiser</button>
+                    </div>
+                </div>
                 
                 <h3>2. Corps de Séance : Skills & EMOM (40 min)</h3>
                 <ul>
@@ -496,6 +545,17 @@
                         </ul>
                     </li>
                 </ul>
+
+                <!-- CHRONO EMOM 5 MIN S1 -->
+                <div class="timer-container">
+                    <h4>⏱️ Chrono EMOM - 5 Minutes (Bip chaque minute)</h4>
+                    <div class="timer-display" id="timer-display-emom-s1">05:00</div>
+                    <div class="timer-round" id="timer-round-emom-s1">Minute 1 / 5</div>
+                    <div class="timer-controls">
+                        <button class="btn-start" onclick="startIntervalTimer('emom-s1', 300, 60, 'Minute')">▶️ Démarrer</button>
+                        <button class="btn-stop" onclick="resetIntervalTimer('emom-s1', 300, 5, 'Minute')">⏹️ Réinitialiser</button>
+                    </div>
+                </div>
 
                 <div class="game-block">
                     <h4>🔥 SITUATIONS LUDIQUES & DÉFIS DÉTAILLÉS</h4>
@@ -521,6 +581,15 @@
         <div id="tab-s2" class="tab-content">
             <h2 class="section-title">Séance 2 : Cardio-Training & EMOM long</h2>
 
+            <div class="obj-box">
+                <h4>🎯 Objectifs de la séance</h4>
+                <ul>
+                    <li>Apprendre à <strong>lisser son effort</strong> sur un EMOM long (8 à 10 min) sans partir trop vite.</li>
+                    <li>Maîtriser les critères de réussite des Jumping Jacks, Mountain Climbers et <strong>Fentes (Lunges)</strong>.</li>
+                    <li>Coopérer en équipe de 4 sur un format relais avec contrainte d'engagement minimal.</li>
+                </ul>
+            </div>
+
             <div class="prof-tip" style="background-color: #ECFDF5; border-left-color: #10B981;">
                 <h4>👨‍🏫 Fiche Pédagogique (Support Collègues)</h4>
                 <p>Retrouvez le document complet de la leçon issu du Google Drive.</p>
@@ -531,7 +600,7 @@
 
             <div class="prof-tip">
                 <h4>💡 L'objectif du prof aujourd'hui :</h4>
-                <p>Éviter le "départ canon". Les élèves veulent souvent sprinter la 1ère minute de l'EMOM, mais ils explosent à la 3ème. Le rôle du juge/coach est de les forcer à **lisser leur effort** pour être réguliers sur tout le bloc de temps.</p>
+                <p>Éviter le "départ canon". Les élèves veulent souvent sprinter la 1ère minute de l'EMOM, mais ils explosent à la 3ème. Le rôle du juge/coach est de les forcer à <strong>lisser leur effort</strong> pour être réguliers sur tout le bloc de temps.</p>
             </div>
 
             <div class="seance-card">
@@ -552,10 +621,33 @@
                     </li>
                 </ul>
 
+                <!-- CHRONO EMOM 10 MIN S2 -->
+                <div class="timer-container">
+                    <h4>⏱️ Chrono EMOM - 10 Minutes (Bip chaque minute)</h4>
+                    <div class="timer-display" id="timer-display-emom-s2">10:00</div>
+                    <div class="timer-round" id="timer-round-emom-s2">Minute 1 / 10</div>
+                    <div class="timer-controls">
+                        <button class="btn-start" onclick="startIntervalTimer('emom-s2', 600, 60, 'Minute')">▶️ Démarrer</button>
+                        <button class="btn-stop" onclick="resetIntervalTimer('emom-s2', 600, 10, 'Minute')">⏹️ Réinitialiser</button>
+                    </div>
+                </div>
+
                 <div class="game-block">
                     <h4>🔥 SITUATION LUDIQUE & DÉFI</h4>
                     <p><strong>Le Relais par Équipe (15 min) :</strong> Par équipe de 4 élèves. L'équipe doit réaliser un total de <strong>100 Jumping Jacks, 100 Squats, 50 Gainage Tap (ex: Shoulder touch), et 50 Sprawls</strong> le plus vite possible.<br>
                     <em>Règle d'or :</em> Chaque élève de l'équipe <strong>doit faire au minimum 5 répétitions</strong> pour chaque exercice. Ils s'organisent comme ils veulent pour leurs relais !</p>
+                </div>
+
+                <!-- CHRONO FOR TIME RELAIS S2 -->
+                <div class="timer-container timer-fortime">
+                    <h4>⏱️ Chrono FOR TIME - Relais Équipe de 4</h4>
+                    <div class="timer-display" id="timer-display-ft-s2">00:00</div>
+                    <div class="timer-round" id="timer-round-ft-s2">Prêt à chronométrer</div>
+                    <div class="timer-controls">
+                        <button class="btn-start" onclick="startForTime('ft-s2')">▶️ Démarrer</button>
+                        <button class="btn-pause" onclick="pauseForTime('ft-s2')">⏸️ Stop / Arrivée</button>
+                        <button class="btn-stop" onclick="resetForTime('ft-s2')">⏹️ Réinitialiser</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -563,6 +655,15 @@
         <!-- ================= SÉANCE 3 ================= -->
         <div id="tab-s3" class="tab-content">
             <h2 class="section-title">Séance 3 : Chaînes Croisées & E2MOM</h2>
+
+            <div class="obj-box">
+                <h4>🎯 Objectifs de la séance</h4>
+                <ul>
+                    <li>Découvrir le format <strong>E2MOM 10 minutes</strong> (format exact du WOD 1 de l'évaluation finale).</li>
+                    <li>Maîtriser le gainage dorsal (<strong>Superman</strong>) et abdominal (<strong>Crunchs</strong>) sans compensation.</li>
+                    <li>Maintenir un gainage propre sous fatigue cardiaque (défi Biathlon).</li>
+                </ul>
+            </div>
 
             <div class="prof-tip" style="background-color: #ECFDF5; border-left-color: #10B981;">
                 <h4>👨‍🏫 Fiche Pédagogique (Support Collègues)</h4>
@@ -603,8 +704,8 @@
                     <div class="timer-display" id="timer-display-s3">10:00</div>
                     <div class="timer-round" id="timer-round-s3">Tour 1 / 5</div>
                     <div class="timer-controls">
-                        <button class="btn-start" onclick="startTimer('s3')">▶️ Démarrer</button>
-                        <button class="btn-stop" onclick="resetTimer('s3')">⏹️ Réinitialiser</button>
+                        <button class="btn-start" onclick="startIntervalTimer('s3', 600, 120, 'Tour')">▶️ Démarrer</button>
+                        <button class="btn-stop" onclick="resetIntervalTimer('s3', 600, 5, 'Tour')">⏹️ Réinitialiser</button>
                     </div>
                 </div>
 
@@ -618,6 +719,15 @@
         <!-- ================= SÉANCE 4 ================= -->
         <div id="tab-s4" class="tab-content">
             <h2 class="section-title">Séance 4 : Cardio-Puissance & AMRAP</h2>
+
+            <div class="obj-box">
+                <h4>🎯 Objectifs de la séance</h4>
+                <ul>
+                    <li>Découvrir le format <strong>AMRAP classique (10 min)</strong> et gérer son allure en continu sans pause imposée.</li>
+                    <li>Dédramatiser et sécuriser l'exécution des <strong>Burpees</strong> (ou Sprawls selon son niveau).</li>
+                    <li>Savoir compter un score en "Tours + Répétitions" tout en restant strict sur les No Rep.</li>
+                </ul>
+            </div>
 
             <div class="prof-tip" style="background-color: #ECFDF5; border-left-color: #10B981;">
                 <h4>👨‍🏫 Fiche Pédagogique (Support Collègues)</h4>
@@ -661,14 +771,14 @@
                     </li>
                 </ul>
 
-                <!-- CHRONOMETRE INTEGRE S4 (AMRAP) -->
-                <div class="timer-container" style="background-color: #312E81;">
-                    <h4 style="color: #A5B4FC;">⏱️ Chrono AMRAP - 10 Minutes (Continu)</h4>
-                    <div class="timer-display" id="timer-display-s4">10:00</div>
-                    <div class="timer-round" id="timer-round-s4" style="color: #A5B4FC;">Tourne à ton rythme !</div>
+                <!-- CHRONOMETRE INTEGRE S4 (AMRAP 10 MIN) -->
+                <div class="timer-container timer-amrap">
+                    <h4>⏱️ Chrono AMRAP - 10 Minutes (Continu)</h4>
+                    <div class="timer-display" id="timer-display-amrap-s4">10:00</div>
+                    <div class="timer-round" id="timer-round-amrap-s4" style="color: #A5B4FC;">Tourne à ton rythme !</div>
                     <div class="timer-controls">
-                        <button class="btn-start" style="background-color: #4F46E5;" onclick="startAMRAP('s4')">▶️ Démarrer</button>
-                        <button class="btn-stop" style="background-color: #E11D48;" onclick="resetAMRAP('s4')">⏹️ Réinitialiser</button>
+                        <button class="btn-start" style="background-color: #4F46E5;" onclick="startAMRAP('amrap-s4', 600)">▶️ Démarrer</button>
+                        <button class="btn-stop" style="background-color: #E11D48;" onclick="resetAMRAP('amrap-s4', 600)">⏹️ Réinitialiser</button>
                     </div>
                 </div>
 
@@ -676,12 +786,32 @@
                     <h4>🔥 SITUATION LUDIQUE & DÉFI</h4>
                     <p><strong>Le Relais "I Go, You Go" (15 min) :</strong> Binômes de même niveau. Le chrono tourne (6 minutes). L'élève A fait 3 Burpees le plus vite possible. Dès qu'il a fini, il tape dans la main de B qui fait ses 3 Burpees. Sprint permanent, temps mort très court, oblige les élèves à se dépasser en transfert d'énergie !</p>
                 </div>
+
+                <!-- CHRONO RELAIS 6 MIN S4 -->
+                <div class="timer-container timer-amrap">
+                    <h4>⏱️ Chrono Relais "I Go, You Go" - 6 Minutes</h4>
+                    <div class="timer-display" id="timer-display-relais-s4">06:00</div>
+                    <div class="timer-round" id="timer-round-relais-s4" style="color: #A5B4FC;">Relais rapide en binôme !</div>
+                    <div class="timer-controls">
+                        <button class="btn-start" style="background-color: #4F46E5;" onclick="startAMRAP('relais-s4', 360)">▶️ Démarrer</button>
+                        <button class="btn-stop" style="background-color: #E11D48;" onclick="resetAMRAP('relais-s4', 360)">⏹️ Réinitialiser</button>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- ================= SÉANCE 5 ================= -->
         <div id="tab-s5" class="tab-content">
             <h2 class="section-title">Séance 5 : Gestion de crise & "Death By"</h2>
+
+            <div class="obj-box">
+                <h4>🎯 Objectifs de la séance</h4>
+                <ul>
+                    <li>Gérer la montée de la fatigue (acidose) sans dégrader sa posture sur le format <strong>Death By</strong>.</li>
+                    <li>Se tester sur le <strong>Team WOD 170 Reps For Time</strong> (format exact du WOD 2 de l'évaluation) et optimiser les relais.</li>
+                    <li>Affiner sa connaissance de soi pour choisir un contrat réaliste (Poker des Contrats).</li>
+                </ul>
+            </div>
             
             <div class="prof-tip">
                 <h4>💡 Pédagogie : Le format "Death By" (La mort subite)</h4>
@@ -705,6 +835,20 @@
                             <li>Le juge observe la dégradation de la posture (acidose). S'il y a un dos rond = No rep.</li>
                         </ul>
                     </li>
+                </ul>
+
+                <!-- CHRONO DEATH BY S5 -->
+                <div class="timer-container timer-death">
+                    <h4>⏱️ Chrono DEATH BY (Bip chaque minute en boucle)</h4>
+                    <div class="timer-display" id="timer-display-death-s5">01:00</div>
+                    <div class="timer-round" id="timer-round-death-s5" style="color: #FCA5A5;">Minute 1 : 2 Burpees + 1 Rep</div>
+                    <div class="timer-controls">
+                        <button class="btn-start" onclick="startDeathBy('death-s5')">▶️ Démarrer</button>
+                        <button class="btn-stop" onclick="resetDeathBy('death-s5')">⏹️ Arrêter / Reset</button>
+                    </div>
+                </div>
+
+                <ul>
                     <li><strong>Team WOD - 170 Reps For Time (30 min) :</strong>
                         <ul>
                             <li>En équipe de 2, relais libre. Les élèves se testent sur le format exact de l'évaluation finale.</li>
@@ -712,6 +856,18 @@
                         </ul>
                     </li>
                 </ul>
+
+                <!-- CHRONO FOR TIME S5 -->
+                <div class="timer-container timer-fortime">
+                    <h4>⏱️ Chrono FOR TIME - Team WOD 170 Reps</h4>
+                    <div class="timer-display" id="timer-display-ft-s5">00:00</div>
+                    <div class="timer-round" id="timer-round-ft-s5">Prêt à chronométrer</div>
+                    <div class="timer-controls">
+                        <button class="btn-start" onclick="startForTime('ft-s5')">▶️ Démarrer</button>
+                        <button class="btn-pause" onclick="pauseForTime('ft-s5')">⏸️ Stop / Arrivée</button>
+                        <button class="btn-stop" onclick="resetForTime('ft-s5')">⏹️ Réinitialiser</button>
+                    </div>
+                </div>
                 
                 <div class="game-block">
                     <h4>🔥 SITUATION LUDIQUE & DÉFI</h4>
@@ -723,6 +879,15 @@
         <!-- ================= SÉANCE 6 ================= -->
         <div id="tab-s6" class="tab-content">
             <h2 class="section-title">Séance 6 : Répétition Générale (Test)</h2>
+
+            <div class="obj-box">
+                <h4>🎯 Objectifs de la séance</h4>
+                <ul>
+                    <li>Prendre en charge son <strong>échauffement en autonomie</strong> (évalué sur 4 pts le jour J).</li>
+                    <li>Simuler les 2 épreuves officielles (WOD 1 E2MOM + WOD 2 Team WOD) pour <strong>valider son contrat définitif</strong>.</li>
+                    <li>Fiabiliser son regard de juge (défi Piège ton Juge).</li>
+                </ul>
+            </div>
             
             <div class="prof-tip">
                 <h4>💡 Conseils pour l'évaluation</h4>
@@ -743,6 +908,20 @@
                             <li>L'élève teste son contrat. Doit-il baisser la difficulté pour ne pas faire de "No Rep" ? Doit-il baisser son nombre de répétitions (passer de 40 à 30 reps) ?</li>
                         </ul>
                     </li>
+                </ul>
+
+                <!-- CHRONOMETRE INTEGRE S6 (E2MOM) -->
+                <div class="timer-container">
+                    <h4>⏱️ Chrono WOD 1 : E2MOM - 10 Minutes (Bip toutes les 2 min)</h4>
+                    <div class="timer-display" id="timer-display-s6">10:00</div>
+                    <div class="timer-round" id="timer-round-s6">Tour 1 / 5</div>
+                    <div class="timer-controls">
+                        <button class="btn-start" onclick="startIntervalTimer('s6', 600, 120, 'Tour')">▶️ Démarrer</button>
+                        <button class="btn-stop" onclick="resetIntervalTimer('s6', 600, 5, 'Tour')">⏹️ Réinitialiser</button>
+                    </div>
+                </div>
+
+                <ul>
                     <li><strong>Simulation de l'Épreuve 2 - Team WOD (20 min) :</strong>
                         <ul>
                             <li>Format imposé : 170 répétitions par équipe.</li>
@@ -752,14 +931,15 @@
                     <li><strong>Validation :</strong> À la fin de l'heure, l'élève valide et signe son contrat définitif pour l'évaluation de la semaine prochaine.</li>
                 </ul>
 
-                <!-- CHRONOMETRE INTEGRE S6 -->
-                <div class="timer-container">
-                    <h4>⏱️ Chrono E2MOM - 10 Minutes (Bip toutes les 2 min)</h4>
-                    <div class="timer-display" id="timer-display-s6">10:00</div>
-                    <div class="timer-round" id="timer-round-s6">Tour 1 / 5</div>
+                <!-- CHRONO FOR TIME S6 -->
+                <div class="timer-container timer-fortime">
+                    <h4>⏱️ Chrono WOD 2 : FOR TIME - Team WOD 170 Reps</h4>
+                    <div class="timer-display" id="timer-display-ft-s6">00:00</div>
+                    <div class="timer-round" id="timer-round-ft-s6">Prêt à chronométrer</div>
                     <div class="timer-controls">
-                        <button class="btn-start" onclick="startTimer('s6')">▶️ Démarrer</button>
-                        <button class="btn-stop" onclick="resetTimer('s6')">⏹️ Réinitialiser</button>
+                        <button class="btn-start" onclick="startForTime('ft-s6')">▶️ Démarrer</button>
+                        <button class="btn-pause" onclick="pauseForTime('ft-s6')">⏸️ Stop / Arrivée</button>
+                        <button class="btn-stop" onclick="resetForTime('ft-s6')">⏹️ Réinitialiser</button>
                     </div>
                 </div>
 
@@ -941,31 +1121,35 @@
             }, 250);
         }
 
-        // --- Logique Audio et Formatage ---
-        let timerInterval = null;
-        let timeRemaining = 600; 
+        // --- Moteur Audio & Gestionnaire global des chronomètres ---
+        const activeTimers = {};
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
         function playBeep(type) {
             if (audioCtx.state === 'suspended') audioCtx.resume();
             const oscillator = audioCtx.createOscillator();
             const gainNode = audioCtx.createGain();
-            
             oscillator.connect(gainNode);
             gainNode.connect(audioCtx.destination);
             
             if (type === 'end') {
                 oscillator.type = 'square';
                 oscillator.frequency.setValueAtTime(400, audioCtx.currentTime); 
-                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gainNode.gain.setValueAtTime(0.12, audioCtx.currentTime);
                 oscillator.start();
                 oscillator.stop(audioCtx.currentTime + 1.5); 
-            } else {
+            } else if (type === 'rest') {
                 oscillator.type = 'sine';
-                oscillator.frequency.setValueAtTime(800, audioCtx.currentTime);
+                oscillator.frequency.setValueAtTime(520, audioCtx.currentTime);
                 gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
                 oscillator.start();
-                oscillator.stop(audioCtx.currentTime + 0.5);
+                oscillator.stop(audioCtx.currentTime + 0.4);
+            } else {
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(880, audioCtx.currentTime);
+                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                oscillator.start();
+                oscillator.stop(audioCtx.currentTime + 0.45);
             }
         }
 
@@ -974,85 +1158,206 @@
             const s = seconds % 60;
             return (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
         }
-        
-        // --- CHRONO E2MOM (Leçon 3 et 6) ---
-        function getRound(seconds) {
-            if (seconds > 480) return 1; 
-            if (seconds > 360) return 2; 
-            if (seconds > 240) return 3; 
-            if (seconds > 120) return 4; 
-            if (seconds > 0) return 5;   
-            return 5;
-        }
 
-        function updateDisplay(id, time, round) {
-            document.getElementById('timer-display-' + id).innerText = formatTime(time);
-            if(time > 0) {
-                document.getElementById('timer-round-' + id).innerText = "Tour " + round + " / 5";
-                document.getElementById('timer-round-' + id).style.color = "#94A3B8";
-            } else {
-                document.getElementById('timer-round-' + id).innerText = "✅ FIN DU WOD !";
-                document.getElementById('timer-round-' + id).style.color = "#10B981";
+        function clearTimerById(id) {
+            if (activeTimers[id]) {
+                clearInterval(activeTimers[id]);
+                delete activeTimers[id];
             }
         }
 
-        function startTimer(id) {
-            if (timerInterval) clearInterval(timerInterval);
-            timeRemaining = 600;
-            updateDisplay(id, timeRemaining, 1);
-            playBeep('start'); 
-            
-            timerInterval = setInterval(() => {
-                timeRemaining--;
-                let currentRound = getRound(timeRemaining);
-                updateDisplay(id, timeRemaining, currentRound);
-                
-                if (timeRemaining > 0 && timeRemaining % 120 === 0) {
+        // --- 1. CHRONO TABATA (20s Effort / 10s Repos x 8) ---
+        function startTabata(id) {
+            clearTimerById(id);
+            let round = 1;
+            let isWork = true;
+            let time = 20;
+            const display = document.getElementById('timer-display-' + id);
+            const roundEl = document.getElementById('timer-round-' + id);
+
+            display.innerText = formatTime(time);
+            roundEl.innerText = "🔥 EFFORT - Round 1 / 8";
+            roundEl.style.color = "#6EE7B7";
+            playBeep('start');
+
+            activeTimers[id] = setInterval(() => {
+                time--;
+                if (time <= 0) {
+                    if (isWork) {
+                        if (round === 8) {
+                            clearTimerById(id);
+                            display.innerText = "00:00";
+                            roundEl.innerText = "✅ FIN DU TABATA !";
+                            roundEl.style.color = "#10B981";
+                            playBeep('end');
+                            return;
+                        }
+                        isWork = false;
+                        time = 10;
+                        roundEl.innerText = "😮‍💨 REPOS - Round " + round + " / 8";
+                        roundEl.style.color = "#FDE047";
+                        playBeep('rest');
+                    } else {
+                        isWork = true;
+                        round++;
+                        time = 20;
+                        roundEl.innerText = "🔥 EFFORT - Round " + round + " / 8";
+                        roundEl.style.color = "#6EE7B7";
+                        playBeep('start');
+                    }
+                }
+                display.innerText = formatTime(time);
+            }, 1000);
+        }
+
+        function resetTabata(id) {
+            clearTimerById(id);
+            document.getElementById('timer-display-' + id).innerText = "00:20";
+            const roundEl = document.getElementById('timer-round-' + id);
+            roundEl.innerText = "Prêt - Round 1 / 8";
+            roundEl.style.color = "#94A3B8";
+        }
+
+        // --- 2. CHRONO EMOM / E2MOM (Bip à intervalle régulier) ---
+        function startIntervalTimer(id, totalSeconds, intervalSeconds, label) {
+            clearTimerById(id);
+            let remaining = totalSeconds;
+            const totalRounds = totalSeconds / intervalSeconds;
+            const display = document.getElementById('timer-display-' + id);
+            const roundEl = document.getElementById('timer-round-' + id);
+
+            display.innerText = formatTime(remaining);
+            roundEl.innerText = label + " 1 / " + totalRounds;
+            roundEl.style.color = "#94A3B8";
+            playBeep('start');
+
+            activeTimers[id] = setInterval(() => {
+                remaining--;
+                display.innerText = formatTime(remaining);
+
+                if (remaining > 0) {
+                    const currentRound = Math.floor((totalSeconds - remaining) / intervalSeconds) + 1;
+                    roundEl.innerText = label + " " + currentRound + " / " + totalRounds;
+                    if (remaining % intervalSeconds === 0) {
+                        playBeep('round');
+                    }
+                } else {
+                    clearTimerById(id);
+                    roundEl.innerText = "✅ FIN DU WOD !";
+                    roundEl.style.color = "#10B981";
+                    playBeep('end');
+                }
+            }, 1000);
+        }
+
+        function resetIntervalTimer(id, totalSeconds, totalRounds, label) {
+            clearTimerById(id);
+            document.getElementById('timer-display-' + id).innerText = formatTime(totalSeconds);
+            const roundEl = document.getElementById('timer-round-' + id);
+            roundEl.innerText = label + " 1 / " + totalRounds;
+            roundEl.style.color = "#94A3B8";
+        }
+
+        // --- 3. CHRONO AMRAP (Continu sans bip intermédiaire) ---
+        function startAMRAP(id, totalSeconds) {
+            clearTimerById(id);
+            let remaining = totalSeconds;
+            const display = document.getElementById('timer-display-' + id);
+            const roundEl = document.getElementById('timer-round-' + id);
+
+            display.innerText = formatTime(remaining);
+            roundEl.innerText = "En cours - Gère ton allure !";
+            roundEl.style.color = "#A5B4FC";
+            playBeep('start');
+
+            activeTimers[id] = setInterval(() => {
+                remaining--;
+                display.innerText = formatTime(remaining);
+
+                if (remaining <= 0) {
+                    clearTimerById(id);
+                    roundEl.innerText = "✅ TIME CAP !";
+                    roundEl.style.color = "#10B981";
+                    playBeep('end');
+                }
+            }, 1000);
+        }
+
+        function resetAMRAP(id, totalSeconds) {
+            clearTimerById(id);
+            document.getElementById('timer-display-' + id).innerText = formatTime(totalSeconds);
+            const roundEl = document.getElementById('timer-round-' + id);
+            roundEl.innerText = "Tourne à ton rythme !";
+            roundEl.style.color = "#A5B4FC";
+        }
+
+        // --- 4. CHRONO DEATH BY (1 min en boucle avec incrémentation auto) ---
+        function startDeathBy(id) {
+            clearTimerById(id);
+            let minute = 1;
+            let remaining = 60;
+            const display = document.getElementById('timer-display-' + id);
+            const roundEl = document.getElementById('timer-round-' + id);
+
+            display.innerText = formatTime(remaining);
+            roundEl.innerText = "Minute 1 : 2 Burpees + 1 Rep";
+            roundEl.style.color = "#FCA5A5";
+            playBeep('start');
+
+            activeTimers[id] = setInterval(() => {
+                remaining--;
+                if (remaining <= 0) {
+                    minute++;
+                    remaining = 60;
+                    roundEl.innerText = "Minute " + minute + " : 2 Burpees + " + minute + " Reps";
                     playBeep('round');
                 }
-                
-                if (timeRemaining <= 0) {
-                    clearInterval(timerInterval);
-                    playBeep('end');
-                }
+                display.innerText = formatTime(remaining);
             }, 1000);
         }
 
-        function resetTimer(id) {
-            if (timerInterval) clearInterval(timerInterval);
-            timeRemaining = 600;
-            updateDisplay(id, timeRemaining, 1);
-            document.getElementById('timer-round-' + id).style.color = "#94A3B8";
+        function resetDeathBy(id) {
+            clearTimerById(id);
+            document.getElementById('timer-display-' + id).innerText = "01:00";
+            const roundEl = document.getElementById('timer-round-' + id);
+            roundEl.innerText = "Minute 1 : 2 Burpees + 1 Rep";
+            roundEl.style.color = "#FCA5A5";
         }
 
-        // --- CHRONO AMRAP (Leçon 4) ---
-        function startAMRAP(id) {
-            if (timerInterval) clearInterval(timerInterval);
-            timeRemaining = 600; // 10 minutes
-            document.getElementById('timer-display-' + id).innerText = formatTime(timeRemaining);
-            document.getElementById('timer-round-' + id).innerText = "Tourne à ton rythme !";
-            document.getElementById('timer-round-' + id).style.color = "#A5B4FC";
-            playBeep('start'); 
-            
-            timerInterval = setInterval(() => {
-                timeRemaining--;
-                document.getElementById('timer-display-' + id).innerText = formatTime(timeRemaining);
-                
-                if (timeRemaining <= 0) {
-                    clearInterval(timerInterval);
-                    document.getElementById('timer-round-' + id).innerText = "✅ TIME CAP !";
-                    document.getElementById('timer-round-' + id).style.color = "#10B981";
-                    playBeep('end');
-                }
+        // --- 5. CHRONO FOR TIME (Croissant avec Pause/Arrivée) ---
+        const forTimeElapsed = {};
+
+        function startForTime(id) {
+            clearTimerById(id);
+            if (forTimeElapsed[id] === undefined) forTimeElapsed[id] = 0;
+            const display = document.getElementById('timer-display-' + id);
+            const roundEl = document.getElementById('timer-round-' + id);
+
+            roundEl.innerText = "⏱️ Chronométrage en cours...";
+            roundEl.style.color = "#7DD3FC";
+            playBeep('start');
+
+            activeTimers[id] = setInterval(() => {
+                forTimeElapsed[id]++;
+                display.innerText = formatTime(forTimeElapsed[id]);
             }, 1000);
         }
 
-        function resetAMRAP(id) {
-            if (timerInterval) clearInterval(timerInterval);
-            timeRemaining = 600;
-            document.getElementById('timer-display-' + id).innerText = formatTime(timeRemaining);
-            document.getElementById('timer-round-' + id).innerText = "Tourne à ton rythme !";
-            document.getElementById('timer-round-' + id).style.color = "#A5B4FC";
+        function pauseForTime(id) {
+            clearTimerById(id);
+            const roundEl = document.getElementById('timer-round-' + id);
+            roundEl.innerText = "🏁 Temps arrêté : " + formatTime(forTimeElapsed[id] || 0);
+            roundEl.style.color = "#10B981";
+            playBeep('end');
+        }
+
+        function resetForTime(id) {
+            clearTimerById(id);
+            forTimeElapsed[id] = 0;
+            document.getElementById('timer-display-' + id).innerText = "00:00";
+            const roundEl = document.getElementById('timer-round-' + id);
+            roundEl.innerText = "Prêt à chronométrer";
+            roundEl.style.color = "#94A3B8";
         }
     </script>
 </body>
