@@ -235,18 +235,19 @@
             text-align: center;
             margin: 1.5rem 0;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            position: relative;
         }
         .timer-container h4 { margin: 0 0 0.8rem 0; color: #38BDF8; font-size: 1.15rem; text-transform: uppercase; }
         .timer-display { font-size: 3.8rem; font-weight: bold; font-family: 'Courier New', Courier, monospace; line-height: 1; margin-bottom: 0.5rem; color: #F8FAFC; }
         .timer-round { font-size: 1.2rem; color: #94A3B8; margin-bottom: 1.2rem; font-weight: bold; }
+        .timer-controls { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; }
         .timer-controls button {
-            padding: 0.75rem 1.3rem;
+            padding: 0.75rem 1.2rem;
             font-size: 0.95rem;
             font-weight: bold;
             border: none;
             border-radius: 6px;
             cursor: pointer;
-            margin: 0.25rem 0.4rem;
             transition: 0.2s;
         }
         .btn-start { background-color: #10B981; color: white; }
@@ -255,6 +256,42 @@
         .btn-pause:hover { background-color: #D97706; }
         .btn-stop { background-color: #EF4444; color: white; }
         .btn-stop:hover { background-color: #DC2626; }
+        .btn-fs { background-color: #475569; color: white; }
+        .btn-fs:hover { background-color: #334155; }
+
+        /* MODE PLEIN ECRAN POUR LES CHRONOS */
+        .timer-container:fullscreen,
+        .timer-container:-webkit-full-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            border-radius: 0;
+            padding: 2rem;
+        }
+        .timer-container:fullscreen h4,
+        .timer-container:-webkit-full-screen h4 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+        }
+        .timer-container:fullscreen .timer-display,
+        .timer-container:-webkit-full-screen .timer-display {
+            font-size: 22vw;
+            margin-bottom: 1.5rem;
+        }
+        .timer-container:fullscreen .timer-round,
+        .timer-container:-webkit-full-screen .timer-round {
+            font-size: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+        .timer-container:fullscreen .timer-controls button,
+        .timer-container:-webkit-full-screen .timer-controls button {
+            font-size: 1.4rem;
+            padding: 1.1rem 2rem;
+        }
 
         /* Variantes visuelles de chronos */
         .timer-tabata { background-color: #064E3B; }
@@ -532,6 +569,7 @@
                     <div class="timer-controls">
                         <button class="btn-start" onclick="startTabata('tabata-s1')">▶️ Démarrer</button>
                         <button class="btn-stop" onclick="resetTabata('tabata-s1')">⏹️ Réinitialiser</button>
+                        <button class="btn-fs" onclick="toggleFullscreen(this)">⛶ Plein écran</button>
                     </div>
                 </div>
                 
@@ -554,6 +592,7 @@
                     <div class="timer-controls">
                         <button class="btn-start" onclick="startIntervalTimer('emom-s1', 300, 60, 'Minute')">▶️ Démarrer</button>
                         <button class="btn-stop" onclick="resetIntervalTimer('emom-s1', 300, 5, 'Minute')">⏹️ Réinitialiser</button>
+                        <button class="btn-fs" onclick="toggleFullscreen(this)">⛶ Plein écran</button>
                     </div>
                 </div>
 
@@ -629,6 +668,7 @@
                     <div class="timer-controls">
                         <button class="btn-start" onclick="startIntervalTimer('emom-s2', 600, 60, 'Minute')">▶️ Démarrer</button>
                         <button class="btn-stop" onclick="resetIntervalTimer('emom-s2', 600, 10, 'Minute')">⏹️ Réinitialiser</button>
+                        <button class="btn-fs" onclick="toggleFullscreen(this)">⛶ Plein écran</button>
                     </div>
                 </div>
 
@@ -647,6 +687,7 @@
                         <button class="btn-start" onclick="startForTime('ft-s2')">▶️ Démarrer</button>
                         <button class="btn-pause" onclick="pauseForTime('ft-s2')">⏸️ Stop / Arrivée</button>
                         <button class="btn-stop" onclick="resetForTime('ft-s2')">⏹️ Réinitialiser</button>
+                        <button class="btn-fs" onclick="toggleFullscreen(this)">⛶ Plein écran</button>
                     </div>
                 </div>
             </div>
@@ -700,12 +741,13 @@
 
                 <!-- CHRONOMETRE INTEGRE S3 -->
                 <div class="timer-container">
-                    <h4>⏱️ Chrono E2MOM - 10 Minutes (Bip toutes les 2 min)</h4>
+                    <h4>⏱️ Chrono E2MOM - 10 Minutes (Bip chaque minute / 5 Tours de 2')</h4>
                     <div class="timer-display" id="timer-display-s3">10:00</div>
                     <div class="timer-round" id="timer-round-s3">Tour 1 / 5</div>
                     <div class="timer-controls">
                         <button class="btn-start" onclick="startIntervalTimer('s3', 600, 120, 'Tour')">▶️ Démarrer</button>
                         <button class="btn-stop" onclick="resetIntervalTimer('s3', 600, 5, 'Tour')">⏹️ Réinitialiser</button>
+                        <button class="btn-fs" onclick="toggleFullscreen(this)">⛶ Plein écran</button>
                     </div>
                 </div>
 
@@ -773,12 +815,13 @@
 
                 <!-- CHRONOMETRE INTEGRE S4 (AMRAP 10 MIN) -->
                 <div class="timer-container timer-amrap">
-                    <h4>⏱️ Chrono AMRAP - 10 Minutes (Continu)</h4>
+                    <h4>⏱️ Chrono AMRAP - 10 Minutes (Bip chaque minute)</h4>
                     <div class="timer-display" id="timer-display-amrap-s4">10:00</div>
                     <div class="timer-round" id="timer-round-amrap-s4" style="color: #A5B4FC;">Tourne à ton rythme !</div>
                     <div class="timer-controls">
                         <button class="btn-start" style="background-color: #4F46E5;" onclick="startAMRAP('amrap-s4', 600)">▶️ Démarrer</button>
                         <button class="btn-stop" style="background-color: #E11D48;" onclick="resetAMRAP('amrap-s4', 600)">⏹️ Réinitialiser</button>
+                        <button class="btn-fs" onclick="toggleFullscreen(this)">⛶ Plein écran</button>
                     </div>
                 </div>
 
@@ -795,6 +838,7 @@
                     <div class="timer-controls">
                         <button class="btn-start" style="background-color: #4F46E5;" onclick="startAMRAP('relais-s4', 360)">▶️ Démarrer</button>
                         <button class="btn-stop" style="background-color: #E11D48;" onclick="resetAMRAP('relais-s4', 360)">⏹️ Réinitialiser</button>
+                        <button class="btn-fs" onclick="toggleFullscreen(this)">⛶ Plein écran</button>
                     </div>
                 </div>
             </div>
@@ -845,6 +889,7 @@
                     <div class="timer-controls">
                         <button class="btn-start" onclick="startDeathBy('death-s5')">▶️ Démarrer</button>
                         <button class="btn-stop" onclick="resetDeathBy('death-s5')">⏹️ Arrêter / Reset</button>
+                        <button class="btn-fs" onclick="toggleFullscreen(this)">⛶ Plein écran</button>
                     </div>
                 </div>
 
@@ -866,6 +911,7 @@
                         <button class="btn-start" onclick="startForTime('ft-s5')">▶️ Démarrer</button>
                         <button class="btn-pause" onclick="pauseForTime('ft-s5')">⏸️ Stop / Arrivée</button>
                         <button class="btn-stop" onclick="resetForTime('ft-s5')">⏹️ Réinitialiser</button>
+                        <button class="btn-fs" onclick="toggleFullscreen(this)">⛶ Plein écran</button>
                     </div>
                 </div>
                 
@@ -912,12 +958,13 @@
 
                 <!-- CHRONOMETRE INTEGRE S6 (E2MOM) -->
                 <div class="timer-container">
-                    <h4>⏱️ Chrono WOD 1 : E2MOM - 10 Minutes (Bip toutes les 2 min)</h4>
+                    <h4>⏱️ Chrono WOD 1 : E2MOM - 10 Minutes (Bip chaque minute / 5 Tours de 2')</h4>
                     <div class="timer-display" id="timer-display-s6">10:00</div>
                     <div class="timer-round" id="timer-round-s6">Tour 1 / 5</div>
                     <div class="timer-controls">
                         <button class="btn-start" onclick="startIntervalTimer('s6', 600, 120, 'Tour')">▶️ Démarrer</button>
                         <button class="btn-stop" onclick="resetIntervalTimer('s6', 600, 5, 'Tour')">⏹️ Réinitialiser</button>
+                        <button class="btn-fs" onclick="toggleFullscreen(this)">⛶ Plein écran</button>
                     </div>
                 </div>
 
@@ -940,6 +987,7 @@
                         <button class="btn-start" onclick="startForTime('ft-s6')">▶️ Démarrer</button>
                         <button class="btn-pause" onclick="pauseForTime('ft-s6')">⏸️ Stop / Arrivée</button>
                         <button class="btn-stop" onclick="resetForTime('ft-s6')">⏹️ Réinitialiser</button>
+                        <button class="btn-fs" onclick="toggleFullscreen(this)">⛶ Plein écran</button>
                     </div>
                 </div>
 
@@ -1078,7 +1126,7 @@
 
     </div>
 
-    <!-- Script de gestion des onglets, Chronomètres et Impression -->
+    <!-- Script de gestion des onglets, Chronomètres, Plein écran et Impression -->
     <script>
         function openTab(tabId, elmnt) {
             var tabcontents = document.getElementsByClassName("tab-content");
@@ -1094,6 +1142,34 @@
                 elmnt.classList.add("active");
                 elmnt.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
             }
+        }
+
+        // --- Plein écran pour les chronomètres ---
+        function toggleFullscreen(btn) {
+            const container = btn.closest('.timer-container');
+            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                if (container.requestFullscreen) {
+                    container.requestFullscreen();
+                } else if (container.webkitRequestFullscreen) {
+                    container.webkitRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                }
+            }
+        }
+
+        // Met à jour le texte du bouton quand on entre/sort du plein écran
+        document.addEventListener('fullscreenchange', updateFsButtons);
+        document.addEventListener('webkitfullscreenchange', updateFsButtons);
+        function updateFsButtons() {
+            const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+            document.querySelectorAll('.btn-fs').forEach(b => {
+                b.innerText = isFs ? '✖ Quitter plein écran' : '⛶ Plein écran';
+            });
         }
 
         function printCard(cardId) {
@@ -1121,7 +1197,7 @@
             }, 250);
         }
 
-        // --- Moteur Audio & Gestionnaire global des chronomètres ---
+        // --- Moteur Audio Haute Puissance (Passe au-dessus de Spotify) ---
         const activeTimers = {};
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
@@ -1133,23 +1209,33 @@
             gainNode.connect(audioCtx.destination);
             
             if (type === 'end') {
-                oscillator.type = 'square';
-                oscillator.frequency.setValueAtTime(400, audioCtx.currentTime); 
-                gainNode.gain.setValueAtTime(0.12, audioCtx.currentTime);
+                // Buzzer long et grave pour la fin
+                oscillator.type = 'sawtooth';
+                oscillator.frequency.setValueAtTime(350, audioCtx.currentTime); 
+                gainNode.gain.setValueAtTime(1.0, audioCtx.currentTime);
                 oscillator.start();
                 oscillator.stop(audioCtx.currentTime + 1.5); 
+            } else if (type === 'countdown') {
+                // 3 petits bips avant le départ de chaque minute (3, 2, 1)
+                oscillator.type = 'square';
+                oscillator.frequency.setValueAtTime(660, audioCtx.currentTime);
+                gainNode.gain.setValueAtTime(0.85, audioCtx.currentTime);
+                oscillator.start();
+                oscillator.stop(audioCtx.currentTime + 0.15);
             } else if (type === 'rest') {
-                oscillator.type = 'sine';
-                oscillator.frequency.setValueAtTime(520, audioCtx.currentTime);
-                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                // Bip moyen pour le repos (Tabata)
+                oscillator.type = 'square';
+                oscillator.frequency.setValueAtTime(550, audioCtx.currentTime);
+                gainNode.gain.setValueAtTime(0.85, audioCtx.currentTime);
                 oscillator.start();
                 oscillator.stop(audioCtx.currentTime + 0.4);
             } else {
-                oscillator.type = 'sine';
-                oscillator.frequency.setValueAtTime(880, audioCtx.currentTime);
-                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                // Bip très perçant pour les départs et chaque minute
+                oscillator.type = 'square';
+                oscillator.frequency.setValueAtTime(1000, audioCtx.currentTime);
+                gainNode.gain.setValueAtTime(1.0, audioCtx.currentTime);
                 oscillator.start();
-                oscillator.stop(audioCtx.currentTime + 0.45);
+                oscillator.stop(audioCtx.currentTime + 0.5);
             }
         }
 
@@ -1182,6 +1268,9 @@
 
             activeTimers[id] = setInterval(() => {
                 time--;
+                if (time === 3 || time === 2 || time === 1) {
+                    playBeep('countdown');
+                }
                 if (time <= 0) {
                     if (isWork) {
                         if (round === 8) {
@@ -1218,7 +1307,7 @@
             roundEl.style.color = "#94A3B8";
         }
 
-        // --- 2. CHRONO EMOM / E2MOM (Bip à intervalle régulier) ---
+        // --- 2. CHRONO EMOM / E2MOM (Bip à chaque minute + 3 petits bips avant) ---
         function startIntervalTimer(id, totalSeconds, intervalSeconds, label) {
             clearTimerById(id);
             let remaining = totalSeconds;
@@ -1238,7 +1327,14 @@
                 if (remaining > 0) {
                     const currentRound = Math.floor((totalSeconds - remaining) / intervalSeconds) + 1;
                     roundEl.innerText = label + " " + currentRound + " / " + totalRounds;
-                    if (remaining % intervalSeconds === 0) {
+
+                    // 3 petits bips avant le départ de chaque minute (3, 2, 1)
+                    const secInMin = remaining % 60;
+                    if (secInMin === 3 || secInMin === 2 || secInMin === 1) {
+                        playBeep('countdown');
+                    }
+                    // Bip franc à chaque minute
+                    if (secInMin === 0) {
                         playBeep('round');
                     }
                 } else {
@@ -1258,7 +1354,7 @@
             roundEl.style.color = "#94A3B8";
         }
 
-        // --- 3. CHRONO AMRAP (Continu sans bip intermédiaire) ---
+        // --- 3. CHRONO AMRAP (Bip à chaque minute + 3 petits bips avant) ---
         function startAMRAP(id, totalSeconds) {
             clearTimerById(id);
             let remaining = totalSeconds;
@@ -1274,7 +1370,15 @@
                 remaining--;
                 display.innerText = formatTime(remaining);
 
-                if (remaining <= 0) {
+                if (remaining > 0) {
+                    const secInMin = remaining % 60;
+                    if (secInMin === 3 || secInMin === 2 || secInMin === 1) {
+                        playBeep('countdown');
+                    }
+                    if (secInMin === 0) {
+                        playBeep('round');
+                    }
+                } else {
                     clearTimerById(id);
                     roundEl.innerText = "✅ TIME CAP !";
                     roundEl.style.color = "#10B981";
@@ -1291,7 +1395,7 @@
             roundEl.style.color = "#A5B4FC";
         }
 
-        // --- 4. CHRONO DEATH BY (1 min en boucle avec incrémentation auto) ---
+        // --- 4. CHRONO DEATH BY (1 min en boucle + 3 petits bips avant) ---
         function startDeathBy(id) {
             clearTimerById(id);
             let minute = 1;
@@ -1306,6 +1410,9 @@
 
             activeTimers[id] = setInterval(() => {
                 remaining--;
+                if (remaining === 3 || remaining === 2 || remaining === 1) {
+                    playBeep('countdown');
+                }
                 if (remaining <= 0) {
                     minute++;
                     remaining = 60;
@@ -1324,7 +1431,7 @@
             roundEl.style.color = "#FCA5A5";
         }
 
-        // --- 5. CHRONO FOR TIME (Croissant avec Pause/Arrivée) ---
+        // --- 5. CHRONO FOR TIME (Croissant + bip chaque minute et 3 bips avant) ---
         const forTimeElapsed = {};
 
         function startForTime(id) {
@@ -1340,6 +1447,14 @@
             activeTimers[id] = setInterval(() => {
                 forTimeElapsed[id]++;
                 display.innerText = formatTime(forTimeElapsed[id]);
+
+                const secInMin = forTimeElapsed[id] % 60;
+                if (secInMin === 57 || secInMin === 58 || secInMin === 59) {
+                    playBeep('countdown');
+                }
+                if (secInMin === 0) {
+                    playBeep('round');
+                }
             }, 1000);
         }
 
