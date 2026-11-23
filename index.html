@@ -875,7 +875,7 @@
                 <ul>
                     <li><strong>Épreuve "Death By" (20 min) :</strong>
                         <ul>
-                            <li>Pénalité fixe : Chaque minute commence par <strong>2 Burpees obligatoires</strong>, puis l'élève ajoute le nombre croissant de Squats (ou Fentes).</li>
+                            <li><strong>Pénalité croissante :</strong> Chaque minute commence par des <strong>Burpees obligatoires</strong> (<strong>4</strong> de la min 1 à 10, <strong>5</strong> de la min 11 à 15, puis <strong>6</strong> de la min 16 à 20), suivis du nombre croissant de Squats (ou Fentes).</li>
                             <li>Le juge observe la dégradation de la posture (acidose). S'il y a un dos rond = No rep.</li>
                         </ul>
                     </li>
@@ -883,9 +883,9 @@
 
                 <!-- CHRONO DEATH BY S5 -->
                 <div class="timer-container timer-death">
-                    <h4>⏱️ Chrono DEATH BY (Bip chaque minute en boucle)</h4>
+                    <h4>⏱️ Chrono DEATH BY - 20 Min (Pénalité croissante 4 / 5 / 6 Burpees)</h4>
                     <div class="timer-display" id="timer-display-death-s5">01:00</div>
-                    <div class="timer-round" id="timer-round-death-s5" style="color: #FCA5A5;">Minute 1 : 2 Burpees + 1 Rep</div>
+                    <div class="timer-round" id="timer-round-death-s5" style="color: #FCA5A5;">Minute 1 : 4 Burpees + 1 Rep</div>
                     <div class="timer-controls">
                         <button class="btn-start" onclick="startDeathBy('death-s5')">▶️ Démarrer</button>
                         <button class="btn-stop" onclick="resetDeathBy('death-s5')">⏹️ Arrêter / Reset</button>
@@ -1162,7 +1162,6 @@
             }
         }
 
-        // Met à jour le texte du bouton quand on entre/sort du plein écran
         document.addEventListener('fullscreenchange', updateFsButtons);
         document.addEventListener('webkitfullscreenchange', updateFsButtons);
         function updateFsButtons() {
@@ -1209,28 +1208,24 @@
             gainNode.connect(audioCtx.destination);
             
             if (type === 'end') {
-                // Buzzer long et grave pour la fin
                 oscillator.type = 'sawtooth';
                 oscillator.frequency.setValueAtTime(350, audioCtx.currentTime); 
                 gainNode.gain.setValueAtTime(1.0, audioCtx.currentTime);
                 oscillator.start();
                 oscillator.stop(audioCtx.currentTime + 1.5); 
             } else if (type === 'countdown') {
-                // 3 petits bips avant le départ de chaque minute (3, 2, 1)
                 oscillator.type = 'square';
                 oscillator.frequency.setValueAtTime(660, audioCtx.currentTime);
                 gainNode.gain.setValueAtTime(0.85, audioCtx.currentTime);
                 oscillator.start();
                 oscillator.stop(audioCtx.currentTime + 0.15);
             } else if (type === 'rest') {
-                // Bip moyen pour le repos (Tabata)
                 oscillator.type = 'square';
                 oscillator.frequency.setValueAtTime(550, audioCtx.currentTime);
                 gainNode.gain.setValueAtTime(0.85, audioCtx.currentTime);
                 oscillator.start();
                 oscillator.stop(audioCtx.currentTime + 0.4);
             } else {
-                // Bip très perçant pour les départs et chaque minute
                 oscillator.type = 'square';
                 oscillator.frequency.setValueAtTime(1000, audioCtx.currentTime);
                 gainNode.gain.setValueAtTime(1.0, audioCtx.currentTime);
@@ -1328,12 +1323,10 @@
                     const currentRound = Math.floor((totalSeconds - remaining) / intervalSeconds) + 1;
                     roundEl.innerText = label + " " + currentRound + " / " + totalRounds;
 
-                    // 3 petits bips avant le départ de chaque minute (3, 2, 1)
                     const secInMin = remaining % 60;
                     if (secInMin === 3 || secInMin === 2 || secInMin === 1) {
                         playBeep('countdown');
                     }
-                    // Bip franc à chaque minute
                     if (secInMin === 0) {
                         playBeep('round');
                     }
@@ -1395,7 +1388,13 @@
             roundEl.style.color = "#A5B4FC";
         }
 
-        // --- 4. CHRONO DEATH BY (1 min en boucle + 3 petits bips avant) ---
+        // --- 4. CHRONO DEATH BY (20 min - Pénalité croissante : 4 / 5 / 6 Burpees) ---
+        function getDeathByBurpees(min) {
+            if (min <= 10) return 4;
+            if (min <= 15) return 5;
+            return 6;
+        }
+
         function startDeathBy(id) {
             clearTimerById(id);
             let minute = 1;
@@ -1404,7 +1403,7 @@
             const roundEl = document.getElementById('timer-round-' + id);
 
             display.innerText = formatTime(remaining);
-            roundEl.innerText = "Minute 1 : 2 Burpees + 1 Rep";
+            roundEl.innerText = "Minute 1 : 4 Burpees + 1 Rep";
             roundEl.style.color = "#FCA5A5";
             playBeep('start');
 
@@ -1415,8 +1414,17 @@
                 }
                 if (remaining <= 0) {
                     minute++;
+                    if (minute > 20) {
+                        clearTimerById(id);
+                        display.innerText = "00:00";
+                        roundEl.innerText = "✅ FIN DU DEATH BY (20 min) !";
+                        roundEl.style.color = "#10B981";
+                        playBeep('end');
+                        return;
+                    }
                     remaining = 60;
-                    roundEl.innerText = "Minute " + minute + " : 2 Burpees + " + minute + " Reps";
+                    const burpees = getDeathByBurpees(minute);
+                    roundEl.innerText = "Minute " + minute + " : " + burpees + " Burpees + " + minute + " Reps";
                     playBeep('round');
                 }
                 display.innerText = formatTime(remaining);
@@ -1427,7 +1435,7 @@
             clearTimerById(id);
             document.getElementById('timer-display-' + id).innerText = "01:00";
             const roundEl = document.getElementById('timer-round-' + id);
-            roundEl.innerText = "Minute 1 : 2 Burpees + 1 Rep";
+            roundEl.innerText = "Minute 1 : 4 Burpees + 1 Rep";
             roundEl.style.color = "#FCA5A5";
         }
 
